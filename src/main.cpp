@@ -5,6 +5,7 @@
 #include <string>
 using namespace std;
 
+/*
 string tipusToString(int tipus)
 {
 	string tipusString;
@@ -285,7 +286,7 @@ int main()
 	if (!correcte)
 		reduccio += 0.5;
 
-	// Mou figura dreta un cop 
+	// Mou figura dreta un cop
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 6" << endl;
 	joc.inicialitza("./data/test_mou_figura_4.txt");
@@ -299,7 +300,7 @@ int main()
 	if (!correcte)
 		reduccio += 0.5;
 
-	// Mou figura girada dreta dos cops 
+	// Mou figura girada dreta dos cops
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 7" << endl;
 	joc.inicialitza("./data/test_mou_figura_5.txt");
@@ -349,7 +350,7 @@ int main()
 	if (!correcte)
 		reduccio += 0.5;
 
-	// Mou figura girada dreta 1 cop 
+	// Mou figura girada dreta 1 cop
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 10" << endl;
 	joc.inicialitza("./data/test_mou_figura_8.txt");
@@ -363,7 +364,7 @@ int main()
 	if (!correcte)
 		reduccio += 0.5;
 
-	// Mou figura girada dreta 2 cops, el segon colisiona amb el tauler 
+	// Mou figura girada dreta 2 cops, el segon colisiona amb el tauler
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 11" << endl;
 	joc.inicialitza("./data/test_mou_figura_9.txt");
@@ -455,7 +456,7 @@ int main()
 	if (!correcte)
 		reduccio += 0.5;
 
-	// Gir  prohibit limit esquerra figura I 
+	// Gir  prohibit limit esquerra figura I
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 4" << endl;
 	joc.inicialitza("./data/test_gir_figura_4.txt");
@@ -635,7 +636,7 @@ int main()
 	if (!correcte)
 		reduccio += 0.5;
 
-	// Gir figura O 
+	// Gir figura O
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 15" << endl;
 	joc.inicialitza("./data/test_gir_figura_15.txt");
@@ -816,6 +817,16 @@ int main()
 	if (grade == 10.0)
 		cout << "Comment :=>> Final del test sense errors" << endl;
 	cout << "Comment :=>> " << endl;
+
+	return 0;
+}*/
+
+
+int main()
+{
+	Figura fig;
+	fig.setShape(FIGURA_J);
+	fig.showShape();
 
 	return 0;
 }

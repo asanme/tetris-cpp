@@ -1,5 +1,8 @@
 #pragma once
 
+const int MAX_FILA = 8;
+const int MAX_COL = 8;
+
 typedef enum
 {
 	NO_FIGURA = 0,
@@ -31,25 +34,17 @@ typedef enum
 	GIR_ANTI_HORARI
 } DireccioGir;
 
-typedef enum
-{
-	UP,
-	RIGHT,
-	DOWN,
-	LEFT
-} ShapeRotation;
-
 class Figura
 {
  public:
-	Figura() : m_shape(NO_FIGURA), m_color(NO_COLOR), m_rotation(), m_xPosition(0), m_yPosition(0)
+	Figura() : m_shape(NO_FIGURA), m_color(NO_COLOR), m_xPosition(0), m_yPosition(0)
 	{
 	}
+	void showShape();
 
 	void moveVertically();
 	void moveHorizontally(int xDirection);
 
-	ShapeRotation getShapeRotation() const;
 	void rotateShape(DireccioGir rotationDirection);
 
 	TipusFigura getShape() const;
@@ -67,7 +62,9 @@ class Figura
  private:
 	TipusFigura m_shape;
 	ColorFigura m_color;
-	ShapeRotation m_rotation;
+	int** m_shapeMatrix;
+	int m_columns;
+	int m_rows;
 
 	int m_xPosition;
 	int m_yPosition;
