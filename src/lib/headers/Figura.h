@@ -1,5 +1,6 @@
 #pragma once
 
+#include <iostream>
 const int MAX_FILA = 8;
 const int MAX_COL = 8;
 
@@ -37,11 +38,23 @@ typedef enum
 class Figura
 {
  public:
-	Figura() : m_shape(NO_FIGURA), m_color(NO_COLOR), m_xPosition(0), m_yPosition(0)
+	~Figura()
 	{
+		freeShapeMatrix();
 	}
-	void showShape();
 
+	Figura()
+	{
+		m_shape = NO_FIGURA;
+		m_color = NO_COLOR;
+		m_rows = 0;
+		m_columns = 0;
+		m_shapeMatrix = nullptr;
+		m_xPosition = 0;
+		m_yPosition = 0;
+	}
+
+	void showShape();
 	void moveVertically();
 	void moveHorizontally(int xDirection);
 
@@ -60,11 +73,16 @@ class Figura
 	void setYPosition(int yPosition);
 
  private:
+	void freeShapeMatrix();
+
+	// Other shape information
 	TipusFigura m_shape;
 	ColorFigura m_color;
-	int** m_shapeMatrix;
-	int m_columns;
+
+	// Matrix information
 	int m_rows;
+	int m_columns;
+	int** m_shapeMatrix;
 
 	int m_xPosition;
 	int m_yPosition;

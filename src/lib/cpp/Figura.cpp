@@ -2,6 +2,7 @@
 #include <iostream>
 
 using namespace std;
+
 void Figura::moveHorizontally(int xDirection)
 {
 
@@ -17,27 +18,32 @@ void Figura::rotateShape(DireccioGir rotationDirection)
 
 }
 
-TipusFigura Figura::getShape() const
-{
-	return m_shape;
-}
-
 void Figura::setShape(TipusFigura shape)
 {
+	if (m_shapeMatrix != nullptr)
+	{
+		freeShapeMatrix();
+	}
+
 	m_shape = shape;
 
-	int** tmpMatrix;
+	int** tmpMatrix = nullptr;
 	int columns;
 	int rows;
 
 	switch (shape)
 	{
 	case FIGURA_O:
-		columns = 2;
 		rows = 2;
+		columns = 2;
+
 		tmpMatrix = new int* [rows];
 		for (int i = 0; i < rows; i++)
 			tmpMatrix[i] = new int[columns];
+
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < columns; j++)
+				tmpMatrix[i][j] = 0;
 
 		tmpMatrix[0][0] = 1;
 		tmpMatrix[0][1] = 1;
@@ -47,12 +53,16 @@ void Figura::setShape(TipusFigura shape)
 		break;
 
 	case FIGURA_I:
-		columns = 4;
 		rows = 4;
+		columns = 4;
 
 		tmpMatrix = new int* [rows];
 		for (int i = 0; i < rows; i++)
 			tmpMatrix[i] = new int[columns];
+
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < columns; j++)
+				tmpMatrix[i][j] = 0;
 
 		tmpMatrix[1][0] = 1;
 		tmpMatrix[1][1] = 1;
@@ -62,12 +72,18 @@ void Figura::setShape(TipusFigura shape)
 		break;
 
 	case FIGURA_T:
-		columns = 3;
 		rows = 3;
+		columns = 3;
 
 		tmpMatrix = new int* [rows];
 		for (int i = 0; i < rows; i++)
+		{
 			tmpMatrix[i] = new int[columns];
+		}
+
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < columns; j++)
+				tmpMatrix[i][j] = 0;
 
 		tmpMatrix[1][0] = 1;
 		tmpMatrix[1][1] = 1;
@@ -77,12 +93,16 @@ void Figura::setShape(TipusFigura shape)
 		break;
 
 	case FIGURA_L:
-		columns = 3;
 		rows = 3;
+		columns = 3;
 
 		tmpMatrix = new int* [rows];
 		for (int i = 0; i < rows; i++)
 			tmpMatrix[i] = new int[columns];
+
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < columns; j++)
+				tmpMatrix[i][j] = 0;
 
 		tmpMatrix[1][0] = 1;
 		tmpMatrix[1][1] = 1;
@@ -92,12 +112,16 @@ void Figura::setShape(TipusFigura shape)
 		break;
 
 	case FIGURA_J:
-		columns = 3;
 		rows = 3;
+		columns = 3;
 
 		tmpMatrix = new int* [rows];
 		for (int i = 0; i < rows; i++)
 			tmpMatrix[i] = new int[columns];
+
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < columns; j++)
+				tmpMatrix[i][j] = 0;
 
 		tmpMatrix[0][0] = 1;
 		tmpMatrix[1][0] = 1;
@@ -107,12 +131,16 @@ void Figura::setShape(TipusFigura shape)
 		break;
 
 	case FIGURA_Z:
-		columns = 3;
 		rows = 3;
+		columns = 3;
 
 		tmpMatrix = new int* [rows];
 		for (int i = 0; i < rows; i++)
 			tmpMatrix[i] = new int[columns];
+
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < columns; j++)
+				tmpMatrix[i][j] = 0;
 
 		tmpMatrix[0][0] = 1;
 		tmpMatrix[0][1] = 1;
@@ -122,12 +150,16 @@ void Figura::setShape(TipusFigura shape)
 		break;
 
 	case FIGURA_S:
-		columns = 3;
 		rows = 3;
+		columns = 3;
 
 		tmpMatrix = new int* [rows];
 		for (int i = 0; i < rows; i++)
 			tmpMatrix[i] = new int[columns];
+
+		for (int i = 0; i < rows; i++)
+			for (int j = 0; j < columns; j++)
+				tmpMatrix[i][j] = 0;
 
 		tmpMatrix[0][1] = 1;
 		tmpMatrix[0][2] = 1;
@@ -137,9 +169,48 @@ void Figura::setShape(TipusFigura shape)
 		break;
 	}
 
-	m_shapeMatrix = tmpMatrix;
-	m_columns = columns;
-	m_rows = rows;
+	if (tmpMatrix != nullptr)
+	{
+		m_shapeMatrix = tmpMatrix;
+		m_columns = columns;
+		m_rows = rows;
+	}
+}
+
+void Figura::showShape()
+{
+	if (m_shapeMatrix != nullptr)
+	{
+		for (int i = 0; i < m_rows; i++)
+		{
+			for (int j = 0; j < m_columns; j++)
+			{
+				cout << m_shapeMatrix[i][j] << " ";
+			}
+
+			cout << "\n";
+		}
+	}
+}
+
+// Frees the memory allocated in the pointer and sets the columns and rows to 0
+void Figura::freeShapeMatrix()
+{
+	for (int i = 0; i < m_rows; i++)
+	{
+		delete[] m_shapeMatrix[i];
+	}
+
+	delete[] m_shapeMatrix;
+
+	m_rows = 0;
+	m_columns = 0;
+	m_shapeMatrix = nullptr;
+}
+
+TipusFigura Figura::getShape() const
+{
+	return m_shape;
 }
 
 ColorFigura Figura::getColor() const
@@ -170,16 +241,4 @@ int Figura::getYPosition() const
 void Figura::setYPosition(int yPosition)
 {
 	m_yPosition = yPosition;
-}
-void Figura::showShape()
-{
-	for (int i = 0; i < m_rows; i++)
-	{
-		for (int j = 0; j < m_columns; j++)
-		{
-			cout << m_shapeMatrix[i][j] << " ";
-		}
-
-		cout << "\n";
-	}
 }
