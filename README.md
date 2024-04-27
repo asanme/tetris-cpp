@@ -5,9 +5,9 @@ ___
 ### Integrants:
 
 * **Alex Sánchez Menage**. NIU: **1670860**
-* **Alexander Romero Orellana**. NIU: **1670870**
+* **Sedna del Carmen Valido Bravo de Laguna**. NIU: **1674419**
 
-### Grup: **452_4**
+### Grup: **--**
 
 ___
 
