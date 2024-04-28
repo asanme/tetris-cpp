@@ -15,7 +15,57 @@ void Figura::moveVertically()
 
 void Figura::rotateShape(DireccioGir rotationDirection)
 {
+	switch (rotationDirection)
+	{
+	case GIR_HORARI:
+		rotateShapeRight();
+		break;
+	case GIR_ANTI_HORARI:
+		rotateShapeLeft();
+		break;
+	}
+}
 
+static void transposeMatrix(int** matrix, int rows, int columns)
+{
+	int matrixCopy[rows][columns];
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			matrixCopy[i][j] = matrix[i][j];
+		}
+	}
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; j++)
+		{
+			matrix[i][j] = matrixCopy[j][i];
+		}
+	}
+}
+
+static void invertRows(int** matrix, int rows, int columns)
+{
+
+}
+
+static void invertColumns(int** matrix, int rows, int columns)
+{
+
+}
+
+void Figura::rotateShapeLeft()
+{
+	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
+	invertRows(m_shapeMatrix, m_rows, m_columns);
+}
+
+void Figura::rotateShapeRight()
+{
+	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
+	invertColumns(m_shapeMatrix, m_rows, m_columns);
 }
 
 void Figura::setShape(TipusFigura shape)
@@ -242,3 +292,4 @@ void Figura::setYPosition(int yPosition)
 {
 	m_yPosition = yPosition;
 }
+

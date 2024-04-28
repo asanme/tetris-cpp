@@ -74,6 +74,8 @@ class Figura
 
  private:
 	void freeShapeMatrix();
+	void rotateShapeRight();
+	void rotateShapeLeft();
 
 	// Other shape information
 	TipusFigura m_shape;

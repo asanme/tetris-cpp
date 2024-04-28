@@ -825,32 +825,13 @@ int main()
 int main()
 {
 	Figura fig;
-	std::cout << "------\n";
-	fig.setShape(FIGURA_O);
-	fig.showShape();
-
-	std::cout << "------\n";
-	fig.setShape(FIGURA_I);
-	fig.showShape();
 
 	std::cout << "------\n";
 	fig.setShape(FIGURA_T);
 	fig.showShape();
 
 	std::cout << "------\n";
-	fig.setShape(FIGURA_S);
-	fig.showShape();
-
-	std::cout << "------\n";
-	fig.setShape(FIGURA_Z);
-	fig.showShape();
-
-	std::cout << "------\n";
-	fig.setShape(FIGURA_L);
-	fig.showShape();
-
-	std::cout << "------\n";
-	fig.setShape(FIGURA_J);
+	fig.rotateShape(GIR_ANTI_HORARI);
 	fig.showShape();
 
 	return 0;
