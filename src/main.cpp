@@ -827,7 +827,7 @@ int main()
 	Figura fig;
 
 	std::cout << "------\n";
-	fig.setShape(FIGURA_T);
+	fig.setShape(FIGURA_S);
 	fig.showShape();
 
 	std::cout << "------\n";

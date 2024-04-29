@@ -18,11 +18,39 @@ void Figura::rotateShape(DireccioGir rotationDirection)
 	switch (rotationDirection)
 	{
 	case GIR_HORARI:
-		rotateShapeRight();
+		rotateShapeClockwise();
 		break;
 	case GIR_ANTI_HORARI:
-		rotateShapeLeft();
+		rotateShapeCounterclockwise();
 		break;
+	}
+}
+
+static void invertRows(int** matrix, int rows, int columns)
+{
+	for (int j = 0; j < columns; ++j)
+	{
+		for (int i = 0; i < rows / 2; ++i)
+		{
+			int tmp = matrix[i][j];
+			int rowIndex = rows - 1 - i;
+			matrix[i][j] = matrix[rowIndex][j];
+			matrix[rowIndex][j] = tmp;
+		}
+	}
+}
+
+static void invertColumns(int** matrix, int rows, int columns)
+{
+	for (int i = 0; i < rows; ++i)
+	{
+		for (int j = 0; j < columns / 2; ++j)
+		{
+			int tmp = matrix[i][j];
+			int columnIndex = columns - 1 - j;
+			matrix[i][j] = matrix[i][columnIndex];
+			matrix[i][columnIndex] = tmp;
+		}
 	}
 }
 
@@ -46,34 +74,22 @@ static void transposeMatrix(int** matrix, int rows, int columns)
 	}
 }
 
-static void invertRows(int** matrix, int rows, int columns)
-{
-
-}
-
-static void invertColumns(int** matrix, int rows, int columns)
-{
-
-}
-
-void Figura::rotateShapeLeft()
-{
-	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
-	invertRows(m_shapeMatrix, m_rows, m_columns);
-}
-
-void Figura::rotateShapeRight()
+void Figura::rotateShapeClockwise()
 {
 	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
 	invertColumns(m_shapeMatrix, m_rows, m_columns);
 }
 
+void Figura::rotateShapeCounterclockwise()
+{
+	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
+	invertRows(m_shapeMatrix, m_rows, m_columns);
+}
+
 void Figura::setShape(TipusFigura shape)
 {
 	if (m_shapeMatrix != nullptr)
-	{
 		freeShapeMatrix();
-	}
 
 	m_shape = shape;
 
