@@ -822,21 +822,29 @@ int main()
 }*/
 
 
+//int main()
+//{
+//	Tauler tauler;
+//	Figura fig;
+//	fig.setShape(FIGURA_I);
+//	fig.setColor(COLOR_BLAUCEL);
+//
+//	std::cout << "-----------------\n";
+//	tauler.addShape(fig);
+//	tauler.showBoard();
+//
+//	std::cout << "-----------------\n";
+//	fig.rotateShape(GIR_HORARI);
+//	tauler.updateBoard();
+//	tauler.showBoard();
+//
+//	return 0;
+//}
+
+
 int main()
 {
-	Tauler tauler;
-	Figura fig;
-	fig.setShape(FIGURA_I);
-	fig.setColor(COLOR_BLAUCEL);
-
-	std::cout << "-----------------\n";
-	tauler.addShape(fig);
-	tauler.showBoard();
-
-	std::cout << "-----------------\n";
-	fig.rotateShape(GIR_HORARI);
-	tauler.updateBoard();
-	tauler.showBoard();
-
-	return 0;
+	Joc j;
+	j.showBoard();
+	j.escriuTauler("../output/board.txt");
 }

@@ -60,3 +60,20 @@ void Tauler::updateBoard()
 	clearShapePosition();
 	updateCurrentShape();
 }
+
+int** Tauler::getBoard() const
+{
+	int** boardMatrix = new int* [MAX_FILA];
+	for (int i = 0; i < MAX_FILA; i++)
+		boardMatrix[i] = new int[MAX_COL];
+
+	for (int i = 0; i < MAX_FILA; i++)
+	{
+		for (int j = 0; j < MAX_COL; j++)
+		{
+			boardMatrix[i][j] = m_board[i][j];
+		}
+	}
+
+	return boardMatrix;
+}

@@ -25,10 +25,12 @@ class Tauler
 	void addShape(Figura& shape);
 	void updateBoard();
 
+	int** getBoard() const;
+
  private:
 	void updateCurrentShape();
+	void clearShapePosition();
 
 	ColorFigura m_board[MAX_FILA][MAX_COL];
 	Figura* m_currentShape;
-	void clearShapePosition();
 };

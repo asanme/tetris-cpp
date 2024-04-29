@@ -78,12 +78,12 @@ void Figura::rotateShape(DireccioGir rotationDirection)
 
 void Figura::moveHorizontally(int xDirection)
 {
-
+	m_xPosition += xDirection;
 }
 
 void Figura::moveVertically()
 {
-
+	++m_yPosition;
 }
 
 void Figura::setShape(TipusFigura shape)
