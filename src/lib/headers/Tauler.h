@@ -26,6 +26,7 @@ class Tauler
 	void updateBoard();
 
 	int** getBoard() const;
+	void setBoard(int** board);
 
  private:
 	void updateCurrentShape();

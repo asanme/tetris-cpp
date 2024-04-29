@@ -1,30 +1,43 @@
 #include <fstream>
+#include <vector>
 #include "../headers/Joc.h"
 
 void Joc::inicialitza(const string& nomFitxer)
 {
-	// TODO Reads a file and loads the information onto the board
+	ifstream boardData;
+	boardData.open(nomFitxer, ios::in);
+
+	if (boardData.is_open())
+	{
+		string currentLine;
+		while (getline(boardData, currentLine))
+		{
+			std::cout << currentLine << "\n";
+		}
+	}
+
+	boardData.close();
 }
 
 void Joc::escriuTauler(const string& nomFitxer)
 {
-	ofstream file;
-	file.open(nomFitxer, ios::out);
+	ofstream boardOutput;
+	boardOutput.open(nomFitxer, ios::out);
 
-	if (file.is_open())
+	if (boardOutput.is_open())
 	{
 		int** tmpBoard = m_board->getBoard();
 		for (int i = 0; i < MAX_FILA; i++)
 		{
 			for (int j = 0; j < MAX_COL; ++j)
 			{
-				file << tmpBoard[i][j] << " ";
+				boardOutput << tmpBoard[i][j] << " ";
 			}
-			file << "\n";
+			boardOutput << "\n";
 		}
 	}
 
-	file.close();
+	boardOutput.close();
 }
 
 bool Joc::giraFigura(DireccioGir direccio)

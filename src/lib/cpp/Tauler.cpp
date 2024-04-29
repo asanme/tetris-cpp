@@ -77,3 +77,14 @@ int** Tauler::getBoard() const
 
 	return boardMatrix;
 }
+void Tauler::setBoard(int** board)
+{
+	for (int i = 0; i < MAX_FILA; i++)
+	{
+		for (int j = 0; j < MAX_COL; ++j)
+		{
+			// TODO Remove static cast and add a switch instead
+			m_board[i][j] = static_cast<ColorFigura>(board[i][j]);
+		}
+	}
+}
