@@ -3,19 +3,7 @@
 
 using namespace std;
 
-// TODO Check if init is valid
-Tauler::Tauler()
-{
-	for (int i = 0; i < MAX_FILA; i++)
-	{
-		for (int j = 0; j < MAX_COL; j++)
-		{
-			m_board[i][j] = COLOR_NEGRE;
-		}
-	}
-}
-
-void Tauler::mostrarTauler()
+void Tauler::showBoard()
 {
 	for (int i = 0; i < MAX_FILA; i++)
 	{
@@ -26,4 +14,49 @@ void Tauler::mostrarTauler()
 
 		cout << "\n";
 	}
+}
+
+void Tauler::updateCurrentShape()
+{
+	for (int i = 0; i < m_currentShape->getRows(); i++)
+	{
+		for (int j = 0; j < m_currentShape->getColumns(); ++j)
+		{
+			int rowPosition = i + m_currentShape->getXPosition();
+			int columnPosition = j + m_currentShape->getYPosition();
+
+			if (m_currentShape->getShapeMatrix()[i][j] != 0)
+				m_board[rowPosition][columnPosition] = m_currentShape->getColor();
+		}
+	}
+}
+
+void Tauler::clearShapePosition()
+{
+	for (int i = 0; i < m_currentShape->getRows(); i++)
+	{
+		for (int j = 0; j < m_currentShape->getColumns(); ++j)
+		{
+			int rowPosition = i + m_currentShape->getXPosition();
+			int columnPosition = j + m_currentShape->getYPosition();
+
+			if (m_currentShape->getShapeMatrix()[i][j] != 0)
+				m_board[rowPosition][columnPosition] = COLOR_NEGRE;
+		}
+	}
+}
+
+void Tauler::addShape(Figura& shape)
+{
+	m_currentShape = &shape;
+	updateCurrentShape();
+}
+
+void Tauler::updateBoard()
+{
+	if (m_currentShape == nullptr)
+		return;
+
+	clearShapePosition();
+	updateCurrentShape();
 }

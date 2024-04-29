@@ -1,6 +1,7 @@
 #pragma once
 
 #include <iostream>
+
 const int MAX_FILA = 8;
 const int MAX_COL = 8;
 
@@ -54,11 +55,12 @@ class Figura
 		m_yPosition = 0;
 	}
 
-	void showShape();
 	void moveVertically();
 	void moveHorizontally(int xDirection);
 
+	void showShape();
 	void rotateShape(DireccioGir rotationDirection);
+	int** getShapeMatrix() const;
 
 	TipusFigura getShape() const;
 	void setShape(TipusFigura shape);
@@ -71,6 +73,9 @@ class Figura
 
 	int getYPosition() const;
 	void setYPosition(int yPosition);
+
+	int getRows() const;
+	int getColumns() const;
 
  private:
 	void freeShapeMatrix();

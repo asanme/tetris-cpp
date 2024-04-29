@@ -3,29 +3,6 @@
 
 using namespace std;
 
-void Figura::moveHorizontally(int xDirection)
-{
-
-}
-
-void Figura::moveVertically()
-{
-
-}
-
-void Figura::rotateShape(DireccioGir rotationDirection)
-{
-	switch (rotationDirection)
-	{
-	case GIR_HORARI:
-		rotateShapeClockwise();
-		break;
-	case GIR_ANTI_HORARI:
-		rotateShapeCounterclockwise();
-		break;
-	}
-}
-
 static void invertRows(int** matrix, int rows, int columns)
 {
 	for (int j = 0; j < columns; ++j)
@@ -86,6 +63,29 @@ void Figura::rotateShapeCounterclockwise()
 	invertRows(m_shapeMatrix, m_rows, m_columns);
 }
 
+void Figura::rotateShape(DireccioGir rotationDirection)
+{
+	switch (rotationDirection)
+	{
+	case GIR_HORARI:
+		rotateShapeClockwise();
+		break;
+	case GIR_ANTI_HORARI:
+		rotateShapeCounterclockwise();
+		break;
+	}
+}
+
+void Figura::moveHorizontally(int xDirection)
+{
+
+}
+
+void Figura::moveVertically()
+{
+
+}
+
 void Figura::setShape(TipusFigura shape)
 {
 	if (m_shapeMatrix != nullptr)
@@ -93,7 +93,7 @@ void Figura::setShape(TipusFigura shape)
 
 	m_shape = shape;
 
-	int** tmpMatrix = nullptr;
+	int** newMatrixShape = nullptr;
 	int columns;
 	int rows;
 
@@ -103,18 +103,18 @@ void Figura::setShape(TipusFigura shape)
 		rows = 2;
 		columns = 2;
 
-		tmpMatrix = new int* [rows];
+		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
-			tmpMatrix[i] = new int[columns];
+			newMatrixShape[i] = new int[columns];
 
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < columns; j++)
-				tmpMatrix[i][j] = 0;
+				newMatrixShape[i][j] = 0;
 
-		tmpMatrix[0][0] = 1;
-		tmpMatrix[0][1] = 1;
-		tmpMatrix[1][0] = 1;
-		tmpMatrix[1][1] = 1;
+		newMatrixShape[0][0] = 1;
+		newMatrixShape[0][1] = 1;
+		newMatrixShape[1][0] = 1;
+		newMatrixShape[1][1] = 1;
 
 		break;
 
@@ -122,18 +122,18 @@ void Figura::setShape(TipusFigura shape)
 		rows = 4;
 		columns = 4;
 
-		tmpMatrix = new int* [rows];
+		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
-			tmpMatrix[i] = new int[columns];
+			newMatrixShape[i] = new int[columns];
 
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < columns; j++)
-				tmpMatrix[i][j] = 0;
+				newMatrixShape[i][j] = 0;
 
-		tmpMatrix[1][0] = 1;
-		tmpMatrix[1][1] = 1;
-		tmpMatrix[1][2] = 1;
-		tmpMatrix[1][3] = 1;
+		newMatrixShape[1][0] = 1;
+		newMatrixShape[1][1] = 1;
+		newMatrixShape[1][2] = 1;
+		newMatrixShape[1][3] = 1;
 
 		break;
 
@@ -141,20 +141,20 @@ void Figura::setShape(TipusFigura shape)
 		rows = 3;
 		columns = 3;
 
-		tmpMatrix = new int* [rows];
+		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
 		{
-			tmpMatrix[i] = new int[columns];
+			newMatrixShape[i] = new int[columns];
 		}
 
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < columns; j++)
-				tmpMatrix[i][j] = 0;
+				newMatrixShape[i][j] = 0;
 
-		tmpMatrix[1][0] = 1;
-		tmpMatrix[1][1] = 1;
-		tmpMatrix[1][2] = 1;
-		tmpMatrix[0][1] = 1;
+		newMatrixShape[1][0] = 1;
+		newMatrixShape[1][1] = 1;
+		newMatrixShape[1][2] = 1;
+		newMatrixShape[0][1] = 1;
 
 		break;
 
@@ -162,18 +162,18 @@ void Figura::setShape(TipusFigura shape)
 		rows = 3;
 		columns = 3;
 
-		tmpMatrix = new int* [rows];
+		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
-			tmpMatrix[i] = new int[columns];
+			newMatrixShape[i] = new int[columns];
 
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < columns; j++)
-				tmpMatrix[i][j] = 0;
+				newMatrixShape[i][j] = 0;
 
-		tmpMatrix[1][0] = 1;
-		tmpMatrix[1][1] = 1;
-		tmpMatrix[1][2] = 1;
-		tmpMatrix[0][2] = 1;
+		newMatrixShape[1][0] = 1;
+		newMatrixShape[1][1] = 1;
+		newMatrixShape[1][2] = 1;
+		newMatrixShape[0][2] = 1;
 
 		break;
 
@@ -181,18 +181,18 @@ void Figura::setShape(TipusFigura shape)
 		rows = 3;
 		columns = 3;
 
-		tmpMatrix = new int* [rows];
+		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
-			tmpMatrix[i] = new int[columns];
+			newMatrixShape[i] = new int[columns];
 
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < columns; j++)
-				tmpMatrix[i][j] = 0;
+				newMatrixShape[i][j] = 0;
 
-		tmpMatrix[0][0] = 1;
-		tmpMatrix[1][0] = 1;
-		tmpMatrix[1][1] = 1;
-		tmpMatrix[1][2] = 1;
+		newMatrixShape[0][0] = 1;
+		newMatrixShape[1][0] = 1;
+		newMatrixShape[1][1] = 1;
+		newMatrixShape[1][2] = 1;
 
 		break;
 
@@ -200,18 +200,18 @@ void Figura::setShape(TipusFigura shape)
 		rows = 3;
 		columns = 3;
 
-		tmpMatrix = new int* [rows];
+		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
-			tmpMatrix[i] = new int[columns];
+			newMatrixShape[i] = new int[columns];
 
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < columns; j++)
-				tmpMatrix[i][j] = 0;
+				newMatrixShape[i][j] = 0;
 
-		tmpMatrix[0][0] = 1;
-		tmpMatrix[0][1] = 1;
-		tmpMatrix[1][1] = 1;
-		tmpMatrix[1][2] = 1;
+		newMatrixShape[0][0] = 1;
+		newMatrixShape[0][1] = 1;
+		newMatrixShape[1][1] = 1;
+		newMatrixShape[1][2] = 1;
 
 		break;
 
@@ -219,25 +219,25 @@ void Figura::setShape(TipusFigura shape)
 		rows = 3;
 		columns = 3;
 
-		tmpMatrix = new int* [rows];
+		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
-			tmpMatrix[i] = new int[columns];
+			newMatrixShape[i] = new int[columns];
 
 		for (int i = 0; i < rows; i++)
 			for (int j = 0; j < columns; j++)
-				tmpMatrix[i][j] = 0;
+				newMatrixShape[i][j] = 0;
 
-		tmpMatrix[0][1] = 1;
-		tmpMatrix[0][2] = 1;
-		tmpMatrix[1][0] = 1;
-		tmpMatrix[1][1] = 1;
+		newMatrixShape[0][1] = 1;
+		newMatrixShape[0][2] = 1;
+		newMatrixShape[1][0] = 1;
+		newMatrixShape[1][1] = 1;
 
 		break;
 	}
 
-	if (tmpMatrix != nullptr)
+	if (newMatrixShape != nullptr)
 	{
-		m_shapeMatrix = tmpMatrix;
+		m_shapeMatrix = newMatrixShape;
 		m_columns = columns;
 		m_rows = rows;
 	}
@@ -272,6 +272,11 @@ void Figura::freeShapeMatrix()
 	m_rows = 0;
 	m_columns = 0;
 	m_shapeMatrix = nullptr;
+}
+
+int** Figura::getShapeMatrix() const
+{
+	return m_shapeMatrix;
 }
 
 TipusFigura Figura::getShape() const
@@ -309,3 +314,12 @@ void Figura::setYPosition(int yPosition)
 	m_yPosition = yPosition;
 }
 
+int Figura::getColumns() const
+{
+	return m_columns;
+}
+
+int Figura::getRows() const
+{
+	return m_rows;
+}

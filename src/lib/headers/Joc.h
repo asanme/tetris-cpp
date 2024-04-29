@@ -15,6 +15,7 @@ class Joc
 	bool mouFigura(int dirX);
 	int baixaFigura();
 	void escriuTauler(const string& nomFitxer);
+
  private:
 	Tauler m_board;
 	Figura m_shape;

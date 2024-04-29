@@ -824,15 +824,19 @@ int main()
 
 int main()
 {
+	Tauler tauler;
 	Figura fig;
+	fig.setShape(FIGURA_I);
+	fig.setColor(COLOR_BLAUCEL);
 
-	std::cout << "------\n";
-	fig.setShape(FIGURA_S);
-	fig.showShape();
+	std::cout << "-----------------\n";
+	tauler.addShape(fig);
+	tauler.showBoard();
 
-	std::cout << "------\n";
-	fig.rotateShape(GIR_ANTI_HORARI);
-	fig.showShape();
+	std::cout << "-----------------\n";
+	fig.rotateShape(GIR_HORARI);
+	tauler.updateBoard();
+	tauler.showBoard();
 
 	return 0;
 }
