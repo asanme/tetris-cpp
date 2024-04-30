@@ -2,6 +2,40 @@
 #include <vector>
 #include "../headers/Joc.h"
 
+static void extractShapeData(string& currentLine, int* shapeData)
+{
+	int dataIndex = 0;
+	for (char c : currentLine)
+	{
+		if (isdigit(c))
+		{
+			int currentValue = c - '0';
+			shapeData[dataIndex] = currentValue;
+			++dataIndex;
+		}
+
+		cout << c << " ";
+	}
+
+	cout << "\n";
+}
+
+static void extractMatrixData(int** tmpBoardMatrix, const string& currentLine, int& rowIndex)
+{
+	int matrixColumnIndex = 0;
+	for (int i = 0; i < currentLine.length(); i++)
+	{
+		if (isdigit(currentLine[i]))
+		{
+			int currentMatrixValue = currentLine[i] - '0';
+			tmpBoardMatrix[rowIndex][matrixColumnIndex] = currentMatrixValue;
+			++matrixColumnIndex;
+		}
+	}
+
+	++rowIndex;
+}
+
 void Joc::inicialitza(const string& nomFitxer)
 {
 	ifstream boardData;
@@ -10,10 +44,29 @@ void Joc::inicialitza(const string& nomFitxer)
 	if (boardData.is_open())
 	{
 		string currentLine;
+		int shapeData[4];
+		int fileRowIndex = 0;
+		int matrixRowIndex = 0;
+
+		int** tmpBoardMatrix = new int* [MAX_FILA];
+		for (int i = 0; i < MAX_FILA; i++)
+			tmpBoardMatrix[i] = new int[MAX_COL];
+
 		while (getline(boardData, currentLine))
 		{
-			std::cout << currentLine << "\n";
+			if (fileRowIndex != 0)
+			{
+				extractMatrixData(tmpBoardMatrix, currentLine, matrixRowIndex);
+			}
+			else
+			{
+				extractShapeData(currentLine, shapeData);
+			}
+
+			++fileRowIndex;
 		}
+
+		m_board->setBoard(tmpBoardMatrix);
 	}
 
 	boardData.close();

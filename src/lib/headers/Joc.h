@@ -22,10 +22,11 @@ class Joc
 	}
 
 	void inicialitza(const string& nomFitxer);
+	void escriuTauler(const string& nomFitxer);
+
 	bool giraFigura(DireccioGir direccio);
 	bool mouFigura(int dirX);
 	int baixaFigura();
-	void escriuTauler(const string& nomFitxer);
 
 	void showBoard();
 

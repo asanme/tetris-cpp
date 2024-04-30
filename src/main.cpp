@@ -845,7 +845,6 @@ int main()
 int main()
 {
 	Joc j;
-	//j.showBoard();
-	//j.escriuTauler("../output/board.txt");
 	j.inicialitza("../src/data/test_inicialitzacio_tauler.txt");
+	j.showBoard();
 }
