@@ -55,6 +55,14 @@ void Figura::rotateShapeClockwise()
 {
 	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
 	invertColumns(m_shapeMatrix, m_rows, m_columns);
+
+	if (m_shape == FIGURA_I)
+	{
+		if (m_rotationIndex == 3)
+			m_rotationIndex = 0;
+		else
+			++m_rotationIndex;
+	}
 }
 
 void Figura::rotateShapeCounterclockwise()
@@ -78,12 +86,12 @@ void Figura::rotateShape(DireccioGir rotationDirection)
 
 void Figura::moveHorizontally(int xDirection)
 {
-	m_xPosition += xDirection;
+	m_xPivotPosition += xDirection;
 }
 
 void Figura::moveVertically()
 {
-	++m_yPosition;
+	++m_yPivotPosition;
 }
 
 void Figura::setShape(TipusFigura shape)
@@ -135,6 +143,9 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[1][2] = 1;
 		newMatrixShape[1][3] = 1;
 
+		m_xPivotPosition = 2;
+		m_yPivotPosition = 1;
+
 		break;
 
 	case FIGURA_T:
@@ -156,6 +167,9 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[1][2] = 1;
 		newMatrixShape[0][1] = 1;
 
+		m_xPivotPosition = 1;
+		m_yPivotPosition = 1;
+
 		break;
 
 	case FIGURA_L:
@@ -174,6 +188,9 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[1][1] = 1;
 		newMatrixShape[1][2] = 1;
 		newMatrixShape[0][2] = 1;
+
+		m_xPivotPosition = 1;
+		m_yPivotPosition = 1;
 
 		break;
 
@@ -194,6 +211,9 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[1][1] = 1;
 		newMatrixShape[1][2] = 1;
 
+		m_xPivotPosition = 1;
+		m_yPivotPosition = 1;
+
 		break;
 
 	case FIGURA_Z:
@@ -213,6 +233,9 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[1][1] = 1;
 		newMatrixShape[1][2] = 1;
 
+		m_xPivotPosition = 1;
+		m_yPivotPosition = 1;
+
 		break;
 
 	case FIGURA_S:
@@ -231,6 +254,9 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[0][2] = 1;
 		newMatrixShape[1][0] = 1;
 		newMatrixShape[1][1] = 1;
+
+		m_xPivotPosition = 1;
+		m_yPivotPosition = 1;
 
 		break;
 	}
@@ -296,22 +322,22 @@ void Figura::setColor(ColorFigura color)
 
 int Figura::getXPosition() const
 {
-	return m_xPosition;
+	return m_xPivotPosition;
 }
 
 void Figura::setXPosition(int xPosition)
 {
-	m_xPosition = xPosition;
+	m_xPivotPosition = xPosition;
 }
 
 int Figura::getYPosition() const
 {
-	return m_yPosition;
+	return m_yPivotPosition;
 }
 
 void Figura::setYPosition(int yPosition)
 {
-	m_yPosition = yPosition;
+	m_yPivotPosition = yPosition;
 }
 
 int Figura::getColumns() const
@@ -322,4 +348,9 @@ int Figura::getColumns() const
 int Figura::getRows() const
 {
 	return m_rows;
+}
+
+int Figura::getRotationIndex() const
+{
+	return m_rotationIndex;
 }

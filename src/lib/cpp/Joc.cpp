@@ -66,6 +66,19 @@ void Joc::inicialitza(const string& nomFitxer)
 			++fileRowIndex;
 		}
 
+		// TODO Remove static cast
+		Figura f;
+		int row = shapeData[1];
+		int column = shapeData[2];
+		int rotationIndex = shapeData[3];
+		f.setShape(static_cast<TipusFigura>(shapeData[0]));
+		for (int i = 0; i < rotationIndex; i++)
+		{
+			f.rotateShape(GIR_HORARI);
+		}
+
+		f.showShape();
+
 		m_board->setBoard(tmpBoardMatrix);
 	}
 

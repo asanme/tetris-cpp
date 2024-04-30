@@ -77,6 +77,7 @@ int** Tauler::getBoard() const
 
 	return boardMatrix;
 }
+
 void Tauler::setBoard(int** board)
 {
 	for (int i = 0; i < MAX_FILA; i++)

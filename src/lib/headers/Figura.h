@@ -46,13 +46,14 @@ class Figura
 
 	Figura()
 	{
-		m_shape = NO_FIGURA;
-		m_color = NO_COLOR;
 		m_rows = 0;
 		m_columns = 0;
 		m_shapeMatrix = nullptr;
-		m_xPosition = 0;
-		m_yPosition = 0;
+		m_shape = NO_FIGURA;
+		m_color = NO_COLOR;
+		m_rotationIndex = 0;
+		m_xPivotPosition = 0;
+		m_yPivotPosition = 0;
 	}
 
 	void moveVertically();
@@ -67,6 +68,8 @@ class Figura
 
 	ColorFigura getColor() const;
 	void setColor(ColorFigura color);
+
+	int getRotationIndex() const;
 
 	int getXPosition() const;
 	void setXPosition(int xPosition);
@@ -85,12 +88,13 @@ class Figura
 	// Other shape information
 	TipusFigura m_shape;
 	ColorFigura m_color;
+	int m_rotationIndex;
 
 	// Matrix information
 	int m_rows;
 	int m_columns;
 	int** m_shapeMatrix;
 
-	int m_xPosition;
-	int m_yPosition;
+	int m_xPivotPosition;
+	int m_yPivotPosition;
 };
