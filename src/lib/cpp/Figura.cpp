@@ -303,25 +303,7 @@ void Figura::setShape(TipusFigura shape)
 	}
 }
 
-void Figura::showShape()
-{
-	if (m_shapeMatrix == nullptr)
-		return;
-
-	cout << "xPivot: " << m_xPivotPosition << "\n";
-	cout << "yPivot: " << m_yPivotPosition << "\n";
-	for (int i = 0; i < m_rows; i++)
-	{
-		for (int j = 0; j < m_columns; j++)
-		{
-			cout << m_shapeMatrix[i][j] << " ";
-		}
-
-		cout << "\n";
-	}
-}
-
-// Frees the memory allocated in the pointer and sets the columns and rows to 0
+// Frees the memory allocated in the shape
 void Figura::freeShapeMatrix()
 {
 	if (m_shapeMatrix == nullptr)
@@ -344,19 +326,9 @@ int** Figura::getShapeMatrix() const
 	return m_shapeMatrix;
 }
 
-TipusFigura Figura::getShape() const
-{
-	return m_shape;
-}
-
 ColorFigura Figura::getColor() const
 {
 	return m_color;
-}
-
-void Figura::setColor(ColorFigura color)
-{
-	m_color = color;
 }
 
 int Figura::getXBoardPosition() const
@@ -397,4 +369,22 @@ int Figura::getColumns() const
 int Figura::getRows() const
 {
 	return m_rows;
+}
+
+void Figura::showShape()
+{
+	if (m_shapeMatrix == nullptr)
+		return;
+
+	cout << "xPivot: " << m_xPivotPosition << "\n";
+	cout << "yPivot: " << m_yPivotPosition << "\n";
+	for (int i = 0; i < m_rows; i++)
+	{
+		for (int j = 0; j < m_columns; j++)
+		{
+			cout << m_shapeMatrix[i][j] << " ";
+		}
+
+		cout << "\n";
+	}
 }

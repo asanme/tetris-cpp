@@ -21,16 +21,18 @@ class Tauler
 		}
 	}
 
-	void showBoard();
 	void addShape(Figura& shape, int xPos, int yPos);
 	void updateBoard();
 
-	int** getBoard() const;
-	void setBoard(int** board);
+	// Methods for input / output
+	int** dumpBoard() const;
+	void loadBoard(int** board);
+
+	// Debug only
+	void showBoard();
 
  private:
-	void updateCurrentShape();
-	void clearShapePosition();
+	void removeShapeFromBoard();
 
 	ColorFigura m_board[MAX_FILA][MAX_COL];
 	Figura* m_currentShape;

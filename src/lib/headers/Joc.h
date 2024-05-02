@@ -8,29 +8,22 @@ using namespace std;
 class Joc
 {
  public:
-	~Joc()
-	{
-		m_board = nullptr;
-		m_currentShape = nullptr;
-	}
+	Joc() = default;
 
-	Joc()
-	{
-		m_board = new Tauler();
-		// TODO Remove this, only for testing
-		m_currentShape = new Figura();
-	}
-
+	// Methods for input / output
 	void inicialitza(const string& nomFitxer);
 	void escriuTauler(const string& nomFitxer);
 
+	// Methods for shapes
 	bool giraFigura(DireccioGir direccio);
 	bool mouFigura(int dirX);
 	int baixaFigura();
 
+	// Debug only
 	void showBoard();
 
  private:
-	Tauler* m_board;
-	Figura* m_currentShape;
+	Tauler m_board;
+	Figura m_currentShape;
+	void setGameData(int** boardMatrixData, const int* shapeData);
 };

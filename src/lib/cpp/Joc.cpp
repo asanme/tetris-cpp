@@ -32,6 +32,21 @@ static void deserializeMatrixData(int** tmpBoardMatrix, int& rowIndex, const str
 	++rowIndex;
 }
 
+// Loads deserialized data into the objects
+void Joc::setGameData(int** boardMatrixData, const int* shapeData)
+{
+	int row = shapeData[1];
+	int column = shapeData[2];
+	int rotationIndex = shapeData[3];
+	m_currentShape.setShape(static_cast<TipusFigura>(shapeData[0]));
+
+	for (int i = 0; i < rotationIndex; i++)
+		m_currentShape.rotateShape(GIR_HORARI);
+
+	m_board.loadBoard(boardMatrixData);
+	m_board.addShape(m_currentShape, row, column);
+}
+
 void Joc::inicialitza(const string& nomFitxer)
 {
 	ifstream boardData;
@@ -58,20 +73,7 @@ void Joc::inicialitza(const string& nomFitxer)
 			++fileRowIndex;
 		}
 
-		Figura f;
-		int row = shapeData[1];
-		int column = shapeData[2];
-		int rotationIndex = shapeData[3];
-		f.setShape(static_cast<TipusFigura>(shapeData[0]));
-
-		for (int i = 0; i < rotationIndex; i++)
-			f.rotateShape(GIR_HORARI);
-
-		f.showShape();
-		cout << "expected x: " << row << " expected y: " << column << "\n";
-
-		m_board->setBoard(tmpBoardMatrix);
-//		m_board->addShape(f, row, column);
+		setGameData(tmpBoardMatrix, shapeData);
 	}
 
 	boardData.close();
@@ -84,7 +86,7 @@ void Joc::escriuTauler(const string& nomFitxer)
 
 	if (boardOutput.is_open())
 	{
-		int** tmpBoard = m_board->getBoard();
+		int** tmpBoard = m_board.dumpBoard();
 		for (int i = 0; i < MAX_FILA; i++)
 		{
 			for (int j = 0; j < MAX_COL; ++j)
@@ -105,17 +107,17 @@ bool Joc::giraFigura(DireccioGir direccio)
 
 bool Joc::mouFigura(int dirX)
 {
-	m_currentShape->moveHorizontally(dirX);
+	// TODO
 	return false;
 }
 
 int Joc::baixaFigura()
 {
-	m_currentShape->moveVertically();
+	// TODO
 	return 0;
 }
 
 void Joc::showBoard()
 {
-	m_board->showBoard();
+	m_board.showBoard();
 }

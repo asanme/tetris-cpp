@@ -64,15 +64,12 @@ class Figura
 	void moveVertically();
 	void moveHorizontally(int xDirection);
 
-	void showShape();
+	void setShape(TipusFigura shape);
 	void rotateShape(DireccioGir rotationDirection);
+
 	int** getShapeMatrix() const;
 
-	TipusFigura getShape() const;
-	void setShape(TipusFigura shape);
-
 	ColorFigura getColor() const;
-	void setColor(ColorFigura color);
 
 	int getXPivotPosition() const;
 	int getYPivotPosition() const;
@@ -85,6 +82,9 @@ class Figura
 
 	int getRows() const;
 	int getColumns() const;
+
+	// Debug only
+	void showShape();
 
  private:
 	void freeShapeMatrix();
