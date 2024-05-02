@@ -32,7 +32,6 @@ static void deserializeMatrixData(int** tmpBoardMatrix, int& rowIndex, const str
 	++rowIndex;
 }
 
-// Loads deserialized data into the objects
 void Joc::setGameData(int** boardMatrixData, const int* shapeData)
 {
 	int row = shapeData[1];
@@ -102,18 +101,25 @@ void Joc::escriuTauler(const string& nomFitxer)
 
 bool Joc::giraFigura(DireccioGir direccio)
 {
-	return false;
+	bool isRotationValid = m_board.isRotationValid(direccio);
+
+	if (isRotationValid)
+		m_board.rotateShape(direccio);
+
+	return isRotationValid;
 }
 
 bool Joc::mouFigura(int dirX)
 {
 	// TODO
+
 	return false;
 }
 
 int Joc::baixaFigura()
 {
 	// TODO
+
 	return 0;
 }
 

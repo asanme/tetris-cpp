@@ -10,11 +10,9 @@ class Joc
  public:
 	Joc() = default;
 
-	// Methods for input / output
 	void inicialitza(const string& nomFitxer);
 	void escriuTauler(const string& nomFitxer);
 
-	// Methods for shapes
 	bool giraFigura(DireccioGir direccio);
 	bool mouFigura(int dirX);
 	int baixaFigura();

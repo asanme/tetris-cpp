@@ -66,6 +66,39 @@ class Figura
 		m_yBoardPivotPosition = 0;
 	}
 
+	// Copy constructor
+	Figura(const Figura& figura)
+	{
+		m_shape = figura.m_shape;
+		m_color = figura.m_color;
+		m_rotationIndex = figura.m_rotationIndex;
+
+		m_rows = figura.m_rows;
+		m_columns = figura.m_columns;
+
+		m_xPivotPosition = figura.m_xPivotPosition;
+		m_yPivotPosition = figura.m_yPivotPosition;
+
+		m_xBoardPivotPosition = figura.m_xBoardPivotPosition;
+		m_yBoardPivotPosition = figura.m_yBoardPivotPosition;
+		m_shapeMatrix = nullptr;
+
+		if (figura.m_shapeMatrix == nullptr)
+			return;
+
+		m_shapeMatrix = new int* [m_rows];
+		for (int i = 0; i < m_rows; i++)
+			m_shapeMatrix[i] = new int[m_columns];
+
+		for (int i = 0; i < m_rows; ++i)
+		{
+			for (int j = 0; j < m_columns; ++j)
+			{
+				m_shapeMatrix[i][j] = figura.m_shapeMatrix[i][j];
+			}
+		}
+	}
+
 	void moveVertically();
 	void moveHorizontally(int xDirection);
 
@@ -79,11 +112,11 @@ class Figura
 	int getXPivotPosition() const;
 	int getYPivotPosition() const;
 
-	int getXBoardPosition() const;
-	void setXBoardPosition(int xPosition);
+	int getXBoardPivotPosition() const;
+	void setXBoardPivotPosition(int xPosition);
 
-	int getYBoardPosition() const;
-	void setYBoardPosition(int yPosition);
+	int getYBoardPivotPosition() const;
+	void setYBoardPivotPosition(int yPosition);
 
 	int getRows() const;
 	int getColumns() const;

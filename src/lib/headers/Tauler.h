@@ -5,13 +5,10 @@
 class Tauler
 {
  public:
-	~Tauler()
-	{
-		m_currentShape = nullptr;
-	}
-
 	Tauler()
 	{
+		m_currentShape = nullptr;
+
 		for (int i = 0; i < MAX_FILA; i++)
 		{
 			for (int j = 0; j < MAX_COL; j++)
@@ -21,10 +18,30 @@ class Tauler
 		}
 	}
 
-	void addShape(Figura& shape, int xPos, int yPos);
-	void updateBoard();
+	Tauler(const Tauler& tauler)
+	{
+		m_currentShape = nullptr;
+		if (tauler.m_currentShape != nullptr)
+		{
+			m_currentShape = new Figura(*tauler.m_currentShape);
+		}
 
-	// Methods for input / output
+		for (int i = 0; i < MAX_FILA; i++)
+		{
+			for (int j = 0; j < MAX_COL; ++j)
+			{
+				m_board[i][j] = tauler.m_board[i][j];
+			}
+		}
+	}
+
+	void addShape(Figura& shape, int xPos, int yPos);
+	void moveShape(int xDir);
+	void rotateShape(DireccioGir direction);
+
+	bool isRotationValid(DireccioGir direction);
+	bool isMovementValid(int dirX);
+
 	int** dumpBoard() const;
 	void loadBoard(int** board);
 
@@ -32,7 +49,9 @@ class Tauler
 	void showBoard();
 
  private:
-	void removeShapeFromBoard();
+	bool isShapeColliding(const Figura& shape) const;
+	void redrawShape();
+	void clearShape();
 
 	ColorFigura m_board[MAX_FILA][MAX_COL];
 	Figura* m_currentShape;

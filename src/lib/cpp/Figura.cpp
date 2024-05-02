@@ -56,7 +56,6 @@ void Figura::rotateShapeClockwise()
 	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
 	invertColumns(m_shapeMatrix, m_rows, m_columns);
 
-	// We only have to worry about the pivot of this shape
 	if (m_shape == FIGURA_I)
 	{
 		if (m_rotationIndex == 3)
@@ -94,7 +93,7 @@ void Figura::rotateShapeCounterclockwise()
 	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
 	invertRows(m_shapeMatrix, m_rows, m_columns);
 
-	// TODO Implement pivot rotations for FIGURA_I
+	// TODO Implement the rest of pivot rotations for FIGURA_I
 }
 
 void Figura::rotateShape(DireccioGir rotationDirection)
@@ -333,22 +332,22 @@ ColorFigura Figura::getColor() const
 	return m_color;
 }
 
-int Figura::getXBoardPosition() const
+int Figura::getXBoardPivotPosition() const
 {
 	return m_xBoardPivotPosition;
 }
 
-void Figura::setXBoardPosition(int xPosition)
+void Figura::setXBoardPivotPosition(int xPosition)
 {
 	m_xBoardPivotPosition = xPosition;
 }
 
-int Figura::getYBoardPosition() const
+int Figura::getYBoardPivotPosition() const
 {
 	return m_yBoardPivotPosition;
 }
 
-void Figura::setYBoardPosition(int yPosition)
+void Figura::setYBoardPivotPosition(int yPosition)
 {
 	m_yBoardPivotPosition = yPosition;
 }
