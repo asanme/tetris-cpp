@@ -51,14 +51,19 @@ class Figura
 
 	Figura()
 	{
-		m_rows = 0;
-		m_columns = 0;
 		m_shapeMatrix = nullptr;
+		m_rotationIndex = 0;
 		m_shape = NO_FIGURA;
 		m_color = NO_COLOR;
-		m_rotationIndex = 0;
+
+		m_rows = 0;
+		m_columns = 0;
+
 		m_xPivotPosition = 0;
 		m_yPivotPosition = 0;
+
+		m_xBoardPivotPosition = 0;
+		m_yBoardPivotPosition = 0;
 	}
 
 	void moveVertically();

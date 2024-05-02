@@ -296,10 +296,12 @@ void Figura::setShape(TipusFigura shape)
 	// If TipusFigura is not NO_FIGURA
 	if (newMatrixShape != nullptr)
 	{
-		m_shape = shape;
 		m_shapeMatrix = newMatrixShape;
 		m_columns = columns;
 		m_rows = rows;
+
+		m_shape = shape;
+		m_color = color;
 	}
 }
 
@@ -376,6 +378,8 @@ void Figura::showShape()
 	if (m_shapeMatrix == nullptr)
 		return;
 
+	cout << "\n-----------\n";
+	cout << "Showing Shape Data:\n";
 	cout << "xPivot: " << m_xPivotPosition << "\n";
 	cout << "yPivot: " << m_yPivotPosition << "\n";
 	for (int i = 0; i < m_rows; i++)

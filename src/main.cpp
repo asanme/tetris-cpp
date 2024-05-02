@@ -5,7 +5,6 @@
 #include <string>
 using namespace std;
 
-/*
 string tipusToString(int tipus)
 {
 	string tipusString;
@@ -177,11 +176,11 @@ int main()
 	cout << "Comment :=>> Inicialitzacio del tauler amb figura sense girar" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> " << endl;
-	joc.inicialitza("./data/test_inicialitzacio_tauler.txt");
-	mostraFitxerInicial("./data/test_inicialitzacio_tauler.txt");
-	joc.escriuTauler("./data/resultat_inicialitzacio_tauler.txt");
-	correcte = comparaResultatPartida("./data/resultat_inicialitzacio_tauler.txt",
-		"./data/resultat_esperat_inicialitzacio_tauler.txt");
+	joc.inicialitza("../src/data/test_inicialitzacio_tauler.txt");
+	mostraFitxerInicial("../src/data/test_inicialitzacio_tauler.txt");
+	joc.escriuTauler("../src/data/resultat_inicialitzacio_tauler.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_inicialitzacio_tauler.txt",
+		"../src/data/resultat_esperat_inicialitzacio_tauler.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
@@ -191,11 +190,11 @@ int main()
 	cout << "Comment :=>> Inicialitzacio del tauler amb figura amb gir" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> " << endl;
-	joc.inicialitza("./data/test_inicialitzacio_gir.txt");
-	mostraFitxerInicial("./data/test_inicialitzacio_gir.txt");
-	joc.escriuTauler("./data/resultat_inicialitzacio_gir.txt");
-	correcte = comparaResultatPartida("./data/resultat_inicialitzacio_gir.txt",
-		"./data/resultat_esperat_inicialitzacio_gir.txt");
+	joc.inicialitza("../src/data/test_inicialitzacio_gir.txt");
+	mostraFitxerInicial("../src/data/test_inicialitzacio_gir.txt");
+	joc.escriuTauler("../src/data/resultat_inicialitzacio_gir.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_inicialitzacio_gir.txt",
+		"../src/data/resultat_esperat_inicialitzacio_gir.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
@@ -214,113 +213,119 @@ int main()
 	// Baixa figura
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 1" << endl;
-	joc.inicialitza("./data/test_baixa_figura.txt");
-	mostraFitxerInicial("./data/test_baixa_figura.txt");
+	joc.inicialitza("../src/data/test_baixa_figura.txt");
+	mostraFitxerInicial("../src/data/test_baixa_figura.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.baixaFigura();
-	joc.escriuTauler("./data/resultat_baixa_figura.txt");
-	correcte = comparaResultatPartida("./data/resultat_baixa_figura.txt", "./data/resultat_esperat_baixa_figura.txt");
+	joc.escriuTauler("../src/data/resultat_baixa_figura.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_baixa_figura.txt",
+		"../src/data/resultat_esperat_baixa_figura.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Baixa i col�loca figura al tauler
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 2" << endl;
-	joc.inicialitza("./data/test_baixa_figura.txt");
-	mostraFitxerInicial("./data/test_baixa_figura.txt");
+	joc.inicialitza("../src/data/test_baixa_figura.txt");
+	mostraFitxerInicial("../src/data/test_baixa_figura.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.baixaFigura();
 	joc.baixaFigura();
-	joc.escriuTauler("./data/resultat_baixa_coloca_figura.txt");
-	correcte = comparaResultatPartida("./data/resultat_baixa_coloca_figura.txt",
-		"./data/resultat_esperat_baixa_coloca_figura.txt");
+	joc.escriuTauler("../src/data/resultat_baixa_coloca_figura.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_baixa_coloca_figura.txt",
+		"../src/data/resultat_esperat_baixa_coloca_figura.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Mou figura esquerra i no pot
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 3" << endl;
-	joc.inicialitza("./data/test_mou_figura_1.txt");
-	mostraFitxerInicial("./data/test_mou_figura_1.txt");
+	joc.inicialitza("../src/data/test_mou_figura_1.txt");
+	mostraFitxerInicial("../src/data/test_mou_figura_1.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura esquerra" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(-1);
-	joc.escriuTauler("./data/resultat_mou_figura_1.txt");
-	correcte = comparaResultatPartida("./data/resultat_mou_figura_1.txt", "./data/resultat_esperat_mou_figura_1.txt");
+	joc.escriuTauler("../src/data/resultat_mou_figura_1.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_mou_figura_1.txt",
+		"../src/data/resultat_esperat_mou_figura_1.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Mou figura esquerra i pot degut al gir
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 4" << endl;
-	joc.inicialitza("./data/test_mou_figura_2.txt");
-	mostraFitxerInicial("./data/test_mou_figura_2.txt");
+	joc.inicialitza("../src/data/test_mou_figura_2.txt");
+	mostraFitxerInicial("../src/data/test_mou_figura_2.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura esquerra" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(-1);
-	joc.escriuTauler("./data/resultat_mou_figura_2.txt");
-	correcte = comparaResultatPartida("./data/resultat_mou_figura_2.txt", "./data/resultat_esperat_mou_figura_2.txt");
+	joc.escriuTauler("../src/data/resultat_mou_figura_2.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_mou_figura_2.txt",
+		"../src/data/resultat_esperat_mou_figura_2.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Mou figura esquerra, es pot un cop, pero no el segon
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 5" << endl;
-	joc.inicialitza("./data/test_mou_figura_3.txt");
-	mostraFitxerInicial("./data/test_mou_figura_3.txt");
+	joc.inicialitza("../src/data/test_mou_figura_3.txt");
+	mostraFitxerInicial("../src/data/test_mou_figura_3.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura esquerra" << endl;
 	cout << "Comment :=>>  - Mou figura esquerra" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(-1);
 	joc.mouFigura(-1);
-	joc.escriuTauler("./data/resultat_mou_figura_3.txt");
-	correcte = comparaResultatPartida("./data/resultat_mou_figura_3.txt", "./data/resultat_esperat_mou_figura_3.txt");
+	joc.escriuTauler("../src/data/resultat_mou_figura_3.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_mou_figura_3.txt",
+		"../src/data/resultat_esperat_mou_figura_3.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Mou figura dreta un cop
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 6" << endl;
-	joc.inicialitza("./data/test_mou_figura_4.txt");
-	mostraFitxerInicial("./data/test_mou_figura_4.txt");
+	joc.inicialitza("../src/data/test_mou_figura_4.txt");
+	mostraFitxerInicial("../src/data/test_mou_figura_4.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(1);
-	joc.escriuTauler("./data/resultat_mou_figura_4.txt");
-	correcte = comparaResultatPartida("./data/resultat_mou_figura_4.txt", "./data/resultat_esperat_mou_figura_4.txt");
+	joc.escriuTauler("../src/data/resultat_mou_figura_4.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_mou_figura_4.txt",
+		"../src/data/resultat_esperat_mou_figura_4.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Mou figura girada dreta dos cops
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 7" << endl;
-	joc.inicialitza("./data/test_mou_figura_5.txt");
-	mostraFitxerInicial("./data/test_mou_figura_5.txt");
+	joc.inicialitza("../src/data/test_mou_figura_5.txt");
+	mostraFitxerInicial("../src/data/test_mou_figura_5.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(1);
 	joc.mouFigura(1);
-	joc.escriuTauler("./data/resultat_mou_figura_5.txt");
-	correcte = comparaResultatPartida("./data/resultat_mou_figura_5.txt", "./data/resultat_esperat_mou_figura_5.txt");
+	joc.escriuTauler("../src/data/resultat_mou_figura_5.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_mou_figura_5.txt",
+		"../src/data/resultat_esperat_mou_figura_5.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Mou figura girada dreta tres cops, nomes pot dos
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 8" << endl;
-	joc.inicialitza("./data/test_mou_figura_6.txt");
-	mostraFitxerInicial("./data/test_mou_figura_6.txt");
+	joc.inicialitza("../src/data/test_mou_figura_6.txt");
+	mostraFitxerInicial("../src/data/test_mou_figura_6.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
@@ -329,70 +334,75 @@ int main()
 	joc.mouFigura(1);
 	joc.mouFigura(1);
 	joc.mouFigura(1);
-	joc.escriuTauler("./data/resultat_mou_figura_6.txt");
-	correcte = comparaResultatPartida("./data/resultat_mou_figura_6.txt", "./data/resultat_esperat_mou_figura_6.txt");
+	joc.escriuTauler("../src/data/resultat_mou_figura_6.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_mou_figura_6.txt",
+		"../src/data/resultat_esperat_mou_figura_6.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Mou figura dreta dos cops colisiona amb tauler el segon moviment
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 9" << endl;
-	joc.inicialitza("./data/test_mou_figura_7.txt");
-	mostraFitxerInicial("./data/test_mou_figura_7.txt");
+	joc.inicialitza("../src/data/test_mou_figura_7.txt");
+	mostraFitxerInicial("../src/data/test_mou_figura_7.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(1);
 	joc.mouFigura(1);
-	joc.escriuTauler("./data/resultat_mou_figura_7.txt");
-	correcte = comparaResultatPartida("./data/resultat_mou_figura_7.txt", "./data/resultat_esperat_mou_figura_7.txt");
+	joc.escriuTauler("../src/data/resultat_mou_figura_7.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_mou_figura_7.txt",
+		"../src/data/resultat_esperat_mou_figura_7.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Mou figura girada dreta 1 cop
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 10" << endl;
-	joc.inicialitza("./data/test_mou_figura_8.txt");
-	mostraFitxerInicial("./data/test_mou_figura_8.txt");
+	joc.inicialitza("../src/data/test_mou_figura_8.txt");
+	mostraFitxerInicial("../src/data/test_mou_figura_8.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(1);
-	joc.escriuTauler("./data/resultat_mou_figura_8.txt");
-	correcte = comparaResultatPartida("./data/resultat_mou_figura_8.txt", "./data/resultat_esperat_mou_figura_8.txt");
+	joc.escriuTauler("../src/data/resultat_mou_figura_8.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_mou_figura_8.txt",
+		"../src/data/resultat_esperat_mou_figura_8.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Mou figura girada dreta 2 cops, el segon colisiona amb el tauler
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 11" << endl;
-	joc.inicialitza("./data/test_mou_figura_9.txt");
-	mostraFitxerInicial("./data/test_mou_figura_9.txt");
+	joc.inicialitza("../src/data/test_mou_figura_9.txt");
+	mostraFitxerInicial("../src/data/test_mou_figura_9.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(1);
 	joc.mouFigura(1);
-	joc.escriuTauler("./data/resultat_mou_figura_9.txt");
-	correcte = comparaResultatPartida("./data/resultat_mou_figura_9.txt", "./data/resultat_esperat_mou_figura_9.txt");
+	joc.escriuTauler("../src/data/resultat_mou_figura_9.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_mou_figura_9.txt",
+		"../src/data/resultat_esperat_mou_figura_9.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Mou figura I girada tres cops, nom�s pot moure un a l'esquerra
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 12" << endl;
-	joc.inicialitza("./data/test_mou_figura_10.txt");
-	mostraFitxerInicial("./data/test_mou_figura_10.txt");
+	joc.inicialitza("../src/data/test_mou_figura_10.txt");
+	mostraFitxerInicial("../src/data/test_mou_figura_10.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura esquerra" << endl;
 	cout << "Comment :=>>  - Mou figura esquerra" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(-1);
 	joc.mouFigura(-1);
-	joc.escriuTauler("./data/resultat_mou_figura_10.txt");
-	correcte = comparaResultatPartida("./data/resultat_mou_figura_10.txt", "./data/resultat_esperat_mou_figura_10.txt");
+	joc.escriuTauler("../src/data/resultat_mou_figura_10.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_mou_figura_10.txt",
+		"../src/data/resultat_esperat_mou_figura_10.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
@@ -411,38 +421,40 @@ int main()
 	// Gir antihorari
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 1" << endl;
-	joc.inicialitza("./data/test_gir_figura_1.txt");
-	mostraFitxerInicial("./data/test_gir_figura_1.txt");
+	joc.inicialitza("../src/data/test_gir_figura_1.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_1.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Gir anti-horari" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.giraFigura(GIR_ANTI_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_1.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_1.txt", "./data/resultat_esperat_gir_figura_1.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_1.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_1.txt",
+		"../src/data/resultat_esperat_gir_figura_1.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir antihorari prohibit limit esquerra
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 2" << endl;
-	joc.inicialitza("./data/test_gir_figura_2.txt");
-	mostraFitxerInicial("./data/test_gir_figura_2.txt");
+	joc.inicialitza("../src/data/test_gir_figura_2.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_2.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura esquerra" << endl;
 	cout << "Comment :=>>  - Gir anti-horari" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(-1);
 	joc.giraFigura(GIR_ANTI_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_2.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_2.txt", "./data/resultat_esperat_gir_figura_2.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_2.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_2.txt",
+		"../src/data/resultat_esperat_gir_figura_2.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir  prohibit limit dret
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 3" << endl;
-	joc.inicialitza("./data/test_gir_figura_3.txt");
-	mostraFitxerInicial("./data/test_gir_figura_3.txt");
+	joc.inicialitza("../src/data/test_gir_figura_3.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_3.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Gir anti-horari" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
@@ -451,16 +463,17 @@ int main()
 	joc.giraFigura(GIR_ANTI_HORARI);
 	joc.mouFigura(1);
 	joc.giraFigura(GIR_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_3.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_3.txt", "./data/resultat_esperat_gir_figura_3.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_3.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_3.txt",
+		"../src/data/resultat_esperat_gir_figura_3.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir  prohibit limit esquerra figura I
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 4" << endl;
-	joc.inicialitza("./data/test_gir_figura_4.txt");
-	mostraFitxerInicial("./data/test_gir_figura_4.txt");
+	joc.inicialitza("../src/data/test_gir_figura_4.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_4.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Gir horari" << endl;
 	cout << "Comment :=>>  - Mou figura esquerra" << endl;
@@ -471,32 +484,34 @@ int main()
 	joc.mouFigura(-1);
 	joc.mouFigura(-1);
 	joc.giraFigura(GIR_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_4.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_4.txt", "./data/resultat_esperat_gir_figura_4.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_4.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_4.txt",
+		"../src/data/resultat_esperat_gir_figura_4.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir  prohibit limit esquerra figura I nom�s una columna
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 5" << endl;
-	joc.inicialitza("./data/test_gir_figura_5.txt");
-	mostraFitxerInicial("./data/test_gir_figura_5.txt");
+	joc.inicialitza("../src/data/test_gir_figura_5.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_5.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura esquerra" << endl;
 	cout << "Comment :=>>  - Gir anti-horari" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(-1);
 	joc.giraFigura(GIR_ANTI_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_5.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_5.txt", "./data/resultat_esperat_gir_figura_5.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_5.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_5.txt",
+		"../src/data/resultat_esperat_gir_figura_5.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir prohibit limit dreta figura I
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 6" << endl;
-	joc.inicialitza("./data/test_gir_figura_6.txt");
-	mostraFitxerInicial("./data/test_gir_figura_6.txt");
+	joc.inicialitza("../src/data/test_gir_figura_6.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_6.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Gir horari" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
@@ -507,16 +522,17 @@ int main()
 	joc.mouFigura(1);
 	joc.mouFigura(1);
 	joc.giraFigura(GIR_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_6.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_6.txt", "./data/resultat_esperat_gir_figura_6.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_6.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_6.txt",
+		"../src/data/resultat_esperat_gir_figura_6.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir prohibit limit dreta figura I
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 7" << endl;
-	joc.inicialitza("./data/test_gir_figura_7.txt");
-	mostraFitxerInicial("./data/test_gir_figura_7.txt");
+	joc.inicialitza("../src/data/test_gir_figura_7.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_7.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Gir anti-horari" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
@@ -525,130 +541,139 @@ int main()
 	joc.giraFigura(GIR_ANTI_HORARI);
 	joc.mouFigura(1);
 	joc.mouFigura(1);
-	joc.escriuTauler("./data/resultat_gir_figura_7.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_7.txt", "./data/resultat_esperat_gir_figura_7.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_7.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_7.txt",
+		"../src/data/resultat_esperat_gir_figura_7.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Dos girs figura I
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 8" << endl;
-	joc.inicialitza("./data/test_gir_figura_8.txt");
-	mostraFitxerInicial("./data/test_gir_figura_8.txt");
+	joc.inicialitza("../src/data/test_gir_figura_8.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_8.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Gir anti-horari" << endl;
 	cout << "Comment :=>>  - Gir anti-horari" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.giraFigura(GIR_ANTI_HORARI);
 	joc.giraFigura(GIR_ANTI_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_8.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_8.txt", "./data/resultat_esperat_gir_figura_8.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_8.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_8.txt",
+		"../src/data/resultat_esperat_gir_figura_8.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir figura L enmig tauler valid
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 9" << endl;
-	joc.inicialitza("./data/test_gir_figura_9.txt");
-	mostraFitxerInicial("./data/test_gir_figura_9.txt");
+	joc.inicialitza("../src/data/test_gir_figura_9.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_9.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Gir horari" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.giraFigura(GIR_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_9.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_9.txt", "./data/resultat_esperat_gir_figura_9.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_9.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_9.txt",
+		"../src/data/resultat_esperat_gir_figura_9.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir figura L enmig tauler no valid
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 10" << endl;
-	joc.inicialitza("./data/test_gir_figura_10.txt");
-	mostraFitxerInicial("./data/test_gir_figura_10.txt");
+	joc.inicialitza("../src/data/test_gir_figura_10.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_10.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>>  - Gir horari" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(1);
 	joc.giraFigura(GIR_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_10.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_10.txt", "./data/resultat_esperat_gir_figura_10.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_10.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_10.txt",
+		"../src/data/resultat_esperat_gir_figura_10.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir figura S enmig tauler valid
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 11" << endl;
-	joc.inicialitza("./data/test_gir_figura_11.txt");
-	mostraFitxerInicial("./data/test_gir_figura_11.txt");
+	joc.inicialitza("../src/data/test_gir_figura_11.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_11.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Gir horari" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.giraFigura(GIR_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_11.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_11.txt", "./data/resultat_esperat_gir_figura_11.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_11.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_11.txt",
+		"../src/data/resultat_esperat_gir_figura_11.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir figura S enmig tauler no valid
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 12" << endl;
-	joc.inicialitza("./data/test_gir_figura_12.txt");
-	mostraFitxerInicial("./data/test_gir_figura_12.txt");
+	joc.inicialitza("../src/data/test_gir_figura_12.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_12.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Gir anti-horari" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.giraFigura(GIR_ANTI_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_12.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_12.txt", "./data/resultat_esperat_gir_figura_12.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_12.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_12.txt",
+		"../src/data/resultat_esperat_gir_figura_12.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir figura J despres baixar no valid
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 13" << endl;
-	joc.inicialitza("./data/test_gir_figura_13.txt");
-	mostraFitxerInicial("./data/test_gir_figura_13.txt");
+	joc.inicialitza("../src/data/test_gir_figura_13.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_13.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
 	cout << "Comment :=>>  - Gir anti-horari" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.baixaFigura();
 	joc.giraFigura(GIR_ANTI_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_13.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_13.txt", "./data/resultat_esperat_gir_figura_13.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_13.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_13.txt",
+		"../src/data/resultat_esperat_gir_figura_13.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir figura T despres baixar no valid
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 14" << endl;
-	joc.inicialitza("./data/test_gir_figura_14.txt");
-	mostraFitxerInicial("./data/test_gir_figura_14.txt");
+	joc.inicialitza("../src/data/test_gir_figura_14.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_14.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
 	cout << "Comment :=>>  - Gir anti-horari" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.baixaFigura();
 	joc.giraFigura(GIR_ANTI_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_14.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_14.txt", "./data/resultat_esperat_gir_figura_14.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_14.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_14.txt",
+		"../src/data/resultat_esperat_gir_figura_14.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Gir figura O
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 15" << endl;
-	joc.inicialitza("./data/test_gir_figura_15.txt");
-	mostraFitxerInicial("./data/test_gir_figura_15.txt");
+	joc.inicialitza("../src/data/test_gir_figura_15.txt");
+	mostraFitxerInicial("../src/data/test_gir_figura_15.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>>  - Gir horari" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.mouFigura(1);
 	joc.giraFigura(GIR_HORARI);
-	joc.escriuTauler("./data/resultat_gir_figura_15.txt");
-	correcte = comparaResultatPartida("./data/resultat_gir_figura_15.txt", "./data/resultat_esperat_gir_figura_15.txt");
+	joc.escriuTauler("../src/data/resultat_gir_figura_15.txt");
+	correcte = comparaResultatPartida("../src/data/resultat_gir_figura_15.txt",
+		"../src/data/resultat_esperat_gir_figura_15.txt");
 	if (!correcte)
 		reduccio += 0.5;
 	grade += (3.0 - reduccio);
@@ -665,25 +690,26 @@ int main()
 	// Elimina ultima fila
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 1" << endl;
-	joc.inicialitza("./data/test_elimina_files_1.txt");
-	mostraFitxerInicial("./data/test_elimina_files_1.txt");
+	joc.inicialitza("../src/data/test_elimina_files_1.txt");
+	mostraFitxerInicial("../src/data/test_elimina_files_1.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.baixaFigura();
 	joc.baixaFigura();
-	joc.escriuTauler("./data/resultat_elimina_files_1.txt");
+	joc.escriuTauler("../src/data/resultat_elimina_files_1.txt");
 	correcte =
-		comparaResultatPartida("./data/resultat_elimina_files_1.txt", "./data/resultat_esperat_elimina_files_1.txt");
+		comparaResultatPartida("../src/data/resultat_elimina_files_1.txt",
+			"../src/data/resultat_esperat_elimina_files_1.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Elimina penultima fila
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 2" << endl;
-	joc.inicialitza("./data/test_elimina_files_2.txt");
-	mostraFitxerInicial("./data/test_elimina_files_2.txt");
+	joc.inicialitza("../src/data/test_elimina_files_2.txt");
+	mostraFitxerInicial("../src/data/test_elimina_files_2.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
@@ -692,32 +718,34 @@ int main()
 	joc.mouFigura(1);
 	joc.baixaFigura();
 	joc.baixaFigura();
-	joc.escriuTauler("./data/resultat_elimina_files_2.txt");
+	joc.escriuTauler("../src/data/resultat_elimina_files_2.txt");
 	correcte =
-		comparaResultatPartida("./data/resultat_elimina_files_2.txt", "./data/resultat_esperat_elimina_files_2.txt");
+		comparaResultatPartida("../src/data/resultat_elimina_files_2.txt",
+			"../src/data/resultat_esperat_elimina_files_2.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Elimina fila dalt
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 3" << endl;
-	joc.inicialitza("./data/test_elimina_files_3.txt");
-	mostraFitxerInicial("./data/test_elimina_files_3.txt");
+	joc.inicialitza("../src/data/test_elimina_files_3.txt");
+	mostraFitxerInicial("../src/data/test_elimina_files_3.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	joc.baixaFigura();
-	joc.escriuTauler("./data/resultat_elimina_files_3.txt");
+	joc.escriuTauler("../src/data/resultat_elimina_files_3.txt");
 	correcte =
-		comparaResultatPartida("./data/resultat_elimina_files_3.txt", "./data/resultat_esperat_elimina_files_3.txt");
+		comparaResultatPartida("../src/data/resultat_elimina_files_3.txt",
+			"../src/data/resultat_esperat_elimina_files_3.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Elimina dues files seguides
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 4" << endl;
-	joc.inicialitza("./data/test_elimina_files_4.txt");
-	mostraFitxerInicial("./data/test_elimina_files_4.txt");
+	joc.inicialitza("../src/data/test_elimina_files_4.txt");
+	mostraFitxerInicial("../src/data/test_elimina_files_4.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
@@ -730,17 +758,18 @@ int main()
 	joc.baixaFigura();
 	joc.baixaFigura();
 	joc.baixaFigura();
-	joc.escriuTauler("./data/resultat_elimina_files_4.txt");
+	joc.escriuTauler("../src/data/resultat_elimina_files_4.txt");
 	correcte =
-		comparaResultatPartida("./data/resultat_elimina_files_4.txt", "./data/resultat_esperat_elimina_files_4.txt");
+		comparaResultatPartida("../src/data/resultat_elimina_files_4.txt",
+			"../src/data/resultat_esperat_elimina_files_4.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Elimina dues files alternes
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 5" << endl;
-	joc.inicialitza("./data/test_elimina_files_5.txt");
-	mostraFitxerInicial("./data/test_elimina_files_5.txt");
+	joc.inicialitza("../src/data/test_elimina_files_5.txt");
+	mostraFitxerInicial("../src/data/test_elimina_files_5.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
@@ -753,17 +782,18 @@ int main()
 	joc.baixaFigura();
 	joc.baixaFigura();
 	joc.baixaFigura();
-	joc.escriuTauler("./data/resultat_elimina_files_5.txt");
+	joc.escriuTauler("../src/data/resultat_elimina_files_5.txt");
 	correcte =
-		comparaResultatPartida("./data/resultat_elimina_files_5.txt", "./data/resultat_esperat_elimina_files_5.txt");
+		comparaResultatPartida("../src/data/resultat_elimina_files_5.txt",
+			"../src/data/resultat_esperat_elimina_files_5.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Elimina tres files
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 6" << endl;
-	joc.inicialitza("./data/test_elimina_files_6.txt");
-	mostraFitxerInicial("./data/test_elimina_files_6.txt");
+	joc.inicialitza("../src/data/test_elimina_files_6.txt");
+	mostraFitxerInicial("../src/data/test_elimina_files_6.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
@@ -776,17 +806,18 @@ int main()
 	joc.baixaFigura();
 	joc.baixaFigura();
 	joc.baixaFigura();
-	joc.escriuTauler("./data/resultat_elimina_files_6.txt");
+	joc.escriuTauler("../src/data/resultat_elimina_files_6.txt");
 	correcte =
-		comparaResultatPartida("./data/resultat_elimina_files_6.txt", "./data/resultat_esperat_elimina_files_6.txt");
+		comparaResultatPartida("../src/data/resultat_elimina_files_6.txt",
+			"../src/data/resultat_esperat_elimina_files_6.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
 	// Elimina quatre files
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 7" << endl;
-	joc.inicialitza("./data/test_elimina_files_7.txt");
-	mostraFitxerInicial("./data/test_elimina_files_7.txt");
+	joc.inicialitza("../src/data/test_elimina_files_7.txt");
+	mostraFitxerInicial("../src/data/test_elimina_files_7.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
@@ -801,9 +832,10 @@ int main()
 	joc.baixaFigura();
 	joc.baixaFigura();
 	joc.baixaFigura();
-	joc.escriuTauler("./data/resultat_elimina_files_7.txt");
+	joc.escriuTauler("../src/data/resultat_elimina_files_7.txt");
 	correcte =
-		comparaResultatPartida("./data/resultat_elimina_files_7.txt", "./data/resultat_esperat_elimina_files_7.txt");
+		comparaResultatPartida("../src/data/resultat_elimina_files_7.txt",
+			"../src/data/resultat_esperat_elimina_files_7.txt");
 	if (!correcte)
 		reduccio += 0.5;
 
@@ -819,32 +851,4 @@ int main()
 	cout << "Comment :=>> " << endl;
 
 	return 0;
-}*/
-
-
-//int main()
-//{
-//	Tauler tauler;
-//	Figura fig;
-//	fig.setShape(FIGURA_I);
-//	fig.setColor(COLOR_BLAUCEL);
-//
-//	std::cout << "-----------------\n";
-//	tauler.addShape(fig);
-//	tauler.showBoard();
-//
-//	std::cout << "-----------------\n";
-//	fig.rotateShape(GIR_HORARI);
-//	tauler.updateBoard();
-//	tauler.showBoard();
-//
-//	return 0;
-//}
-
-
-int main()
-{
-	Joc j;
-	j.inicialitza("../src/data/test_inicialitzacio_tauler.txt");
-	j.showBoard();
 }

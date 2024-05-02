@@ -46,8 +46,8 @@ void Tauler::addShape(Figura& shape, int xPos, int yPos)
 		{
 			if (shapeMatrix[i][j] != 0)
 			{
-				int xBoardPosition = i + yPositionOffset;
-				int yBoardPosition = j + xPositionOffset;
+				int xBoardPosition = i + xPositionOffset;
+				int yBoardPosition = j + yPositionOffset;
 
 				m_board[xBoardPosition][yBoardPosition] = shape.getColor();
 				shape.setXBoardPosition(xBoardPosition);
@@ -83,8 +83,7 @@ void Tauler::updateBoard()
 
 void Tauler::showBoard()
 {
-	cout << "---------------\n";
-	cout << "Showing current board:\n";
+	cout << "\nShowing current board:\n";
 	cout << "---------------\n";
 
 	for (int i = 0; i < MAX_FILA; i++)
