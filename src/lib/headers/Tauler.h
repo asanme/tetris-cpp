@@ -22,7 +22,7 @@ class Tauler
 	}
 
 	void showBoard();
-	void addShape(Figura& shape);
+	void addShape(Figura& shape, int xPos, int yPos);
 	void updateBoard();
 
 	int** getBoard() const;

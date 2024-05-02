@@ -56,12 +56,36 @@ void Figura::rotateShapeClockwise()
 	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
 	invertColumns(m_shapeMatrix, m_rows, m_columns);
 
+	// We only have to worry about the pivot of this shape
 	if (m_shape == FIGURA_I)
 	{
 		if (m_rotationIndex == 3)
 			m_rotationIndex = 0;
 		else
 			++m_rotationIndex;
+
+		switch (m_rotationIndex)
+		{
+		case ROTATION_UP:
+			m_xPivotPosition = 2;
+			m_yPivotPosition = 1;
+			break;
+
+		case ROTATION_RIGHT:
+			m_xPivotPosition = 2;
+			m_yPivotPosition = 2;
+			break;
+
+		case ROTATION_DOWN:
+			m_xPivotPosition = 1;
+			m_yPivotPosition = 2;
+			break;
+
+		case ROTATION_LEFT:
+			m_xPivotPosition = 1;
+			m_yPivotPosition = 1;
+			break;
+		}
 	}
 }
 
@@ -69,6 +93,8 @@ void Figura::rotateShapeCounterclockwise()
 {
 	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
 	invertRows(m_shapeMatrix, m_rows, m_columns);
+
+	// TODO Implement pivot rotations for FIGURA_I
 }
 
 void Figura::rotateShape(DireccioGir rotationDirection)
@@ -86,12 +112,12 @@ void Figura::rotateShape(DireccioGir rotationDirection)
 
 void Figura::moveHorizontally(int xDirection)
 {
-	m_xPivotPosition += xDirection;
+	// TODO
 }
 
 void Figura::moveVertically()
 {
-	++m_yPivotPosition;
+	// TODO
 }
 
 void Figura::setShape(TipusFigura shape)
@@ -99,9 +125,8 @@ void Figura::setShape(TipusFigura shape)
 	if (m_shapeMatrix != nullptr)
 		freeShapeMatrix();
 
-	m_shape = shape;
-
 	int** newMatrixShape = nullptr;
+	ColorFigura color;
 	int columns;
 	int rows;
 
@@ -110,6 +135,7 @@ void Figura::setShape(TipusFigura shape)
 	case FIGURA_O:
 		rows = 2;
 		columns = 2;
+		color = COLOR_GROC;
 
 		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
@@ -129,6 +155,7 @@ void Figura::setShape(TipusFigura shape)
 	case FIGURA_I:
 		rows = 4;
 		columns = 4;
+		color = COLOR_BLAUCEL;
 
 		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
@@ -151,6 +178,7 @@ void Figura::setShape(TipusFigura shape)
 	case FIGURA_T:
 		rows = 3;
 		columns = 3;
+		color = COLOR_MAGENTA;
 
 		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
@@ -175,6 +203,7 @@ void Figura::setShape(TipusFigura shape)
 	case FIGURA_L:
 		rows = 3;
 		columns = 3;
+		color = COLOR_TARONJA;
 
 		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
@@ -197,6 +226,7 @@ void Figura::setShape(TipusFigura shape)
 	case FIGURA_J:
 		rows = 3;
 		columns = 3;
+		color = COLOR_BLAUFOSC;
 
 		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
@@ -219,6 +249,7 @@ void Figura::setShape(TipusFigura shape)
 	case FIGURA_Z:
 		rows = 3;
 		columns = 3;
+		color = COLOR_VERMELL;
 
 		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
@@ -241,6 +272,7 @@ void Figura::setShape(TipusFigura shape)
 	case FIGURA_S:
 		rows = 3;
 		columns = 3;
+		color = COLOR_VERD;
 
 		newMatrixShape = new int* [rows];
 		for (int i = 0; i < rows; i++)
@@ -261,8 +293,10 @@ void Figura::setShape(TipusFigura shape)
 		break;
 	}
 
+	// If TipusFigura is not NO_FIGURA
 	if (newMatrixShape != nullptr)
 	{
+		m_shape = shape;
 		m_shapeMatrix = newMatrixShape;
 		m_columns = columns;
 		m_rows = rows;
@@ -271,23 +305,28 @@ void Figura::setShape(TipusFigura shape)
 
 void Figura::showShape()
 {
-	if (m_shapeMatrix != nullptr)
-	{
-		for (int i = 0; i < m_rows; i++)
-		{
-			for (int j = 0; j < m_columns; j++)
-			{
-				cout << m_shapeMatrix[i][j] << " ";
-			}
+	if (m_shapeMatrix == nullptr)
+		return;
 
-			cout << "\n";
+	cout << "xPivot: " << m_xPivotPosition << "\n";
+	cout << "yPivot: " << m_yPivotPosition << "\n";
+	for (int i = 0; i < m_rows; i++)
+	{
+		for (int j = 0; j < m_columns; j++)
+		{
+			cout << m_shapeMatrix[i][j] << " ";
 		}
+
+		cout << "\n";
 	}
 }
 
 // Frees the memory allocated in the pointer and sets the columns and rows to 0
 void Figura::freeShapeMatrix()
 {
+	if (m_shapeMatrix == nullptr)
+		return;
+
 	for (int i = 0; i < m_rows; i++)
 	{
 		delete[] m_shapeMatrix[i];
@@ -320,24 +359,34 @@ void Figura::setColor(ColorFigura color)
 	m_color = color;
 }
 
-int Figura::getXPosition() const
+int Figura::getXBoardPosition() const
+{
+	return m_xBoardPivotPosition;
+}
+
+void Figura::setXBoardPosition(int xPosition)
+{
+	m_xBoardPivotPosition = xPosition;
+}
+
+int Figura::getYBoardPosition() const
+{
+	return m_yBoardPivotPosition;
+}
+
+void Figura::setYBoardPosition(int yPosition)
+{
+	m_yBoardPivotPosition = yPosition;
+}
+
+int Figura::getYPivotPosition() const
 {
 	return m_xPivotPosition;
 }
 
-void Figura::setXPosition(int xPosition)
-{
-	m_xPivotPosition = xPosition;
-}
-
-int Figura::getYPosition() const
+int Figura::getXPivotPosition() const
 {
 	return m_yPivotPosition;
-}
-
-void Figura::setYPosition(int yPosition)
-{
-	m_yPivotPosition = yPosition;
 }
 
 int Figura::getColumns() const
@@ -348,9 +397,4 @@ int Figura::getColumns() const
 int Figura::getRows() const
 {
 	return m_rows;
-}
-
-int Figura::getRotationIndex() const
-{
-	return m_rotationIndex;
 }

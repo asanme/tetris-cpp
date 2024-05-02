@@ -5,6 +5,11 @@
 const int MAX_FILA = 8;
 const int MAX_COL = 8;
 
+const int ROTATION_UP = 0;
+const int ROTATION_RIGHT = 1;
+const int ROTATION_DOWN = 2;
+const int ROTATION_LEFT = 3;
+
 typedef enum
 {
 	NO_FIGURA = 0,
@@ -69,13 +74,14 @@ class Figura
 	ColorFigura getColor() const;
 	void setColor(ColorFigura color);
 
-	int getRotationIndex() const;
+	int getXPivotPosition() const;
+	int getYPivotPosition() const;
 
-	int getXPosition() const;
-	void setXPosition(int xPosition);
+	int getXBoardPosition() const;
+	void setXBoardPosition(int xPosition);
 
-	int getYPosition() const;
-	void setYPosition(int yPosition);
+	int getYBoardPosition() const;
+	void setYBoardPosition(int yPosition);
 
 	int getRows() const;
 	int getColumns() const;
@@ -95,6 +101,11 @@ class Figura
 	int m_columns;
 	int** m_shapeMatrix;
 
+	// Represents the pivot in the shape matrix
 	int m_xPivotPosition;
 	int m_yPivotPosition;
+
+	// Represents the pivot inside the board
+	int m_xBoardPivotPosition;
+	int m_yBoardPivotPosition;
 };

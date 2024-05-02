@@ -2,7 +2,7 @@
 #include <vector>
 #include "../headers/Joc.h"
 
-static void extractShapeData(string& currentLine, int* shapeData)
+static void deserializeShapeData(int* shapeData, string& currentLine)
 {
 	int dataIndex = 0;
 	for (char c : currentLine)
@@ -13,21 +13,17 @@ static void extractShapeData(string& currentLine, int* shapeData)
 			shapeData[dataIndex] = currentValue;
 			++dataIndex;
 		}
-
-		cout << c << " ";
 	}
-
-	cout << "\n";
 }
 
-static void extractMatrixData(int** tmpBoardMatrix, const string& currentLine, int& rowIndex)
+static void deserializeMatrixData(int** tmpBoardMatrix, int& rowIndex, const string& currentLine)
 {
 	int matrixColumnIndex = 0;
-	for (int i = 0; i < currentLine.length(); i++)
+	for (char c : currentLine)
 	{
-		if (isdigit(currentLine[i]))
+		if (isdigit(c))
 		{
-			int currentMatrixValue = currentLine[i] - '0';
+			int currentMatrixValue = c - '0';
 			tmpBoardMatrix[rowIndex][matrixColumnIndex] = currentMatrixValue;
 			++matrixColumnIndex;
 		}
@@ -55,31 +51,27 @@ void Joc::inicialitza(const string& nomFitxer)
 		while (getline(boardData, currentLine))
 		{
 			if (fileRowIndex != 0)
-			{
-				extractMatrixData(tmpBoardMatrix, currentLine, matrixRowIndex);
-			}
+				deserializeMatrixData(tmpBoardMatrix, matrixRowIndex, currentLine);
 			else
-			{
-				extractShapeData(currentLine, shapeData);
-			}
+				deserializeShapeData(shapeData, currentLine);
 
 			++fileRowIndex;
 		}
 
-		// TODO Remove static cast
 		Figura f;
 		int row = shapeData[1];
 		int column = shapeData[2];
 		int rotationIndex = shapeData[3];
 		f.setShape(static_cast<TipusFigura>(shapeData[0]));
+
 		for (int i = 0; i < rotationIndex; i++)
-		{
 			f.rotateShape(GIR_HORARI);
-		}
 
 		f.showShape();
+		cout << "expected x: " << row << " expected y: " << column << "\n";
 
 		m_board->setBoard(tmpBoardMatrix);
+//		m_board->addShape(f, row, column);
 	}
 
 	boardData.close();

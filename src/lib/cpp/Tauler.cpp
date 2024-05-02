@@ -5,11 +5,15 @@ using namespace std;
 
 void Tauler::showBoard()
 {
+	cout << "---------------\n";
+	cout << "Showing current board:\n";
+	cout << "---------------\n";
+
 	for (int i = 0; i < MAX_FILA; i++)
 	{
 		for (int j = 0; j < MAX_COL; j++)
 		{
-			cout << " " << m_board[i][j];
+			cout << m_board[i][j] << " ";
 		}
 
 		cout << "\n";
@@ -18,12 +22,13 @@ void Tauler::showBoard()
 
 void Tauler::updateCurrentShape()
 {
+	// TODO
 	for (int i = 0; i < m_currentShape->getRows(); i++)
 	{
 		for (int j = 0; j < m_currentShape->getColumns(); ++j)
 		{
-			int rowPosition = i + m_currentShape->getXPosition();
-			int columnPosition = j + m_currentShape->getYPosition();
+			int rowPosition = i + m_currentShape->getXBoardPosition();
+			int columnPosition = j + m_currentShape->getYBoardPosition();
 
 			if (m_currentShape->getShapeMatrix()[i][j] != 0)
 				m_board[rowPosition][columnPosition] = m_currentShape->getColor();
@@ -33,12 +38,13 @@ void Tauler::updateCurrentShape()
 
 void Tauler::clearShapePosition()
 {
+	// TODO
 	for (int i = 0; i < m_currentShape->getRows(); i++)
 	{
 		for (int j = 0; j < m_currentShape->getColumns(); ++j)
 		{
-			int rowPosition = i + m_currentShape->getXPosition();
-			int columnPosition = j + m_currentShape->getYPosition();
+			int rowPosition = i + m_currentShape->getXBoardPosition();
+			int columnPosition = j + m_currentShape->getYBoardPosition();
 
 			if (m_currentShape->getShapeMatrix()[i][j] != 0)
 				m_board[rowPosition][columnPosition] = COLOR_NEGRE;
@@ -46,10 +52,24 @@ void Tauler::clearShapePosition()
 	}
 }
 
-void Tauler::addShape(Figura& shape)
+void Tauler::addShape(Figura& shape, int xPos, int yPos)
 {
 	m_currentShape = &shape;
-	updateCurrentShape();
+	int** shapeMatrix = shape.getShapeMatrix();
+	int xPositionOffset = xPos - shape.getXPivotPosition();
+	int yPositionOffset = yPos - shape.getYPivotPosition();
+
+	for (int i = 0; i < shape.getRows(); ++i)
+	{
+		for (int j = 0; j < shape.getColumns(); ++j)
+		{
+			if (shapeMatrix[i][j] != 0)
+				m_board[i + xPositionOffset][j + yPositionOffset] = shape.getColor();
+		}
+	}
+
+
+//	updateCurrentShape();
 }
 
 void Tauler::updateBoard()
@@ -84,7 +104,6 @@ void Tauler::setBoard(int** board)
 	{
 		for (int j = 0; j < MAX_COL; ++j)
 		{
-			// TODO Remove static cast and add a switch instead
 			m_board[i][j] = static_cast<ColorFigura>(board[i][j]);
 		}
 	}
