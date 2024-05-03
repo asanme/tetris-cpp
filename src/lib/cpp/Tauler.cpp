@@ -180,7 +180,7 @@ bool Tauler::isShapeColliding(const Figura& shape) const
 int Tauler::clearCompletedRows()
 {
 	int completedRowCount = 0;
-	for (int i = 7; i >= 0; --i)
+	for (int i = 7; i >= 0;)
 	{
 		bool rowFilled = true;
 		for (int j = 0; j < 8; ++j)
@@ -195,6 +195,10 @@ int Tauler::clearCompletedRows()
 		{
 			moveRowsDown(i);
 			++completedRowCount;
+		}
+		else
+		{
+			--i;
 		}
 	}
 
