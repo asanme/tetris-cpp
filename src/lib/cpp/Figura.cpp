@@ -93,7 +93,37 @@ void Figura::rotateShapeCounterclockwise()
 	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
 	invertRows(m_shapeMatrix, m_rows, m_columns);
 
-	// TODO Implement the rest of pivot rotations for FIGURA_I
+	// TODO Check if this is right
+	if (m_shape == FIGURA_I)
+	{
+		if (m_rotationIndex == 0)
+			m_rotationIndex = 3;
+		else
+			--m_rotationIndex;
+
+		switch (m_rotationIndex)
+		{
+		case ROTATION_UP:
+			m_xPivotPosition = 2;
+			m_yPivotPosition = 1;
+			break;
+
+		case ROTATION_RIGHT:
+			m_xPivotPosition = 2;
+			m_yPivotPosition = 2;
+			break;
+
+		case ROTATION_DOWN:
+			m_xPivotPosition = 1;
+			m_yPivotPosition = 2;
+			break;
+
+		case ROTATION_LEFT:
+			m_xPivotPosition = 1;
+			m_yPivotPosition = 1;
+			break;
+		}
+	}
 }
 
 void Figura::rotateShape(DireccioGir rotationDirection)
@@ -109,7 +139,6 @@ void Figura::rotateShape(DireccioGir rotationDirection)
 	}
 }
 
-// TODO Check if it works properly
 void Figura::moveHorizontally(int xDirection)
 {
 	m_xBoardPivotPosition += xDirection;
