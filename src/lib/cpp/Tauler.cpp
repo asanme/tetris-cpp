@@ -48,6 +48,9 @@ void Tauler::addShape(Figura& shape, int xPos, int yPos)
 				int rowIndex = i + xPositionOffset;
 				int columnIndex = j + yPositionOffset;
 
+				if ((rowIndex >= MAX_FILA || rowIndex < 0) || (columnIndex >= MAX_COL || columnIndex < 0))
+					return;
+
 				m_board[rowIndex][columnIndex] = shape.getColor();
 				if (i == shape.getXPivotPosition() && j == shape.getYPivotPosition())
 				{
@@ -73,19 +76,32 @@ void Tauler::moveShape(int xDir)
 	redrawShape();
 }
 
+void Tauler::moveShapeVertically()
+{
+	clearShape();
+	m_currentShape->moveVertically();
+	redrawShape();
+}
+
 void Tauler::redrawShape()
 {
 	int xPositionOffset = m_currentShape->getXBoardPivotPosition() - m_currentShape->getXPivotPosition();
 	int yPositionOffset = m_currentShape->getYBoardPivotPosition() - m_currentShape->getYPivotPosition();
-	for (int i = 0; i < m_currentShape->getRows(); i++)
+
+	int rows = m_currentShape->getRows();
+	int columns = m_currentShape->getColumns();
+	ColorFigura color = m_currentShape->getColor();
+	int** shapeMatrix = m_currentShape->getShapeMatrix();
+
+	for (int i = 0; i < rows; i++)
 	{
-		for (int j = 0; j < m_currentShape->getColumns(); ++j)
+		for (int j = 0; j < columns; ++j)
 		{
 			int rowIndex = i + yPositionOffset;
 			int columnIndex = j + xPositionOffset;
 
-			if (m_currentShape->getShapeMatrix()[i][j] != 0)
-				m_board[rowIndex][columnIndex] = m_currentShape->getColor();
+			if (shapeMatrix[i][j] != 0)
+				m_board[rowIndex][columnIndex] = color;
 		}
 	}
 }
@@ -121,6 +137,13 @@ bool Tauler::isMovementValid(int xDir)
 	return !isShapeColliding(shapeCopy);
 }
 
+bool Tauler::isVerticalMovementValid()
+{
+	Figura shapeCopy = *m_currentShape;
+	shapeCopy.moveVertically();
+	return !isShapeColliding(shapeCopy);
+}
+
 bool Tauler::isShapeColliding(const Figura& shape) const
 {
 	int** shapeMatrix = shape.getShapeMatrix();
@@ -152,6 +175,46 @@ bool Tauler::isShapeColliding(const Figura& shape) const
 	}
 
 	return doesShapeCollide || isShapeOutOfBounds;
+}
+
+int Tauler::clearCompletedRows()
+{
+	int completedRowCount = 0;
+	for (int i = 7; i >= 0; --i)
+	{
+		bool rowFilled = true;
+		for (int j = 0; j < 8; ++j)
+		{
+			if (m_board[i][j] == COLOR_NEGRE)
+			{
+				rowFilled = false;
+				break;
+			}
+		}
+		if (rowFilled)
+		{
+			moveRowsDown(i);
+			++completedRowCount;
+		}
+	}
+
+	return completedRowCount;
+}
+
+void Tauler::moveRowsDown(int rowIndex)
+{
+	for (int k = rowIndex; k > 0; --k)
+	{
+		for (int l = 0; l < 8; ++l)
+		{
+			m_board[k][l] = m_board[k - 1][l];
+		}
+	}
+
+	for (int m = 0; m < 8; ++m)
+	{
+		m_board[0][m] = COLOR_NEGRE;
+	}
 }
 
 void Tauler::showBoard()

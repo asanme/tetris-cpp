@@ -51,6 +51,36 @@ static void transposeMatrix(int** matrix, int rows, int columns)
 	}
 }
 
+void Figura::setRotationIndex()
+{
+	switch (m_rotationIndex)
+	{
+	case ROTATION_UP:
+		m_xPivotPosition = 2;
+		m_yPivotPosition = 1;
+		m_yBoardPivotPosition += 1;
+		break;
+
+	case ROTATION_RIGHT:
+		m_xPivotPosition = 2;
+		m_yPivotPosition = 2;
+		m_xBoardPivotPosition -= 1;
+		break;
+
+	case ROTATION_DOWN:
+		m_xPivotPosition = 1;
+		m_yPivotPosition = 2;
+		m_yBoardPivotPosition -= 1;
+		break;
+
+	case ROTATION_LEFT:
+		m_xPivotPosition = 1;
+		m_yPivotPosition = 1;
+		m_xBoardPivotPosition += 1;
+		break;
+	}
+}
+
 void Figura::rotateShapeClockwise()
 {
 	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
@@ -63,28 +93,7 @@ void Figura::rotateShapeClockwise()
 		else
 			++m_rotationIndex;
 
-		switch (m_rotationIndex)
-		{
-		case ROTATION_UP:
-			m_xPivotPosition = 2;
-			m_yPivotPosition = 1;
-			break;
-
-		case ROTATION_RIGHT:
-			m_xPivotPosition = 2;
-			m_yPivotPosition = 2;
-			break;
-
-		case ROTATION_DOWN:
-			m_xPivotPosition = 1;
-			m_yPivotPosition = 2;
-			break;
-
-		case ROTATION_LEFT:
-			m_xPivotPosition = 1;
-			m_yPivotPosition = 1;
-			break;
-		}
+		setRotationIndex();
 	}
 }
 
@@ -93,7 +102,6 @@ void Figura::rotateShapeCounterclockwise()
 	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
 	invertRows(m_shapeMatrix, m_rows, m_columns);
 
-	// TODO Check if this is right
 	if (m_shape == FIGURA_I)
 	{
 		if (m_rotationIndex == 0)
@@ -101,28 +109,7 @@ void Figura::rotateShapeCounterclockwise()
 		else
 			--m_rotationIndex;
 
-		switch (m_rotationIndex)
-		{
-		case ROTATION_UP:
-			m_xPivotPosition = 2;
-			m_yPivotPosition = 1;
-			break;
-
-		case ROTATION_RIGHT:
-			m_xPivotPosition = 2;
-			m_yPivotPosition = 2;
-			break;
-
-		case ROTATION_DOWN:
-			m_xPivotPosition = 1;
-			m_yPivotPosition = 2;
-			break;
-
-		case ROTATION_LEFT:
-			m_xPivotPosition = 1;
-			m_yPivotPosition = 1;
-			break;
-		}
+		setRotationIndex();
 	}
 }
 

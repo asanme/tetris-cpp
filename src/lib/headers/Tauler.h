@@ -37,10 +37,13 @@ class Tauler
 
 	void addShape(Figura& shape, int xPos, int yPos);
 	void moveShape(int xDir);
+	void moveShapeVertically();
 	void rotateShape(DireccioGir direction);
+	int clearCompletedRows();
 
 	bool isRotationValid(DireccioGir direction);
 	bool isMovementValid(int dirX);
+	bool isVerticalMovementValid();
 
 	int** dumpBoard() const;
 	void loadBoard(int** board);
@@ -50,9 +53,11 @@ class Tauler
 
  private:
 	bool isShapeColliding(const Figura& shape) const;
+	void moveRowsDown();
 	void redrawShape();
 	void clearShape();
 
 	ColorFigura m_board[MAX_FILA][MAX_COL];
 	Figura* m_currentShape;
+	void moveRowsDown(int rowIndex);
 };

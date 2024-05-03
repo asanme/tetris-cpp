@@ -146,4 +146,5 @@ class Figura
 	// Represents the pivot inside the board
 	int m_xBoardPivotPosition;
 	int m_yBoardPivotPosition;
+	void setRotationIndex();
 };

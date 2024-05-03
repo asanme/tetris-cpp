@@ -121,7 +121,12 @@ bool Joc::mouFigura(int dirX)
 
 int Joc::baixaFigura()
 {
-	// TODO Check for rows completed
+	bool isVerticalMovementValid = m_board.isVerticalMovementValid();
+
+	if (isVerticalMovementValid)
+		m_board.moveShapeVertically();
+	else
+		m_board.clearCompletedRows();
 
 	return 0;
 }
