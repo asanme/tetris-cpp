@@ -858,6 +858,13 @@ int main()
 	Joc j;
 	j.inicialitza("../src/data/test_inicialitzacio_tauler.txt");
 	j.showBoard();
+
+	j.giraFigura(GIR_HORARI);
+	j.showBoard();
+
+	j.mouFigura(-1);
+	j.showBoard();
+
 	j.giraFigura(GIR_HORARI);
 	j.showBoard();
 }

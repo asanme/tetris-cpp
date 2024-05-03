@@ -111,14 +111,17 @@ bool Joc::giraFigura(DireccioGir direccio)
 
 bool Joc::mouFigura(int dirX)
 {
-	// TODO
+	bool isMovementValid = m_board.isMovementValid(dirX);
 
-	return false;
+	if (isMovementValid)
+		m_board.moveShape(dirX);
+
+	return isMovementValid;
 }
 
 int Joc::baixaFigura()
 {
-	// TODO
+	// TODO Check for rows completed
 
 	return 0;
 }

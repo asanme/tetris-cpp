@@ -39,7 +39,6 @@ void Tauler::addShape(Figura& shape, int xPos, int yPos)
 	int** shapeMatrix = shape.getShapeMatrix();
 	int xPositionOffset = xPos - shape.getXPivotPosition();
 	int yPositionOffset = yPos - shape.getYPivotPosition();
-
 	for (int i = 0; i < shape.getRows(); ++i)
 	{
 		for (int j = 0; j < shape.getColumns(); ++j)
@@ -69,14 +68,15 @@ void Tauler::rotateShape(DireccioGir direction)
 
 void Tauler::moveShape(int xDir)
 {
-
+	clearShape();
+	m_currentShape->moveHorizontally(xDir);
+	redrawShape();
 }
 
 void Tauler::redrawShape()
 {
 	int xPositionOffset = m_currentShape->getXBoardPivotPosition() - m_currentShape->getXPivotPosition();
 	int yPositionOffset = m_currentShape->getYBoardPivotPosition() - m_currentShape->getYPivotPosition();
-
 	for (int i = 0; i < m_currentShape->getRows(); i++)
 	{
 		for (int j = 0; j < m_currentShape->getColumns(); ++j)
@@ -94,7 +94,6 @@ void Tauler::clearShape()
 {
 	int xPositionOffset = m_currentShape->getXBoardPivotPosition() - m_currentShape->getXPivotPosition();
 	int yPositionOffset = m_currentShape->getYBoardPivotPosition() - m_currentShape->getYPivotPosition();
-
 	for (int i = 0; i < m_currentShape->getRows(); i++)
 	{
 		for (int j = 0; j < m_currentShape->getColumns(); ++j)
@@ -117,20 +116,21 @@ bool Tauler::isRotationValid(DireccioGir direction)
 
 bool Tauler::isMovementValid(int xDir)
 {
-	return false;
+	Figura shapeCopy = *m_currentShape;
+	shapeCopy.moveHorizontally(xDir);
+	return !isShapeColliding(shapeCopy);
 }
 
-// TODO Add out of bounds collision check
 bool Tauler::isShapeColliding(const Figura& shape) const
 {
 	int** shapeMatrix = shape.getShapeMatrix();
-	bool doesShapeCollide = false;
 	Tauler boardCopy = *this;
 	boardCopy.clearShape();
 
-	int xPositionOffset = m_currentShape->getXBoardPivotPosition() - m_currentShape->getXPivotPosition();
-	int yPositionOffset = m_currentShape->getYBoardPivotPosition() - m_currentShape->getYPivotPosition();
-
+	bool doesShapeCollide = false;
+	bool isShapeOutOfBounds = false;
+	int xPositionOffset = shape.getXBoardPivotPosition() - shape.getXPivotPosition();
+	int yPositionOffset = shape.getYBoardPivotPosition() - shape.getYPivotPosition();
 	for (int i = 0; i < shape.getRows(); ++i)
 	{
 		for (int j = 0; j < shape.getColumns(); ++j)
@@ -138,13 +138,20 @@ bool Tauler::isShapeColliding(const Figura& shape) const
 			int rowIndex = i + yPositionOffset;
 			int columnIndex = j + xPositionOffset;
 
-			// If the position in the board is occupied, there's a collision
-			if (shapeMatrix[i][j] != 0 && boardCopy.m_board[rowIndex][columnIndex] != 0)
-				doesShapeCollide = true;
+			// Only check where there's a tile
+			if (shapeMatrix[i][j] != 0)
+			{
+				if ((rowIndex >= MAX_FILA || rowIndex < 0) || (columnIndex >= MAX_COL || columnIndex < 0))
+					isShapeOutOfBounds = true;
+
+				// If the position in the board is occupied, there's a collision
+				if (boardCopy.m_board[rowIndex][columnIndex] != 0)
+					doesShapeCollide = true;
+			}
 		}
 	}
 
-	return doesShapeCollide;
+	return doesShapeCollide || isShapeOutOfBounds;
 }
 
 void Tauler::showBoard()

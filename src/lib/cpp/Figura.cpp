@@ -109,14 +109,16 @@ void Figura::rotateShape(DireccioGir rotationDirection)
 	}
 }
 
+// TODO Check if it works properly
 void Figura::moveHorizontally(int xDirection)
 {
-	// TODO
+	m_xBoardPivotPosition += xDirection;
 }
 
+// TODO Check if it works properly
 void Figura::moveVertically()
 {
-	// TODO
+	++m_yBoardPivotPosition;
 }
 
 void Figura::setShape(TipusFigura shape)
