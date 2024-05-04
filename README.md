@@ -49,4 +49,4 @@ Per últim, compilem.
 make
 ``
 
-Dins the la carpeta trobarem l'executable `tetris_cpp`
+Dins the la carpeta trobarem l'executable `tetris_cpp`.
