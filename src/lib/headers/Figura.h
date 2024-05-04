@@ -47,12 +47,10 @@ class Figura
 	Figura()
 	{
 		m_shapeMatrix = nullptr;
-		m_shape = NO_FIGURA;
-		m_color = NO_COLOR;
-
 		m_rows = 0;
 		m_columns = 0;
-
+		m_shape = NO_FIGURA;
+		m_color = NO_COLOR;
 		m_xBoardPosition = 0;
 		m_yBoardPosition = 0;
 	}
@@ -62,10 +60,8 @@ class Figura
 	{
 		m_shape = figura.m_shape;
 		m_color = figura.m_color;
-
 		m_rows = figura.m_rows;
 		m_columns = figura.m_columns;
-
 		m_xBoardPosition = figura.m_xBoardPosition;
 		m_yBoardPosition = figura.m_yBoardPosition;
 		m_shapeMatrix = nullptr;

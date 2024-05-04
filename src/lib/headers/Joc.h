@@ -21,7 +21,8 @@ class Joc
 	void showBoard();
 
  private:
+	void setGameData(int** boardMatrixData, const int* shapeData);
+
 	Tauler m_board;
 	Figura m_currentShape;
-	void setGameData(int** boardMatrixData, const int* shapeData);
 };

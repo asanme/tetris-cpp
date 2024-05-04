@@ -19,6 +19,7 @@ void Tauler::loadBoard(int** board)
 int** Tauler::dumpBoard() const
 {
 	int** boardMatrix = new int* [MAX_FILA];
+
 	for (int i = 0; i < MAX_FILA; i++)
 		boardMatrix[i] = new int[MAX_COL];
 
@@ -48,10 +49,6 @@ void Tauler::addShape(Figura& shape, int xPos, int yPos)
 			{
 				int rowIndex = i + yPos;
 				int columnIndex = j + xPos;
-
-				// TODO Pass all tests without this
-				if ((rowIndex >= MAX_FILA || rowIndex < 0) || (columnIndex >= MAX_COL || columnIndex < 0))
-					return;
 
 				m_board[rowIndex][columnIndex] = shape.getColor();
 			}
@@ -104,6 +101,7 @@ bool Tauler::isVerticalMovementValid()
 int Tauler::clearCompletedRows()
 {
 	int completedRowCount = 0;
+
 	for (int i = 7; i >= 0;)
 	{
 		bool rowFilled = true;
@@ -149,25 +147,15 @@ void Tauler::moveRowsDown(int rowIndex)
 
 void Tauler::redrawShape()
 {
-	// TODO Check why destructor is called while redrawing
-	int rows = m_currentShape->getRows();
-	int columns = m_currentShape->getColumns();
-
-	int xPosition = m_currentShape->getXBoardPosition();
-	int yPosition = m_currentShape->getYBoardPosition();
-
-	ColorFigura color = m_currentShape->getColor();
-	int** shapeMatrix = m_currentShape->getShapeMatrix();
-
-	for (int i = 0; i < rows; i++)
+	for (int i = 0; i < m_currentShape->getRows(); i++)
 	{
-		for (int j = 0; j < columns; ++j)
+		for (int j = 0; j < m_currentShape->getColumns(); ++j)
 		{
-			int rowIndex = i + yPosition;
-			int columnIndex = j + xPosition;
+			int rowIndex = i + m_currentShape->getYBoardPosition();;
+			int columnIndex = j + m_currentShape->getXBoardPosition();
 
-			if (shapeMatrix[i][j] != COLOR_NEGRE)
-				m_board[rowIndex][columnIndex] = color;
+			if (m_currentShape->getShapeMatrix()[i][j] != COLOR_NEGRE)
+				m_board[rowIndex][columnIndex] = m_currentShape->getColor();
 		}
 	}
 }
@@ -195,6 +183,7 @@ bool Tauler::isShapeColliding(const Figura& shape) const
 
 	bool isShapeColliding = false;
 	bool isShapeOutOfBounds = false;
+
 	for (int i = 0; i < shape.getRows(); ++i)
 	{
 		for (int j = 0; j < shape.getColumns(); ++j)

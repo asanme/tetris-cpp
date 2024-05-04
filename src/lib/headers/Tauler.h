@@ -21,6 +21,7 @@ class Tauler
 	Tauler(const Tauler& tauler)
 	{
 		m_currentShape = nullptr;
+
 		if (tauler.m_currentShape != nullptr)
 		{
 			m_currentShape = new Figura(*tauler.m_currentShape);
@@ -36,9 +37,11 @@ class Tauler
 	}
 
 	void addShape(Figura& shape, int xPos, int yPos);
+
 	void moveShape(int xDir);
 	void moveShapeVertically();
 	void rotateShape(DireccioGir direction);
+
 	int clearCompletedRows();
 
 	bool isRotationValid(DireccioGir direction);
@@ -54,7 +57,6 @@ class Tauler
  private:
 	bool isShapeColliding(const Figura& shape) const;
 	void moveRowsDown(int rowIndex);
-	void moveRowsDown();
 	void redrawShape();
 	void clearShape();
 

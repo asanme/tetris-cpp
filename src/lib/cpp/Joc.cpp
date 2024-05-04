@@ -5,6 +5,7 @@
 static void deserializeShapeData(int* shapeData, string& currentLine)
 {
 	int dataIndex = 0;
+
 	for (char c : currentLine)
 	{
 		if (isdigit(c))
@@ -19,6 +20,7 @@ static void deserializeShapeData(int* shapeData, string& currentLine)
 static void deserializeMatrixData(int** tmpBoardMatrix, int& rowIndex, const string& currentLine)
 {
 	int matrixColumnIndex = 0;
+
 	for (char c : currentLine)
 	{
 		if (isdigit(c))
@@ -58,8 +60,8 @@ void Joc::inicialitza(const string& nomFitxer)
 		int shapeData[4];
 		int fileRowIndex = 0;
 		int matrixRowIndex = 0;
-
 		int** tmpBoardMatrix = new int* [MAX_FILA];
+
 		for (int i = 0; i < MAX_FILA; i++)
 			tmpBoardMatrix[i] = new int[MAX_COL];
 
@@ -87,6 +89,7 @@ void Joc::escriuTauler(const string& nomFitxer)
 	if (boardOutput.is_open())
 	{
 		int** tmpBoard = m_board.dumpBoard();
+
 		for (int i = 0; i < MAX_FILA; i++)
 		{
 			for (int j = 0; j < MAX_COL; ++j)
