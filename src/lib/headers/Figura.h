@@ -5,11 +5,6 @@
 const int MAX_FILA = 8;
 const int MAX_COL = 8;
 
-const int ROTATION_UP = 0;
-const int ROTATION_RIGHT = 1;
-const int ROTATION_DOWN = 2;
-const int ROTATION_LEFT = 3;
-
 typedef enum
 {
 	NO_FIGURA = 0,
@@ -52,18 +47,14 @@ class Figura
 	Figura()
 	{
 		m_shapeMatrix = nullptr;
-		m_rotationIndex = 0;
 		m_shape = NO_FIGURA;
 		m_color = NO_COLOR;
 
 		m_rows = 0;
 		m_columns = 0;
 
-		m_xPivotPosition = 0;
-		m_yPivotPosition = 0;
-
-		m_xBoardPivotPosition = 0;
-		m_yBoardPivotPosition = 0;
+		m_xBoardPosition = 0;
+		m_yBoardPosition = 0;
 	}
 
 	// Copy constructor
@@ -71,16 +62,12 @@ class Figura
 	{
 		m_shape = figura.m_shape;
 		m_color = figura.m_color;
-		m_rotationIndex = figura.m_rotationIndex;
 
 		m_rows = figura.m_rows;
 		m_columns = figura.m_columns;
 
-		m_xPivotPosition = figura.m_xPivotPosition;
-		m_yPivotPosition = figura.m_yPivotPosition;
-
-		m_xBoardPivotPosition = figura.m_xBoardPivotPosition;
-		m_yBoardPivotPosition = figura.m_yBoardPivotPosition;
+		m_xBoardPosition = figura.m_xBoardPosition;
+		m_yBoardPosition = figura.m_yBoardPosition;
 		m_shapeMatrix = nullptr;
 
 		if (figura.m_shapeMatrix == nullptr)
@@ -109,14 +96,11 @@ class Figura
 
 	ColorFigura getColor() const;
 
-	int getXPivotPosition() const;
-	int getYPivotPosition() const;
+	int getXBoardPosition() const;
+	void setXBoardPosition(int xPosition);
 
-	int getXBoardPivotPosition() const;
-	void setXBoardPivotPosition(int xPosition);
-
-	int getYBoardPivotPosition() const;
-	void setYBoardPivotPosition(int yPosition);
+	int getYBoardPosition() const;
+	void setYBoardPosition(int yPosition);
 
 	int getRows() const;
 	int getColumns() const;
@@ -126,25 +110,19 @@ class Figura
 
  private:
 	void freeShapeMatrix();
-	void rotateShapeCounterclockwise();
 	void rotateShapeClockwise();
+	void rotateShapeCounterclockwise();
 
 	// Other shape information
 	TipusFigura m_shape;
 	ColorFigura m_color;
-	int m_rotationIndex;
 
 	// Matrix information
 	int m_rows;
 	int m_columns;
 	int** m_shapeMatrix;
 
-	// Represents the pivot in the shape matrix
-	int m_xPivotPosition;
-	int m_yPivotPosition;
-
-	// Represents the pivot inside the board
-	int m_xBoardPivotPosition;
-	int m_yBoardPivotPosition;
-	void setRotationIndex();
+	// Represents the position of the matrix inside the board
+	int m_xBoardPosition;
+	int m_yBoardPosition;
 };

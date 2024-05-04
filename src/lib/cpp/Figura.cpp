@@ -51,66 +51,16 @@ static void transposeMatrix(int** matrix, int rows, int columns)
 	}
 }
 
-void Figura::setRotationIndex()
-{
-	switch (m_rotationIndex)
-	{
-	case ROTATION_UP:
-		m_xPivotPosition = 2;
-		m_yPivotPosition = 1;
-		m_yBoardPivotPosition += 1;
-		break;
-
-	case ROTATION_RIGHT:
-		m_xPivotPosition = 2;
-		m_yPivotPosition = 2;
-		m_xBoardPivotPosition -= 1;
-		break;
-
-	case ROTATION_DOWN:
-		m_xPivotPosition = 1;
-		m_yPivotPosition = 2;
-		m_yBoardPivotPosition -= 1;
-		break;
-
-	case ROTATION_LEFT:
-		m_xPivotPosition = 1;
-		m_yPivotPosition = 1;
-		m_xBoardPivotPosition += 1;
-		break;
-	}
-}
-
 void Figura::rotateShapeClockwise()
 {
 	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
 	invertColumns(m_shapeMatrix, m_rows, m_columns);
-
-	if (m_shape == FIGURA_I)
-	{
-		if (m_rotationIndex == 3)
-			m_rotationIndex = 0;
-		else
-			++m_rotationIndex;
-
-		setRotationIndex();
-	}
 }
 
 void Figura::rotateShapeCounterclockwise()
 {
 	transposeMatrix(m_shapeMatrix, m_rows, m_columns);
 	invertRows(m_shapeMatrix, m_rows, m_columns);
-
-	if (m_shape == FIGURA_I)
-	{
-		if (m_rotationIndex == 0)
-			m_rotationIndex = 3;
-		else
-			--m_rotationIndex;
-
-		setRotationIndex();
-	}
 }
 
 void Figura::rotateShape(DireccioGir rotationDirection)
@@ -128,15 +78,15 @@ void Figura::rotateShape(DireccioGir rotationDirection)
 
 void Figura::moveHorizontally(int xDirection)
 {
-	m_xBoardPivotPosition += xDirection;
+	m_xBoardPosition += xDirection;
 }
 
-// TODO Check if it works properly
 void Figura::moveVertically()
 {
-	++m_yBoardPivotPosition;
+	++m_yBoardPosition;
 }
 
+// TODO Check if function can be simplified
 void Figura::setShape(TipusFigura shape)
 {
 	if (m_shapeMatrix != nullptr)
@@ -187,9 +137,6 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[1][2] = 1;
 		newMatrixShape[1][3] = 1;
 
-		m_xPivotPosition = 2;
-		m_yPivotPosition = 1;
-
 		break;
 
 	case FIGURA_T:
@@ -212,9 +159,6 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[1][2] = 1;
 		newMatrixShape[0][1] = 1;
 
-		m_xPivotPosition = 1;
-		m_yPivotPosition = 1;
-
 		break;
 
 	case FIGURA_L:
@@ -234,9 +178,6 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[1][1] = 1;
 		newMatrixShape[1][2] = 1;
 		newMatrixShape[0][2] = 1;
-
-		m_xPivotPosition = 1;
-		m_yPivotPosition = 1;
 
 		break;
 
@@ -258,9 +199,6 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[1][1] = 1;
 		newMatrixShape[1][2] = 1;
 
-		m_xPivotPosition = 1;
-		m_yPivotPosition = 1;
-
 		break;
 
 	case FIGURA_Z:
@@ -281,9 +219,6 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[1][1] = 1;
 		newMatrixShape[1][2] = 1;
 
-		m_xPivotPosition = 1;
-		m_yPivotPosition = 1;
-
 		break;
 
 	case FIGURA_S:
@@ -303,9 +238,6 @@ void Figura::setShape(TipusFigura shape)
 		newMatrixShape[0][2] = 1;
 		newMatrixShape[1][0] = 1;
 		newMatrixShape[1][1] = 1;
-
-		m_xPivotPosition = 1;
-		m_yPivotPosition = 1;
 
 		break;
 	}
@@ -350,34 +282,24 @@ ColorFigura Figura::getColor() const
 	return m_color;
 }
 
-int Figura::getXBoardPivotPosition() const
+int Figura::getXBoardPosition() const
 {
-	return m_xBoardPivotPosition;
+	return m_xBoardPosition;
 }
 
-void Figura::setXBoardPivotPosition(int xPosition)
+void Figura::setXBoardPosition(int xPosition)
 {
-	m_xBoardPivotPosition = xPosition;
+	m_xBoardPosition = xPosition;
 }
 
-int Figura::getYBoardPivotPosition() const
+int Figura::getYBoardPosition() const
 {
-	return m_yBoardPivotPosition;
+	return m_yBoardPosition;
 }
 
-void Figura::setYBoardPivotPosition(int yPosition)
+void Figura::setYBoardPosition(int yPosition)
 {
-	m_yBoardPivotPosition = yPosition;
-}
-
-int Figura::getYPivotPosition() const
-{
-	return m_xPivotPosition;
-}
-
-int Figura::getXPivotPosition() const
-{
-	return m_yPivotPosition;
+	m_yBoardPosition = yPosition;
 }
 
 int Figura::getColumns() const
@@ -395,10 +317,8 @@ void Figura::showShape()
 	if (m_shapeMatrix == nullptr)
 		return;
 
-	cout << "\n-----------\n";
-	cout << "Showing Shape Data:\n";
-	cout << "xPivot: " << m_xPivotPosition << "\n";
-	cout << "yPivot: " << m_yPivotPosition << "\n";
+	cout << "\nShowing current shape:\n";
+	cout << "---------------\n";
 	for (int i = 0; i < m_rows; i++)
 	{
 		for (int j = 0; j < m_columns; j++)

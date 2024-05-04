@@ -43,7 +43,8 @@ void Joc::setGameData(int** boardMatrixData, const int* shapeData)
 		m_currentShape.rotateShape(GIR_HORARI);
 
 	m_board.loadBoard(boardMatrixData);
-	m_board.addShape(m_currentShape, row, column);
+	// The column is the x position, the row is the y position
+	m_board.addShape(m_currentShape, column - 1, row - 1);
 }
 
 void Joc::inicialitza(const string& nomFitxer)
@@ -135,3 +136,4 @@ void Joc::showBoard()
 {
 	m_board.showBoard();
 }
+

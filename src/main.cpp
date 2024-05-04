@@ -691,7 +691,6 @@ int main()
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 1" << endl;
 	joc.inicialitza("../src/data/test_elimina_files_1.txt");
-	joc.showBoard();
 	mostraFitxerInicial("../src/data/test_elimina_files_1.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
@@ -730,7 +729,6 @@ int main()
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 3" << endl;
 	joc.inicialitza("../src/data/test_elimina_files_3.txt");
-	joc.showBoard();
 	mostraFitxerInicial("../src/data/test_elimina_files_3.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Baixa figura" << endl;
@@ -795,7 +793,6 @@ int main()
 	cout << "Comment :=>> ------------------------------------------------" << endl;
 	cout << "Comment :=>> TEST 6" << endl;
 	joc.inicialitza("../src/data/test_elimina_files_6.txt");
-	joc.showBoard();
 	mostraFitxerInicial("../src/data/test_elimina_files_6.txt");
 	cout << "Comment :=>> Moviments a partir de la configuracio inicial" << endl;
 	cout << "Comment :=>>  - Mou figura dreta" << endl;
@@ -808,7 +805,6 @@ int main()
 	joc.baixaFigura();
 	joc.baixaFigura();
 	joc.baixaFigura();
-	joc.showBoard();
 	joc.baixaFigura();
 	joc.escriuTauler("../src/data/resultat_elimina_files_6.txt");
 	correcte =
@@ -856,23 +852,3 @@ int main()
 
 	return 0;
 }
-
-
-//int main()
-//{
-//	Joc j;
-//	j.inicialitza("../src/data/test_gir_figura_4.txt");
-//	j.showBoard();
-//
-////	cout << "Comment :=>>  - Gir horari" << endl;
-////	cout << "Comment :=>>  - Mou figura esquerra" << endl;
-////	cout << "Comment :=>>  - Mou figura esquerra" << endl;
-////	cout << "Comment :=>>  - Gir horari" << endl;
-//
-//	j.giraFigura(GIR_HORARI);
-//	j.mouFigura(-1);
-//	j.mouFigura(-1);
-//	j.giraFigura(GIR_HORARI);
-//
-//	j.showBoard();
-//}

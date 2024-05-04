@@ -37,26 +37,23 @@ void Tauler::addShape(Figura& shape, int xPos, int yPos)
 {
 	m_currentShape = &shape;
 	int** shapeMatrix = shape.getShapeMatrix();
-	int xPositionOffset = xPos - shape.getXPivotPosition();
-	int yPositionOffset = yPos - shape.getYPivotPosition();
+	shape.setXBoardPosition(xPos);
+	shape.setYBoardPosition(yPos);
+
 	for (int i = 0; i < shape.getRows(); ++i)
 	{
 		for (int j = 0; j < shape.getColumns(); ++j)
 		{
 			if (shapeMatrix[i][j] != 0)
 			{
-				int rowIndex = i + xPositionOffset;
-				int columnIndex = j + yPositionOffset;
+				int rowIndex = i + yPos;
+				int columnIndex = j + xPos;
 
+				// TODO Pass all tests without this
 				if ((rowIndex >= MAX_FILA || rowIndex < 0) || (columnIndex >= MAX_COL || columnIndex < 0))
 					return;
 
 				m_board[rowIndex][columnIndex] = shape.getColor();
-				if (i == shape.getXPivotPosition() && j == shape.getYPivotPosition())
-				{
-					shape.setXBoardPivotPosition(columnIndex);
-					shape.setYBoardPivotPosition(rowIndex);
-				}
 			}
 		}
 	}
@@ -83,46 +80,6 @@ void Tauler::moveShapeVertically()
 	redrawShape();
 }
 
-void Tauler::redrawShape()
-{
-	int xPositionOffset = m_currentShape->getXBoardPivotPosition() - m_currentShape->getXPivotPosition();
-	int yPositionOffset = m_currentShape->getYBoardPivotPosition() - m_currentShape->getYPivotPosition();
-
-	int rows = m_currentShape->getRows();
-	int columns = m_currentShape->getColumns();
-	ColorFigura color = m_currentShape->getColor();
-	int** shapeMatrix = m_currentShape->getShapeMatrix();
-
-	for (int i = 0; i < rows; i++)
-	{
-		for (int j = 0; j < columns; ++j)
-		{
-			int rowIndex = i + yPositionOffset;
-			int columnIndex = j + xPositionOffset;
-
-			if (shapeMatrix[i][j] != 0)
-				m_board[rowIndex][columnIndex] = color;
-		}
-	}
-}
-
-void Tauler::clearShape()
-{
-	int xPositionOffset = m_currentShape->getXBoardPivotPosition() - m_currentShape->getXPivotPosition();
-	int yPositionOffset = m_currentShape->getYBoardPivotPosition() - m_currentShape->getYPivotPosition();
-	for (int i = 0; i < m_currentShape->getRows(); i++)
-	{
-		for (int j = 0; j < m_currentShape->getColumns(); ++j)
-		{
-			int rowIndex = i + yPositionOffset;
-			int columnIndex = j + xPositionOffset;
-
-			if (m_currentShape->getShapeMatrix()[i][j] != 0)
-				m_board[rowIndex][columnIndex] = COLOR_NEGRE;
-		}
-	}
-}
-
 bool Tauler::isRotationValid(DireccioGir direction)
 {
 	Figura shapeCopy = *m_currentShape;
@@ -144,39 +101,6 @@ bool Tauler::isVerticalMovementValid()
 	return !isShapeColliding(shapeCopy);
 }
 
-bool Tauler::isShapeColliding(const Figura& shape) const
-{
-	int** shapeMatrix = shape.getShapeMatrix();
-	Tauler boardCopy = *this;
-	boardCopy.clearShape();
-
-	bool doesShapeCollide = false;
-	bool isShapeOutOfBounds = false;
-	int xPositionOffset = shape.getXBoardPivotPosition() - shape.getXPivotPosition();
-	int yPositionOffset = shape.getYBoardPivotPosition() - shape.getYPivotPosition();
-	for (int i = 0; i < shape.getRows(); ++i)
-	{
-		for (int j = 0; j < shape.getColumns(); ++j)
-		{
-			int rowIndex = i + yPositionOffset;
-			int columnIndex = j + xPositionOffset;
-
-			// Only check where there's a tile
-			if (shapeMatrix[i][j] != 0)
-			{
-				if ((rowIndex >= MAX_FILA || rowIndex < 0) || (columnIndex >= MAX_COL || columnIndex < 0))
-					isShapeOutOfBounds = true;
-
-				// If the position in the board is occupied, there's a collision
-				if (boardCopy.m_board[rowIndex][columnIndex] != 0)
-					doesShapeCollide = true;
-			}
-		}
-	}
-
-	return doesShapeCollide || isShapeOutOfBounds;
-}
-
 int Tauler::clearCompletedRows()
 {
 	int completedRowCount = 0;
@@ -191,6 +115,7 @@ int Tauler::clearCompletedRows()
 				break;
 			}
 		}
+
 		if (rowFilled)
 		{
 			moveRowsDown(i);
@@ -205,6 +130,7 @@ int Tauler::clearCompletedRows()
 	return completedRowCount;
 }
 
+// rowIndex: the index of the row removed
 void Tauler::moveRowsDown(int rowIndex)
 {
 	for (int k = rowIndex; k > 0; --k)
@@ -219,6 +145,78 @@ void Tauler::moveRowsDown(int rowIndex)
 	{
 		m_board[0][m] = COLOR_NEGRE;
 	}
+}
+
+void Tauler::redrawShape()
+{
+	// TODO Check why destructor is called while redrawing
+	int rows = m_currentShape->getRows();
+	int columns = m_currentShape->getColumns();
+
+	int xPosition = m_currentShape->getXBoardPosition();
+	int yPosition = m_currentShape->getYBoardPosition();
+
+	ColorFigura color = m_currentShape->getColor();
+	int** shapeMatrix = m_currentShape->getShapeMatrix();
+
+	for (int i = 0; i < rows; i++)
+	{
+		for (int j = 0; j < columns; ++j)
+		{
+			int rowIndex = i + yPosition;
+			int columnIndex = j + xPosition;
+
+			if (shapeMatrix[i][j] != COLOR_NEGRE)
+				m_board[rowIndex][columnIndex] = color;
+		}
+	}
+}
+
+void Tauler::clearShape()
+{
+	for (int i = 0; i < m_currentShape->getRows(); i++)
+	{
+		for (int j = 0; j < m_currentShape->getColumns(); ++j)
+		{
+			int rowIndex = i + m_currentShape->getYBoardPosition();
+			int columnIndex = j + m_currentShape->getXBoardPosition();
+
+			if (m_currentShape->getShapeMatrix()[i][j] != COLOR_NEGRE)
+				m_board[rowIndex][columnIndex] = COLOR_NEGRE;
+		}
+	}
+}
+
+bool Tauler::isShapeColliding(const Figura& shape) const
+{
+	int** shapeMatrix = shape.getShapeMatrix();
+	Tauler boardCopy = *this;
+	boardCopy.clearShape();
+
+	bool isShapeColliding = false;
+	bool isShapeOutOfBounds = false;
+	for (int i = 0; i < shape.getRows(); ++i)
+	{
+		for (int j = 0; j < shape.getColumns(); ++j)
+		{
+			int rowIndex = i + shape.getYBoardPosition();
+			int columnIndex = j + shape.getXBoardPosition();
+
+			// Only check where there's a tile
+			if (shapeMatrix[i][j] != COLOR_NEGRE)
+			{
+				// Check for out of bounds
+				if ((rowIndex >= MAX_FILA || rowIndex < 0) || (columnIndex >= MAX_COL || columnIndex < 0))
+					isShapeOutOfBounds = true;
+
+				// If the position in the board is occupied, there's a collision
+				if (boardCopy.m_board[rowIndex][columnIndex] != COLOR_NEGRE)
+					isShapeColliding = true;
+			}
+		}
+	}
+
+	return isShapeColliding || isShapeOutOfBounds;
 }
 
 void Tauler::showBoard()
