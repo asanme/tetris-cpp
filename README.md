@@ -19,31 +19,31 @@ ___
 El programa es compatible amb totes les plataformes
 
 ### Pasos
-- Clonem el repositori.
+Clonem el repositori.
 
 ``
 git clone git@github.com:asanme/tetris-cpp.git
 ``
 
-- Anem a la carpeta del repositori.
+Anem a la carpeta del repositori.
 
 ``
 cd tetris-cpp
 ``
 
-- Executem `cmake` i especifiquem el nom de la carpeta on es generaran els fitxers necessaris per compilar.
+Executem `cmake` i especifiquem el nom de la carpeta on es generaran els fitxers necessaris per compilar.
 
 ``
 cmake -B carpeta-compilacio
 ``
 
-- Anem a la carpeta generada.
+Anem a la carpeta generada.
 
 ``
 cd carpeta-compilacio
 ``
 
-- Per últim, compilem.
+Per últim, compilem.
 
 ``
 make
