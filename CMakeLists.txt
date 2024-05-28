@@ -61,6 +61,7 @@ elseif (UNIX)
     set(libpng_DIR ${CMAKE_SOURCE_DIR}/libs/libpng)
     find_package(SDL2_ttf REQUIRED)
     find_package(SDL2_image REQUIRED)
+    find_package(ZLIB REQUIRED)
 
     # Include library folders
     target_include_directories(${PROJECT_NAME} PRIVATE ${SDL_DIR}/include REQUIRED)
@@ -69,6 +70,6 @@ elseif (UNIX)
     # Link libraries
     target_link_libraries(${PROJECT_NAME} ${SDL_DIR}/build/libSDL2.a)
     target_link_libraries(${PROJECT_NAME} ${libpng_DIR}/build/libpng.a)
-    target_link_libraries(${PROJECT_NAME} SDL2_ttf::SDL2_ttf SDL2_image::SDL2_image)
+    target_link_libraries(${PROJECT_NAME} SDL2_ttf::SDL2_ttf SDL2_image::SDL2_image ZLIB::ZLIB)
 endif ()
 
