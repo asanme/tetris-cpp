@@ -4,7 +4,7 @@
 # compile C with /usr/bin/cc
 C_DEFINES = 
 
-C_INCLUDES = -I/home/asanme/cpp-projects/tetris-cpp/lib/SDL/build/include-config-/SDL2 -I/home/asanme/cpp-projects/tetris-cpp/lib/SDL/build/include/SDL2 -I/home/asanme/cpp-projects/tetris-cpp/lib/SDL/build/include
+C_INCLUDES = -I/home/asanme/cpp-projects/tetris-cpp/libs/SDL/build/include-config-/SDL2 -I/home/asanme/cpp-projects/tetris-cpp/libs/SDL/build/include/SDL2 -I/home/asanme/cpp-projects/tetris-cpp/libs/SDL/build/include
 
-C_FLAGS =  -idirafter "/home/asanme/cpp-projects/tetris-cpp/lib/SDL/src/video/khronos" -DHAVE_LINUX_VERSION_H  -Wall -Wundef -fno-strict-aliasing -Wdeclaration-after-statement -fvisibility=hidden -Wshadow -Wno-unused-local-typedefs -mmmx -m3dnow -msse -msse2 -msse3  -isystem/usr/include -D_REENTRANT  -isystem/usr/include/pipewire-0.3  -isystem/usr/include/spa-0.2  -isystem/usr/include/libdrm  -DSDL_BUILD_MAJOR_VERSION=2 -DSDL_BUILD_MINOR_VERSION=30 -DSDL_BUILD_MICRO_VERSION=3
+C_FLAGS =  -idirafter "/home/asanme/cpp-projects/tetris-cpp/libs/SDL/src/video/khronos" -DHAVE_LINUX_VERSION_H  -Wall -Wundef -fno-strict-aliasing -Wdeclaration-after-statement -fvisibility=hidden -Wshadow -Wno-unused-local-typedefs -mmmx -m3dnow -msse -msse2 -msse3  -isystem/usr/include -D_REENTRANT  -isystem/usr/include/pipewire-0.3  -isystem/usr/include/spa-0.2  -isystem/usr/include/libdrm  -DSDL_BUILD_MAJOR_VERSION=2 -DSDL_BUILD_MINOR_VERSION=30 -DSDL_BUILD_MICRO_VERSION=3
 

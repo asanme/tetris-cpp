@@ -36,8 +36,8 @@ THE SOFTWARE.
 #if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) || defined  (_WIN64)
 #include <SDL.h>
 #elif __APPLE__
-#include <SDL2/SDL.h>
 #endif
+#include <SDL2/SDL.h>
 
 #if defined(FC_USE_SDL_GPU) && !defined(NFONT_USE_SDL_GPU)
 #define NFONT_USE_SDL_GPU

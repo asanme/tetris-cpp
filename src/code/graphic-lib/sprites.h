@@ -1,16 +1,7 @@
 #pragma once
 
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) || defined  (_WIN64)
-#include <SDL.h>
-#include <SDL_image.h>
-#elif __APPLE__
 #include <SDL2/SDL.h>
-#include <SDL2_image/SDL_image.h>
-#endif
-
-
-
-
+#include <SDL_image.h>
 
 #define SPRITE_WILL_BE_ANIMATED   NULL
 

@@ -1,12 +1,7 @@
 #ifndef __KEYBOARD_SDL_INCLUDED_
 #define __KEYBOARD_SDL_INCLUDED_
 
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) || defined  (_WIN64)
-#include <SDL.h>
-#elif __APPLE__
 #include <SDL2/SDL.h>
-#endif
-
 
 #define NUM_KEYBOARD_KEY_CODES                           SDL_NUM_SCANCODES
 

@@ -1,15 +1,7 @@
 #include <cstdlib>
 #include <cassert>
 
-
-#define PNG_DEBUG 3
-
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) || defined  (_WIN64)
-#include <png.h>
-#elif __APPLE__
-#include <libpng/png.h>
-#endif
-
+#include <libpng16/png.h>
 
 #include "debug.h"
 #include "error.h"

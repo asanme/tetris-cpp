@@ -5,14 +5,43 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(tetris_cpp
         src/main.cpp
-        src/lib/cpp/Tauler.cpp
-        src/lib/headers/Tauler.h
-        src/lib/cpp/Joc.cpp
-        src/lib/headers/Joc.h
-        src/lib/cpp/Figura.cpp
-        src/lib/headers/Figura.h)
+        src/code/logic/cpp/Tauler.cpp
+        src/code/logic/headers/Tauler.h
+        src/code/logic/cpp/Joc.cpp
+        src/code/logic/headers/Joc.h
+        src/code/logic/cpp/Figura.cpp
+        src/code/logic/headers/Figura.h
+        src/code/logic/cpp/GraphicManager.cpp
+        src/code/logic/headers/GraphicManager.h
+        src/code/logic/headers/InfoJoc.h
+        src/code/logic/cpp/Partida.cpp
+        src/code/logic/headers/Partida.h
+        src/code/graphic-lib/NFont/NFont.cpp
+        src/code/graphic-lib/NFont/NFont.h
+        src/code/graphic-lib/NFont/NFont_gpu.h
+        src/code/graphic-lib/NFont/SDL_FontCache.cpp
+        src/code/graphic-lib/NFont/SDL_FontCache.h
+        src/code/graphic-lib/debug.cpp
+        src/code/graphic-lib/debug.h
+        src/code/graphic-lib/error.h
+        src/code/graphic-lib/image_png.cpp
+        src/code/graphic-lib/image_png.h
+        src/code/graphic-lib/keyboard.cpp
+        src/code/graphic-lib/keyboard.h
+        src/code/graphic-lib/keyboard_sdl.h
+        src/code/graphic-lib/libreria.h
+        src/code/graphic-lib/mouse.cpp
+        src/code/graphic-lib/mouse.h
+        src/code/graphic-lib/sound.cpp
+        src/code/graphic-lib/sound.h
+        src/code/graphic-lib/sprites.cpp
+        src/code/graphic-lib/sprites.h
+        src/code/graphic-lib/stb_vorbis.cpp
+        src/code/graphic-lib/stb_vorbis.h
+        src/code/graphic-lib/video.cpp
+        src/code/graphic-lib/video.h)
 
-# Platform-specific SDL configuration
+# Windows build not working
 if (WIN32)
     # Windows specific configuration
     set(SDL2_DIR ${CMAKE_SOURCE_DIR}/external/SDL-Windows)

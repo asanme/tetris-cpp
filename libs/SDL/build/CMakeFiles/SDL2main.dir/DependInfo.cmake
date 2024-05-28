@@ -8,7 +8,7 @@ set(CMAKE_DEPENDS_LANGUAGES
 
 # The set of dependency files which are needed:
 set(CMAKE_DEPENDS_DEPENDENCY_FILES
-  "/home/asanme/cpp-projects/tetris-cpp/lib/SDL/src/main/dummy/SDL_dummy_main.c" "CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o" "gcc" "CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o.d"
+  "/home/asanme/cpp-projects/tetris-cpp/libs/SDL/src/main/dummy/SDL_dummy_main.c" "CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o" "gcc" "CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o.d"
   )
 
 # Targets to which this target links which contain Fortran sources.

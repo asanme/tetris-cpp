@@ -15,8 +15,8 @@ public:
     void actualitza(double deltaTime);
 private:
     double m_temps;
-    // Atributs necessaris només pels exemples d'utilització de la llibreria. 
-    // S'hauran d'eliminar per la implementació del projecte
+    // Atributs necessaris nomï¿½s pels exemples d'utilitzaciï¿½ de la llibreria. 
+    // S'hauran d'eliminar per la implementaci del projecte
     static const int MIDA = 4;
     ColorFigura m_forma[MIDA][MIDA];
     int m_fila, m_columna;

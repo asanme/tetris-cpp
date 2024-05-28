@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/asanme/cpp-projects/tetris-cpp/lib/SDL
+CMAKE_SOURCE_DIR = /home/asanme/cpp-projects/tetris-cpp/libs/SDL
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/asanme/cpp-projects/tetris-cpp/lib/SDL/build
+CMAKE_BINARY_DIR = /home/asanme/cpp-projects/tetris-cpp/libs/SDL/build
 
 # Utility rule file for uninstall.
 
@@ -67,7 +67,7 @@ include CMakeFiles/uninstall.dir/compiler_depend.make
 include CMakeFiles/uninstall.dir/progress.make
 
 CMakeFiles/uninstall:
-	/usr/bin/cmake -P /home/asanme/cpp-projects/tetris-cpp/lib/SDL/build/cmake_uninstall.cmake
+	/usr/bin/cmake -P /home/asanme/cpp-projects/tetris-cpp/libs/SDL/build/cmake_uninstall.cmake
 
 uninstall: CMakeFiles/uninstall
 uninstall: CMakeFiles/uninstall.dir/build.make
@@ -82,6 +82,6 @@ CMakeFiles/uninstall.dir/clean:
 .PHONY : CMakeFiles/uninstall.dir/clean
 
 CMakeFiles/uninstall.dir/depend:
-	cd /home/asanme/cpp-projects/tetris-cpp/lib/SDL/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/asanme/cpp-projects/tetris-cpp/lib/SDL /home/asanme/cpp-projects/tetris-cpp/lib/SDL /home/asanme/cpp-projects/tetris-cpp/lib/SDL/build /home/asanme/cpp-projects/tetris-cpp/lib/SDL/build /home/asanme/cpp-projects/tetris-cpp/lib/SDL/build/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/asanme/cpp-projects/tetris-cpp/libs/SDL/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/asanme/cpp-projects/tetris-cpp/libs/SDL /home/asanme/cpp-projects/tetris-cpp/libs/SDL /home/asanme/cpp-projects/tetris-cpp/libs/SDL/build /home/asanme/cpp-projects/tetris-cpp/libs/SDL/build /home/asanme/cpp-projects/tetris-cpp/libs/SDL/build/CMakeFiles/uninstall.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/uninstall.dir/depend
 

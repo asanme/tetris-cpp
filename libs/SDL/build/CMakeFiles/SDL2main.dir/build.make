@@ -53,10 +53,10 @@ RM = /usr/bin/cmake -E rm -f
 EQUALS = =
 
 # The top-level source directory on which CMake was run.
-CMAKE_SOURCE_DIR = /home/asanme/cpp-projects/tetris-cpp/lib/SDL
+CMAKE_SOURCE_DIR = /home/asanme/cpp-projects/tetris-cpp/libs/SDL
 
 # The top-level build directory on which CMake was run.
-CMAKE_BINARY_DIR = /home/asanme/cpp-projects/tetris-cpp/lib/SDL/build
+CMAKE_BINARY_DIR = /home/asanme/cpp-projects/tetris-cpp/libs/SDL/build
 
 # Include any dependencies generated for this target.
 include CMakeFiles/SDL2main.dir/depend.make
@@ -70,18 +70,18 @@ include CMakeFiles/SDL2main.dir/progress.make
 include CMakeFiles/SDL2main.dir/flags.make
 
 CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o: CMakeFiles/SDL2main.dir/flags.make
-CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o: /home/asanme/cpp-projects/tetris-cpp/lib/SDL/src/main/dummy/SDL_dummy_main.c
+CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o: /home/asanme/cpp-projects/tetris-cpp/libs/SDL/src/main/dummy/SDL_dummy_main.c
 CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o: CMakeFiles/SDL2main.dir/compiler_depend.ts
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/asanme/cpp-projects/tetris-cpp/lib/SDL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o -MF CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o.d -o CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o -c /home/asanme/cpp-projects/tetris-cpp/lib/SDL/src/main/dummy/SDL_dummy_main.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --progress-dir=/home/asanme/cpp-projects/tetris-cpp/libs/SDL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o"
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -MD -MT CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o -MF CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o.d -o CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o -c /home/asanme/cpp-projects/tetris-cpp/libs/SDL/src/main/dummy/SDL_dummy_main.c
 
 CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.i: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Preprocessing C source to CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.i"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/asanme/cpp-projects/tetris-cpp/lib/SDL/src/main/dummy/SDL_dummy_main.c > CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.i
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /home/asanme/cpp-projects/tetris-cpp/libs/SDL/src/main/dummy/SDL_dummy_main.c > CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.i
 
 CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.s: cmake_force
 	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green "Compiling C source to assembly CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.s"
-	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/asanme/cpp-projects/tetris-cpp/lib/SDL/src/main/dummy/SDL_dummy_main.c -o CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.s
+	/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /home/asanme/cpp-projects/tetris-cpp/libs/SDL/src/main/dummy/SDL_dummy_main.c -o CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.s
 
 # Object files for target SDL2main
 SDL2main_OBJECTS = \
@@ -93,7 +93,7 @@ SDL2main_EXTERNAL_OBJECTS =
 libSDL2main.a: CMakeFiles/SDL2main.dir/src/main/dummy/SDL_dummy_main.c.o
 libSDL2main.a: CMakeFiles/SDL2main.dir/build.make
 libSDL2main.a: CMakeFiles/SDL2main.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/asanme/cpp-projects/tetris-cpp/lib/SDL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libSDL2main.a"
+	@$(CMAKE_COMMAND) -E cmake_echo_color "--switch=$(COLOR)" --green --bold --progress-dir=/home/asanme/cpp-projects/tetris-cpp/libs/SDL/build/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Linking C static library libSDL2main.a"
 	$(CMAKE_COMMAND) -P CMakeFiles/SDL2main.dir/cmake_clean_target.cmake
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/SDL2main.dir/link.txt --verbose=$(VERBOSE)
 
@@ -106,6 +106,6 @@ CMakeFiles/SDL2main.dir/clean:
 .PHONY : CMakeFiles/SDL2main.dir/clean
 
 CMakeFiles/SDL2main.dir/depend:
-	cd /home/asanme/cpp-projects/tetris-cpp/lib/SDL/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/asanme/cpp-projects/tetris-cpp/lib/SDL /home/asanme/cpp-projects/tetris-cpp/lib/SDL /home/asanme/cpp-projects/tetris-cpp/lib/SDL/build /home/asanme/cpp-projects/tetris-cpp/lib/SDL/build /home/asanme/cpp-projects/tetris-cpp/lib/SDL/build/CMakeFiles/SDL2main.dir/DependInfo.cmake "--color=$(COLOR)"
+	cd /home/asanme/cpp-projects/tetris-cpp/libs/SDL/build && $(CMAKE_COMMAND) -E cmake_depends "Unix Makefiles" /home/asanme/cpp-projects/tetris-cpp/libs/SDL /home/asanme/cpp-projects/tetris-cpp/libs/SDL /home/asanme/cpp-projects/tetris-cpp/libs/SDL/build /home/asanme/cpp-projects/tetris-cpp/libs/SDL/build /home/asanme/cpp-projects/tetris-cpp/libs/SDL/build/CMakeFiles/SDL2main.dir/DependInfo.cmake "--color=$(COLOR)"
 .PHONY : CMakeFiles/SDL2main.dir/depend
 

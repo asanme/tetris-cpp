@@ -1,8 +1,4 @@
-#if defined(WIN32) || defined(_WIN32) || defined(__WIN32__) || defined(__NT__) || defined  (_WIN64)
-#include <SDL.h>
-#elif __APPLE__
 #include <SDL2/SDL.h>
-#endif
 
 #include <stdlib.h>
 #include <math.h>
