@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/pngimage.dir/contrib/libtests/pngimage.c.o -o pngimage  -Wl,-rpath,/home/asanme/cpp-projects/tetris-cpp/libs/libpng/build libpng16.so.16.44.git /usr/lib/libz.so -lm

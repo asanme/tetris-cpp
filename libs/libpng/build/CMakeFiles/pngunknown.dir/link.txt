@@ -1,0 +1,1 @@
+/usr/bin/cc CMakeFiles/pngunknown.dir/contrib/libtests/pngunknown.c.o -o pngunknown  -Wl,-rpath,/home/asanme/cpp-projects/tetris-cpp/libs/libpng/build libpng16.so.16.44.git /usr/lib/libz.so -lm

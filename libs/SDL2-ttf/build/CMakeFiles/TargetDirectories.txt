@@ -1,0 +1,9 @@
+/home/asanme/cpp-projects/tetris-cpp/libs/SDL2-ttf/build/CMakeFiles/SDL2_ttf.dir
+/home/asanme/cpp-projects/tetris-cpp/libs/SDL2-ttf/build/CMakeFiles/glfont.dir
+/home/asanme/cpp-projects/tetris-cpp/libs/SDL2-ttf/build/CMakeFiles/showfont.dir
+/home/asanme/cpp-projects/tetris-cpp/libs/SDL2-ttf/build/CMakeFiles/edit_cache.dir
+/home/asanme/cpp-projects/tetris-cpp/libs/SDL2-ttf/build/CMakeFiles/rebuild_cache.dir
+/home/asanme/cpp-projects/tetris-cpp/libs/SDL2-ttf/build/CMakeFiles/list_install_components.dir
+/home/asanme/cpp-projects/tetris-cpp/libs/SDL2-ttf/build/CMakeFiles/install.dir
+/home/asanme/cpp-projects/tetris-cpp/libs/SDL2-ttf/build/CMakeFiles/install/local.dir
+/home/asanme/cpp-projects/tetris-cpp/libs/SDL2-ttf/build/CMakeFiles/install/strip.dir

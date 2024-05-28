@@ -28,12 +28,18 @@ if (WIN32)
 
 elseif (UNIX)
     # Linux specific configuration
-    set(SDL2_DIR ${CMAKE_SOURCE_DIR}/libs/SDL)
+    set(SDL_DIR ${CMAKE_SOURCE_DIR}/libs/SDL)
+    set(libpng_DIR ${CMAKE_SOURCE_DIR}/libs/libpng)
+    find_package(SDL2_ttf REQUIRED)
+    find_package(SDL2_image REQUIRED)
 
-    # Add SDL2 directory to include directories
-    target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_DIR}/include)
+    # Include library folders
+    target_include_directories(${PROJECT_NAME} PRIVATE ${SDL_DIR}/include REQUIRED)
+    target_include_directories(${PROJECT_NAME} PRIVATE ${SDL_DIR} REQUIRED)
 
-    # Link SDL2 library
-    target_link_libraries(${PROJECT_NAME} ${SDL2_DIR}/build/libSDL2.a)
+    # Link libraries
+    target_link_libraries(${PROJECT_NAME} ${SDL_DIR}/build/libSDL2.a)
+    target_link_libraries(${PROJECT_NAME} ${libpng_DIR}/build/libpng.a)
+    target_link_libraries(${PROJECT_NAME} SDL2_ttf::SDL2_ttf SDL2_image::SDL2_image)
 endif ()
 
