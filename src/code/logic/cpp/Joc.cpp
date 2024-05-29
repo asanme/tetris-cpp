@@ -1,6 +1,8 @@
 #include <fstream>
 #include <vector>
 #include "../headers/Joc.h"
+#include "../headers/GraphicManager.h"
+#include "../headers/InfoJoc.h"
 
 static void deserializeShapeData(int* shapeData, string& currentLine)
 {
@@ -139,4 +141,3 @@ void Joc::showBoard()
 {
 	m_board.showBoard();
 }
-

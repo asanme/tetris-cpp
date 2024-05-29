@@ -71,36 +71,36 @@ string GraphicManager::getImagePath(IMAGE_NAME name)
 	switch (name)
 	{
 	case GRAFIC_FONS:
-		path = "data/Graphics/fons.png";
+
+		path = "../src/resources/graphics/fons.png";
 		break;
 	case GRAFIC_TAULER:
-		path = "data/Graphics/tauler.png";
+		path = "../src/resources/graphics/tauler.png";
 		break;
 	case GRAFIC_QUADRAT_GROC:
-		path = "data/Graphics/quadrat_groc.png";
+		path = "../src/resources/graphics/quadrat_groc.png";
 		break;
 	case GRAFIC_QUADRAT_BLAUCEL:
-		path = "data/Graphics/quadrat_blaucel.png";
+		path = "../src/resources/graphics/quadrat_blaucel.png";
 		break;
 	case GRAFIC_QUADRAT_MAGENTA:
-		path = "data/Graphics/quadrat_magenta.png";
+		path = "../src/resources/graphics/quadrat_magenta.png";
 		break;
 	case GRAFIC_QUADRAT_TARONJA:
-		path = "data/Graphics/quadrat_taronja.png";
+		path = "../src/resources/graphics/quadrat_taronja.png";
 		break;
 	case GRAFIC_QUADRAT_BLAUFOSC:
-		path = "data/Graphics/quadrat_blaufosc.png";
+		path = "../src/resources/graphics/quadrat_blaufosc.png";
 		break;
 	case GRAFIC_QUADRAT_VERMELL:
-		path = "data/Graphics/quadrat_vermell.png";
+		path = "../src/resources/graphics/quadrat_vermell.png";
 		break;
 	case GRAFIC_QUADRAT_VERD:
-		path = "data/Graphics/quadrat_verd.png";
+		path = "../src/resources/graphics/quadrat_verd.png";
 		break;
 	default:
 		path = "";
 		break;
-
 	}
 
 	return path;
@@ -113,7 +113,7 @@ string GraphicManager::getFontPath(FONT_NAME name)
 	case FONT_GREEN_30:
 	case FONT_RED_30:
 	case FONT_WHITE_30:
-		path = "data/fonts/FreeSans.ttf";
+		path = "../src/resources/fonts/FreeSans.ttf";
 		break;
 
 	default:
