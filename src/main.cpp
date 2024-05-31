@@ -16,6 +16,9 @@ int main(int argc, const char* argv[])
 	Uint64 NOW = SDL_GetPerformanceCounter();
 	Uint64 LAST = 0;
 	double deltaTime = 0;
+
+	game.inicialitza(0, "../src/data/partida.txt", "", "");
+
 	do
 	{
 		LAST = NOW;

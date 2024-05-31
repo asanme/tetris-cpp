@@ -11,22 +11,28 @@ using namespace std;
 class Partida
 {
  public:
-	Partida() : m_temps(0), m_score(0), m_currentLevel(0)
+	Partida() : m_time(0), m_score(0), m_currentLevel(0)
 	{
 	}
 
-	void actualitza(double d)
-	{
+	void actualitza(double deltaTime);
 
-	}
+	void inicialitza(
+		int mode,
+		const string& fitxerInicial,
+		const string& fitxerFigures,
+		const string& fitxerMoviments
+	);
 
  private:
 	Joc m_game;
 
-	double m_temps;
+	double m_time;
 	int m_score;
 	int m_currentLevel;
 
+	// Utility methods
+	void update(float waitTime, double d);
 };
 
 #endif 

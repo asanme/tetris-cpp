@@ -210,6 +210,27 @@ bool Tauler::isShapeColliding(const Figura& shape) const
 
 void Tauler::showBoard()
 {
+	for (int i = 0; i < MAX_FILA; i++)
+	{
+		for (int j = 0; j < MAX_COL; j++)
+		{
+			if (m_board[i][j] != COLOR_NEGRE)
+			{
+				// Convert the current color to IMAGE_NAME with an offset of 1
+				IMAGE_NAME shapeType = static_cast<IMAGE_NAME>(m_board[i][j] + 1);
+
+				// Render the sprite with the point 0 of reference on the board
+				GraphicManager::getInstance()->drawSprite(
+					shapeType,
+					POS_X_TAULER + ((j + 1) * MIDA_QUADRAT),
+					POS_Y_TAULER + (i * MIDA_QUADRAT),
+					false
+				);
+			}
+		}
+	}
+
+	/*
 	cout << "\nShowing current board:\n";
 	cout << "---------------\n";
 
@@ -222,4 +243,5 @@ void Tauler::showBoard()
 
 		cout << "\n";
 	}
+	*/
 }
