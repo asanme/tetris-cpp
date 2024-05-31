@@ -102,10 +102,10 @@ int Tauler::clearCompletedRows()
 {
 	int completedRowCount = 0;
 
-	for (int i = 7; i >= 0;)
+	for (int i = MAX_FILA - 1; i >= 0;)
 	{
 		bool rowFilled = true;
-		for (int j = 0; j < 8; ++j)
+		for (int j = 0; j < MAX_COL; ++j)
 		{
 			if (m_board[i][j] == COLOR_NEGRE)
 			{
@@ -133,13 +133,13 @@ void Tauler::moveRowsDown(int rowIndex)
 {
 	for (int k = rowIndex; k > 0; --k)
 	{
-		for (int l = 0; l < 8; ++l)
+		for (int l = 0; l < MAX_COL; ++l)
 		{
 			m_board[k][l] = m_board[k - 1][l];
 		}
 	}
 
-	for (int m = 0; m < 8; ++m)
+	for (int m = 0; m < MAX_COL; ++m)
 	{
 		m_board[0][m] = COLOR_NEGRE;
 	}
@@ -210,6 +210,19 @@ bool Tauler::isShapeColliding(const Figura& shape) const
 
 void Tauler::showBoard()
 {
+	cout << "\nShowing current board:\n";
+	cout << "---------------\n";
+
+	for (int i = 0; i < MAX_FILA; i++)
+	{
+		for (int j = 0; j < MAX_COL; j++)
+		{
+			cout << m_board[i][j] << " ";
+		}
+
+		cout << "\n";
+	}
+
 	for (int i = 0; i < MAX_FILA; i++)
 	{
 		for (int j = 0; j < MAX_COL; j++)

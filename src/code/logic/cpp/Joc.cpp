@@ -128,13 +128,14 @@ bool Joc::mouFigura(int dirX)
 int Joc::baixaFigura()
 {
 	bool isVerticalMovementValid = m_board.isVerticalMovementValid();
+	int completedRows = -1;
 
 	if (isVerticalMovementValid)
 		m_board.moveShapeVertically();
 	else
-		m_board.clearCompletedRows();
+		completedRows = m_board.clearCompletedRows();
 
-	return 0;
+	return completedRows;
 }
 
 void Joc::showBoard()
