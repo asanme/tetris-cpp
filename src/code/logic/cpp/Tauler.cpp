@@ -229,19 +229,4 @@ void Tauler::showBoard()
 			}
 		}
 	}
-
-	/*
-	cout << "\nShowing current board:\n";
-	cout << "---------------\n";
-
-	for (int i = 0; i < MAX_FILA; i++)
-	{
-		for (int j = 0; j < MAX_COL; j++)
-		{
-			cout << m_board[i][j] << " ";
-		}
-
-		cout << "\n";
-	}
-	*/
 }

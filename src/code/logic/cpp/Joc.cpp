@@ -141,3 +141,17 @@ void Joc::showBoard()
 {
 	m_board.showBoard();
 }
+
+void Joc::showCoordinates()
+{
+	string coords =
+		"X: " + to_string(m_currentShape.getXBoardPosition()) + " Y: " + to_string(m_currentShape.getYBoardPosition());
+
+	GraphicManager::getInstance()->drawFont(
+		FONT_WHITE_30,
+		POS_X_TAULER + (MIDA_QUADRAT),
+		POS_Y_TAULER - (MIDA_QUADRAT),
+		1,
+		coords
+	);
+}

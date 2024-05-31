@@ -19,6 +19,7 @@ class Joc
 
 	// Debug only
 	void showBoard();
+	void showCoordinates();
 
  private:
 	void setGameData(int** boardMatrixData, const int* shapeData);
