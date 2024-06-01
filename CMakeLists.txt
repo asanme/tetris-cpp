@@ -39,7 +39,9 @@ add_executable(tetris_cpp
         src/code/graphic-lib/stb_vorbis.cpp
         src/code/graphic-lib/stb_vorbis.h
         src/code/graphic-lib/video.cpp
-        src/code/graphic-lib/video.h)
+        src/code/graphic-lib/video.h
+        src/code/logic/headers/Queue.h
+        src/code/logic/cpp/Queue.cpp)
 
 # Windows build not working
 if (WIN32)

@@ -4,21 +4,6 @@
 #include "../headers/GraphicManager.h"
 #include "../headers/InfoJoc.h"
 
-static void deserializeShapeData(int* shapeData, string& currentLine)
-{
-	int dataIndex = 0;
-
-	for (char c : currentLine)
-	{
-		if (isdigit(c))
-		{
-			int currentValue = c - '0';
-			shapeData[dataIndex] = currentValue;
-			++dataIndex;
-		}
-	}
-}
-
 static void deserializeMatrixData(int** tmpBoardMatrix, int& rowIndex, const string& currentLine)
 {
 	int matrixColumnIndex = 0;

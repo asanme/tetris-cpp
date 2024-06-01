@@ -210,6 +210,7 @@ bool Tauler::isShapeColliding(const Figura& shape) const
 
 void Tauler::showBoard()
 {
+/*
 	cout << "\nShowing current board:\n";
 	cout << "---------------\n";
 
@@ -222,6 +223,7 @@ void Tauler::showBoard()
 
 		cout << "\n";
 	}
+*/
 
 	for (int i = 0; i < MAX_FILA; i++)
 	{

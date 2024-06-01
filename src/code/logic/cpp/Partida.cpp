@@ -3,6 +3,45 @@
 #include "../headers/InfoJoc.h"
 #include "../headers/GraphicManager.h"
 
+static void deserializeShapes(const string& fitxerFigures)
+{
+	ifstream shapesFile;
+
+	shapesFile.open(fitxerFigures);
+	if (shapesFile.is_open())
+	{
+		string currentLine;
+
+		while (getline(shapesFile, currentLine))
+		{
+			int currentShape[4];
+			deserializeShapeData(currentShape, currentLine);
+		}
+	}
+
+	shapesFile.close();
+}
+
+static void deserializeMoves(const string& fitxerMoviments)
+{
+	ifstream movesFile;
+
+	movesFile.open(fitxerMoviments);
+	if (movesFile.is_open())
+	{
+		char movement;
+		while (movesFile >> movement)
+		{
+			if (isdigit(movement))
+			{
+				int movementValue = movement - '0';
+			}
+		}
+	}
+
+	movesFile.close();
+}
+
 void Partida::inicialitza(
 	int mode,
 	const string& fitxerInicial,
@@ -10,6 +49,12 @@ void Partida::inicialitza(
 	const string& fitxerMoviments)
 {
 	m_game.inicialitza(fitxerInicial);
+
+	if (mode == AUTOMATED)
+	{
+		deserializeShapes(fitxerFigures);
+		deserializeMoves(fitxerMoviments);
+	}
 }
 
 void Partida::actualitza(GameMode gameMode, double deltaTime)
@@ -20,8 +65,8 @@ void Partida::actualitza(GameMode gameMode, double deltaTime)
 		normalGame(deltaTime);
 		break;
 
-	case TEST:
-		testGame(deltaTime);
+	case AUTOMATED:
+		automatedGame(deltaTime);
 		break;
 	}
 }
@@ -29,10 +74,11 @@ void Partida::actualitza(GameMode gameMode, double deltaTime)
 void Partida::normalGame(double deltaTime)
 {
 	drawBackground();
+
 	int completedRows = -1;
-	// update(0.5, deltaTime);
 	float waitTime = 0.5;
 	m_time += deltaTime;
+	// update(0.5, deltaTime);
 
 	if (m_time > waitTime)
 	{
@@ -41,12 +87,11 @@ void Partida::normalGame(double deltaTime)
 	}
 
 	if (completedRows != -1)
-	{
-		hasReachedEnd = true;
-	}
+		m_shapeReachedEnd = true;
 
-	if (hasReachedEnd)
+	if (m_shapeReachedEnd)
 	{
+		//TODO Spawn new shape and reset m_shapeReachedEnd
 		GraphicManager::getInstance()->drawFont(
 			FONT_WHITE_30,
 			POS_X_TAULER,
@@ -62,13 +107,9 @@ void Partida::normalGame(double deltaTime)
 	handleGameInput();
 }
 
-void Partida::testGame(double deltaTime)
+void Partida::automatedGame(double deltaTime)
 {
 	drawBackground();
-}
-
-void Partida::update(float waitTime, double deltaTime)
-{
 }
 
 void Partida::drawBackground()
@@ -111,7 +152,7 @@ void Partida::handleGameInput()
 		break;
 
 	case TECLA_ESPAI:
-		// TODO Add method inside Joc to move shape to the end
+		// TODO Add method inside Joc to drop shape to the end
 		break;
 	}
 }
