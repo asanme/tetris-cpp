@@ -1,0 +1,3 @@
+<component name="DependencyValidationManager">
+  <scope name="exclude" pattern="file[tetris_cpp]:*/&amp;&amp;!file[tetris_cpp]:src/code/graphic-lib//*" />
+</component>
