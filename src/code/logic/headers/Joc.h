@@ -2,6 +2,7 @@
 
 #include <iostream>
 #include "Tauler.h"
+#include "Figura.h"
 
 using namespace std;
 

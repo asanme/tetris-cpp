@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../../game-logic/headers/Figura.h"
-
+#include "../../logic/headers/Figura.h"
 class ShapeNode
 {
  public:

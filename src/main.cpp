@@ -1,7 +1,7 @@
-#include "./code/graphic-lib/libreria.h"
-#include "./code/graphic-lib/NFont/NFont.h"
-#include "code/logic/game-logic/headers/Partida.h"
 #include <SDL2/SDL.h>
+#include "./code/graphic-lib/libreria.h"
+#include "code/logic/headers/InfoJoc.h"
+#include "code/logic/headers/Partida.h"
 
 int main(int argc, const char* argv[])
 {

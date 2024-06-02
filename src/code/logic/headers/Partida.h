@@ -1,5 +1,4 @@
-#ifndef PARTIDA_H
-#define PARTIDA_H
+#pragma once
 
 #include <iostream>
 #include <string>
@@ -51,5 +50,3 @@ class Partida
 	void normalGame(double deltaTime);
 	void automatedGame(double deltaTime);
 };
-
-#endif 

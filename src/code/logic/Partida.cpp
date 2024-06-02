@@ -2,7 +2,6 @@
 #include "headers/InfoJoc.h"
 #include "headers/Figura.h"
 #include "headers/Partida.h"
-#include "../util/headers/ShapeQueue.h"
 
 static Figura readShapeData(const int* shapeData)
 {

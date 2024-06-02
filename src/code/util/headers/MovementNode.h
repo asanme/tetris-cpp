@@ -1,7 +1,6 @@
 #pragma once
 
-#include "../../game-logic/headers/InfoJoc.h"
-
+#include "../../logic/headers/InfoJoc.h"
 class MovementNode
 {
  public:

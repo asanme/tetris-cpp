@@ -1,7 +1,6 @@
 #pragma once
 
 #include "Figura.h"
-
 class Tauler
 {
  public:

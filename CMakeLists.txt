@@ -5,17 +5,17 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(tetris_cpp
         src/main.cpp
-        src/code/logic/game-logic/Tauler.cpp
-        src/code/logic/game-logic/headers/Tauler.h
-        src/code/logic/game-logic/Joc.cpp
-        src/code/logic/game-logic/headers/Joc.h
-        src/code/logic/game-logic/Figura.cpp
-        src/code/logic/game-logic/headers/Figura.h
-        src/code/logic/game-logic/GraphicManager.cpp
-        src/code/logic/game-logic/headers/GraphicManager.h
-        src/code/logic/game-logic/headers/InfoJoc.h
-        src/code/logic/game-logic/Partida.cpp
-        src/code/logic/game-logic/headers/Partida.h
+        src/code/logic/Tauler.cpp
+        src/code/logic/headers/Tauler.h
+        src/code/logic/Joc.cpp
+        src/code/logic/headers/Joc.h
+        src/code/logic/Figura.cpp
+        src/code/logic/headers/Figura.h
+        src/code/logic/GraphicManager.cpp
+        src/code/logic/headers/GraphicManager.h
+        src/code/logic/headers/InfoJoc.h
+        src/code/logic/Partida.cpp
+        src/code/logic/headers/Partida.h
         src/code/graphic-lib/NFont/NFont.cpp
         src/code/graphic-lib/NFont/NFont.h
         src/code/graphic-lib/NFont/NFont_gpu.h
@@ -40,14 +40,14 @@ add_executable(tetris_cpp
         src/code/graphic-lib/stb_vorbis.h
         src/code/graphic-lib/video.cpp
         src/code/graphic-lib/video.h
-        src/code/logic/util/MovementNode.cpp
-        src/code/logic/util/MovementQueue.cpp
-        src/code/logic/util/ShapeNode.cpp
-        src/code/logic/util/ShapeQueue.cpp
-        src/code/logic/util/headers/MovementNode.h
-        src/code/logic/util/headers/MovementQueue.h
-        src/code/logic/util/headers/ShapeNode.h
-        src/code/logic/util/headers/ShapeQueue.h)
+        src/code/util/MovementNode.cpp
+        src/code/util/MovementQueue.cpp
+        src/code/util/ShapeNode.cpp
+        src/code/util/ShapeQueue.cpp
+        src/code/util/headers/MovementNode.h
+        src/code/util/headers/MovementQueue.h
+        src/code/util/headers/ShapeNode.h
+        src/code/util/headers/ShapeQueue.h)
 
 # Windows build not working
 if (WIN32)
