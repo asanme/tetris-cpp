@@ -35,23 +35,23 @@ class Tauler
 		}
 	}
 
+	// TODO Remove position arguments, the shape will already have the positions
 	void addShape(Figura& shape, int xPos, int yPos);
-	void changeShape(const Figura& shape);
+	void changeShape(Figura& shape);
 
-	void moveShape(int xDir);
 	void moveShapeVertically();
+	void moveShapeHorizontally(int xDir);
 	void rotateShape(DireccioGir direction);
 
 	int clearCompletedRows();
 
-	bool isRotationValid(DireccioGir direction);
-	bool isMovementValid(int dirX);
 	bool isVerticalMovementValid();
+	bool isHorizontalMovementValid(int dirX);
+	bool isRotationValid(DireccioGir direction);
 
 	int** dumpBoard() const;
 	void loadBoard(int** board);
 
-	// Debug only
 	void showBoard();
 
  private:
@@ -60,6 +60,6 @@ class Tauler
 	void redrawShape();
 	void clearShape();
 
-	ColorFigura m_board[MAX_FILA][MAX_COL];
 	Figura* m_currentShape;
+	ColorFigura m_board[MAX_FILA][MAX_COL];
 };

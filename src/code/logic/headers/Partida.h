@@ -33,12 +33,13 @@ class Partida
  private:
 	Joc m_game;
 
+	// Current game information
 	double m_time;
 	int m_score;
 	int m_currentLevel;
-	ShapeQueue m_shapeQueue;
 
 	// Other information
+	ShapeQueue m_shapeQueue;
 	bool m_shapeReachedEnd;
 
 	// Utility methods
@@ -46,7 +47,7 @@ class Partida
 	void handleGameInput();
 	static void drawBackground();
 
-	// Other gamemodes
+	// Other game modes
 	void normalGame(double deltaTime);
 	void automatedGame(double deltaTime);
 };

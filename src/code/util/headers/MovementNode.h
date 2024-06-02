@@ -1,6 +1,7 @@
 #pragma once
-
 #include "../../logic/headers/InfoJoc.h"
+
+// TODO Finish class
 class MovementNode
 {
  public:

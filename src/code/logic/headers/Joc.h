@@ -19,15 +19,15 @@ class Joc
 	bool mouFigura(int dirX);
 	int baixaFigura();
 
-	// Debug only
 	void showBoard();
+
+	// Debug only
 	void showCoordinates();
 
  private:
 	void setGameData(int** boardMatrixData, const int* shapeData);
 
 	Tauler m_board;
-	// TODO Remove (?)
 	Figura m_currentShape;
 };
 

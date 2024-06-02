@@ -4,7 +4,6 @@
 #include "InfoJoc.h"
 #include "GraphicManager.h"
 
-// TODO Check if there's conflict after changing constants (OLD VALUES: 8, 8)
 const int MAX_FILA = N_FILES_TAULER;
 const int MAX_COL = N_COL_TAULER;
 

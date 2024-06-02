@@ -2,44 +2,33 @@
 
 void ShapeQueue::push(const Figura& shape)
 {
+	ShapeNode* newNode = new ShapeNode(shape);
 	if (m_head == nullptr)
-	{
-		m_head = new ShapeNode(shape);
-	}
-	else if (m_tail == nullptr)
-	{
-		m_tail = new ShapeNode(shape);
-		m_head->setNextNode(m_tail);
-	}
+		m_head = newNode;
 	else
-	{
-		ShapeNode* newTailNode = new ShapeNode(shape);
-		m_tail->setNextNode(newTailNode);
-		m_tail = newTailNode;
-	}
+		m_tail->setNextNode(newNode);
+
+	m_tail = newNode;
 }
 
 Figura* ShapeQueue::pop()
 {
 	if (m_head == nullptr)
-	{
-		throw std::runtime_error("Attempted to pop from an empty queue");
-	}
+		return nullptr;
 
-	Figura shapeCopy = m_head->getShape();
+	Figura* shapeCopy = new Figura(m_head->getShape());
 	ShapeNode* oldHead = m_head;
 	m_head = m_head->getNextNode();
 
-	if (m_head == m_tail)
-	{
+	// If there's no more elements
+	if (m_head == nullptr)
 		m_tail = nullptr;
-	}
 
 	delete oldHead;
-
-	return new Figura(shapeCopy);
+	return shapeCopy;
 }
-bool ShapeQueue::isEmpty()
+
+bool ShapeQueue::isEmpty() const
 {
 	return m_head == nullptr;
 }

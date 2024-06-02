@@ -32,7 +32,6 @@ void Joc::setGameData(int** boardMatrixData, const int* shapeData)
 		m_currentShape.rotateShape(GIR_HORARI);
 
 	m_board.loadBoard(boardMatrixData);
-	// The column is the x position, the row is the y position
 	m_board.addShape(m_currentShape, column - 1, row - 1);
 }
 
@@ -92,8 +91,8 @@ void Joc::escriuTauler(const string& nomFitxer)
 
 void Joc::changeShape(const Figura& newShape)
 {
-	m_currentShape = newShape;
-	m_board.changeShape(newShape);
+	m_currentShape = *new Figura(newShape);
+	m_board.changeShape(m_currentShape);
 }
 
 bool Joc::giraFigura(DireccioGir direccio)
@@ -108,10 +107,10 @@ bool Joc::giraFigura(DireccioGir direccio)
 
 bool Joc::mouFigura(int dirX)
 {
-	bool isMovementValid = m_board.isMovementValid(dirX);
+	bool isMovementValid = m_board.isHorizontalMovementValid(dirX);
 
 	if (isMovementValid)
-		m_board.moveShape(dirX);
+		m_board.moveShapeHorizontally(dirX);
 
 	return isMovementValid;
 }
@@ -136,13 +135,14 @@ void Joc::showBoard()
 
 void Joc::showCoordinates()
 {
-	string coords =
-		"X: " + to_string(m_currentShape.getXBoardPosition()) + " Y: " + to_string(m_currentShape.getYBoardPosition());
+	string xPos = "X: " + to_string(m_currentShape.getXBoardPosition());
+	string yPos = "Y: " + to_string(m_currentShape.getYBoardPosition());
+	string coords = xPos + " " + yPos;
 
 	GraphicManager::getInstance()->drawFont(
 		FONT_WHITE_30,
-		POS_X_TAULER + (MIDA_QUADRAT),
-		POS_Y_TAULER - (MIDA_QUADRAT),
+		POS_X_TAULER,
+		POS_Y_TAULER - (2 * MIDA_QUADRAT),
 		1,
 		coords
 	);

@@ -10,10 +10,9 @@ class ShapeQueue
 
 	void push(const Figura& shape);
 	Figura* pop();
-	bool isEmpty();
+	bool isEmpty() const;
 
  private:
 	ShapeNode* m_head;
 	ShapeNode* m_tail;
 };
-

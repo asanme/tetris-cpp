@@ -3,6 +3,7 @@
 #include "headers/Figura.h"
 #include "headers/Partida.h"
 
+// TODO Add methods inside a header file inside util
 static Figura readShapeData(const int* shapeData)
 {
 	Figura currentShape;
@@ -44,6 +45,7 @@ static ShapeQueue deserializeShapes(const string& fitxerFigures)
 	return shapeQueue;
 }
 
+// TODO Finish function
 static void deserializeMoves(const string& fitxerMoviments)
 {
 	ifstream movesFile;
@@ -72,10 +74,10 @@ void Partida::inicialitza(
 )
 {
 	m_game.inicialitza(fitxerInicial);
-	m_shapeQueue = deserializeShapes(fitxerFigures);
 
 	if (mode == AUTOMATED)
 	{
+		m_shapeQueue = deserializeShapes(fitxerFigures);
 		deserializeMoves(fitxerMoviments);
 	}
 }
@@ -114,24 +116,17 @@ void Partida::normalGame(double deltaTime)
 
 	if (m_shapeReachedEnd)
 	{
-		//TODO Spawn new shape and reset m_shapeReachedEnd
 		if (!m_shapeQueue.isEmpty())
-			m_game.changeShape(Figura(*m_shapeQueue.pop()));
-
-		GraphicManager::getInstance()->drawFont(
-			FONT_WHITE_30,
-			POS_X_TAULER,
-			POS_Y_TAULER,
-			1,
-			"Ha llegado al final"
-		);
+		{
+			Figura nextShape = Figura(*m_shapeQueue.pop());
+			m_game.changeShape(nextShape);
+		}
 
 		m_shapeReachedEnd = false;
 	}
 
 	m_game.showBoard();
 	m_game.showCoordinates();
-
 	handleGameInput();
 }
 

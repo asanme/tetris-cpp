@@ -56,9 +56,9 @@ void Tauler::addShape(Figura& shape, int xPos, int yPos)
 	}
 }
 
-void Tauler::changeShape(const Figura& shape)
+void Tauler::changeShape(Figura& shape)
 {
-	m_currentShape = new Figura(shape);
+	m_currentShape = &shape;
 }
 
 void Tauler::rotateShape(DireccioGir direction)
@@ -68,7 +68,7 @@ void Tauler::rotateShape(DireccioGir direction)
 	redrawShape();
 }
 
-void Tauler::moveShape(int xDir)
+void Tauler::moveShapeHorizontally(int xDir)
 {
 	clearShape();
 	m_currentShape->moveHorizontally(xDir);
@@ -89,7 +89,7 @@ bool Tauler::isRotationValid(DireccioGir direction)
 	return !isShapeColliding(shapeCopy);
 }
 
-bool Tauler::isMovementValid(int xDir)
+bool Tauler::isHorizontalMovementValid(int xDir)
 {
 	Figura shapeCopy = *m_currentShape;
 	shapeCopy.moveHorizontally(xDir);
@@ -215,21 +215,6 @@ bool Tauler::isShapeColliding(const Figura& shape) const
 
 void Tauler::showBoard()
 {
-/*
-	cout << "\nShowing current board:\n";
-	cout << "---------------\n";
-
-	for (int i = 0; i < MAX_FILA; i++)
-	{
-		for (int j = 0; j < MAX_COL; j++)
-		{
-			cout << m_board[i][j] << " ";
-		}
-
-		cout << "\n";
-	}
-*/
-
 	for (int i = 0; i < MAX_FILA; i++)
 	{
 		for (int j = 0; j < MAX_COL; j++)

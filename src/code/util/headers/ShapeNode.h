@@ -4,10 +4,8 @@
 class ShapeNode
 {
  public:
-	ShapeNode(const Figura& shape)
+	ShapeNode(const Figura& shape) : m_shape(shape), m_nextNode(nullptr)
 	{
-		m_shape = shape;
-		m_nextNode = nullptr;
 	}
 
 	void setNextNode(ShapeNode* node);
