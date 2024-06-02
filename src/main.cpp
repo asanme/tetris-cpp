@@ -17,7 +17,7 @@ int main(int argc, const char* argv[])
 	Uint64 LAST = 0;
 	double deltaTime = 0;
 
-	game.inicialitza(1, "../data/partida.txt", "../data/figures.txt", "../data/moviments.txt");
+	game.inicialitza(0, "../data/partida.txt", "../data/figures.txt", "../data/moviments.txt");
 
 	do
 	{

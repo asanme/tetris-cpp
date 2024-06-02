@@ -11,12 +11,16 @@ void Partida::inicialitza(
 	const string& fitxerMoviments
 )
 {
-	m_game.inicialitza(fitxerInicial);
-
 	if (mode == AUTOMATED)
 	{
+		m_game.inicialitza(fitxerInicial);
 		m_shapeQueue = deserializeShapes(fitxerFigures);
 		m_movementQueue = deserializeMoves(fitxerMoviments);
+	}
+	else
+	{
+		Figura randomShape = generateRandomShape();
+		m_game.changeShape(randomShape);
 	}
 }
 
@@ -54,12 +58,8 @@ void Partida::normalGame(double deltaTime)
 
 	if (m_shapeReachedEnd)
 	{
-		if (!m_shapeQueue.isEmpty())
-		{
-			Figura nextShape = Figura(*m_shapeQueue.pop());
-			m_game.changeShape(nextShape);
-		}
-
+		Figura nextShape = generateRandomShape();
+		m_game.changeShape(nextShape);
 		m_shapeReachedEnd = false;
 	}
 }

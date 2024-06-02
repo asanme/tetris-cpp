@@ -1,4 +1,5 @@
 #include "headers/Utilities.h"
+#include <random>
 
 void invertRows(int** matrix, int rows, int columns)
 {
@@ -157,4 +158,23 @@ void deserializeMatrixData(int** tmpBoardMatrix, int& rowIndex, const string& cu
 	}
 
 	++rowIndex;
+}
+
+// TODO Fix out of range bugs (probably depending on the size of the shape)
+Figura generateRandomShape()
+{
+	Figura randomizedShape;
+
+	std::random_device rd;
+	std::mt19937 gen(rd());
+	std::uniform_int_distribution<> tileDistribution(0, N_TIPUS_FIGURES - 1);
+	std::uniform_int_distribution<> columnDistribution(0, N_COL_TAULER);
+
+	int randomShape = tileDistribution(gen);
+	int randomColumn = columnDistribution(gen);
+
+	randomizedShape.setShape(static_cast<TipusFigura>(randomShape));
+	randomizedShape.setXBoardPosition(randomColumn);
+
+	return randomizedShape;
 }

@@ -20,3 +20,4 @@ void deserializeMatrixData(int** tmpBoardMatrix, int& rowIndex, const string& cu
 
 // Other operations
 int** initNewMatrix(int columns, int rows);
+Figura generateRandomShape();
