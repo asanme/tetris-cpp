@@ -1,12 +1,15 @@
 #pragma once
 #include "../../logic/headers/InfoJoc.h"
 
-// TODO Finish class
 class MovementNode
 {
  public:
+	MovementNode(TipusMoviment movementType) : m_movementType(movementType)
+	{
+	}
+
 	void setNextNode(MovementNode* node);
-	MovementNode* getNextNode(MovementNode* node) const;
+	MovementNode* getNextNode() const;
 
 	void setMovementType(const TipusMoviment& movementType);
 	TipusMoviment getMovementType() const;

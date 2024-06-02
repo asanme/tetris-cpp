@@ -10,8 +10,9 @@ class MovementQueue
 	{
 	}
 
-	void push();
-	MovementNode* pop();
+	void push(TipusMoviment movementType);
+	TipusMoviment pop();
+	bool isEmpty() const;
 
  private:
 	MovementNode* m_head;

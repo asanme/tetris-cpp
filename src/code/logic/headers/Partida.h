@@ -5,6 +5,7 @@
 #include "InfoJoc.h"
 #include "Joc.h"
 #include "../../util/headers/ShapeQueue.h"
+#include "../../util/headers/MovementQueue.h"
 
 using namespace std;
 
@@ -40,12 +41,13 @@ class Partida
 
 	// Other information
 	ShapeQueue m_shapeQueue;
+	MovementQueue m_movementQueue;
 	bool m_shapeReachedEnd;
 
 	// Utility methods
-	void update(float waitTime, double d);
+	void drawGame();
 	void handleGameInput();
-	static void drawBackground();
+	void handleNextMove(TipusMoviment nextMove);
 
 	// Other game modes
 	void normalGame(double deltaTime);

@@ -18,6 +18,7 @@ class Joc
 	bool giraFigura(DireccioGir direccio);
 	bool mouFigura(int dirX);
 	int baixaFigura();
+	int hardDropShape();
 
 	void showBoard();
 

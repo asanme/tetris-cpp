@@ -27,7 +27,7 @@ int main(int argc, const char* argv[])
 
 		pantalla.processEvents();
 
-		game.actualitza(NORMAL, deltaTime);
+		game.actualitza(AUTOMATED, deltaTime);
 
 		pantalla.update();
 	} while (!Keyboard_GetKeyTrg(KEYBOARD_ESCAPE));

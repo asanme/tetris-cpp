@@ -5,7 +5,7 @@ void MovementNode::setNextNode(MovementNode* node)
 	m_nextNode = node;
 }
 
-MovementNode* MovementNode::getNextNode(MovementNode* node) const
+MovementNode* MovementNode::getNextNode() const
 {
 	return m_nextNode;
 }

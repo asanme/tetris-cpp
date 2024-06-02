@@ -147,3 +147,20 @@ void Joc::showCoordinates()
 		coords
 	);
 }
+int Joc::hardDropShape()
+{
+	int totalCompletedRows = 0;
+	bool hasReachedEnd = false;
+
+	while (!hasReachedEnd)
+	{
+		int completedRows = baixaFigura();
+		if (completedRows != -1)
+		{
+			hasReachedEnd = true;
+			totalCompletedRows += completedRows;
+		}
+	}
+
+	return totalCompletedRows;
+}

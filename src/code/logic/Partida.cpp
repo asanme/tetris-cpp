@@ -45,10 +45,10 @@ static ShapeQueue deserializeShapes(const string& fitxerFigures)
 	return shapeQueue;
 }
 
-// TODO Finish function
-static void deserializeMoves(const string& fitxerMoviments)
+static MovementQueue deserializeMoves(const string& fitxerMoviments)
 {
 	ifstream movesFile;
+	MovementQueue movementQueue;
 
 	movesFile.open(fitxerMoviments);
 	if (movesFile.is_open())
@@ -59,11 +59,13 @@ static void deserializeMoves(const string& fitxerMoviments)
 			if (isdigit(movement))
 			{
 				int movementValue = movement - '0';
+				movementQueue.push(static_cast<TipusMoviment>(movementValue ));
 			}
 		}
 	}
 
 	movesFile.close();
+	return movementQueue;
 }
 
 void Partida::inicialitza(
@@ -78,7 +80,7 @@ void Partida::inicialitza(
 	if (mode == AUTOMATED)
 	{
 		m_shapeQueue = deserializeShapes(fitxerFigures);
-		deserializeMoves(fitxerMoviments);
+		m_movementQueue = deserializeMoves(fitxerMoviments);
 	}
 }
 
@@ -98,12 +100,12 @@ void Partida::actualitza(GameMode gameMode, double deltaTime)
 
 void Partida::normalGame(double deltaTime)
 {
-	drawBackground();
+	drawGame();
+	handleGameInput();
 
 	int completedRows = -1;
 	float waitTime = 0.5;
 	m_time += deltaTime;
-	// update(0.5, deltaTime);
 
 	if (m_time > waitTime)
 	{
@@ -124,21 +126,34 @@ void Partida::normalGame(double deltaTime)
 
 		m_shapeReachedEnd = false;
 	}
-
-	m_game.showBoard();
-	m_game.showCoordinates();
-	handleGameInput();
 }
 
+// TODO Fix bug, the tile render doesn't match the state of the board nor current shape
 void Partida::automatedGame(double deltaTime)
 {
-	drawBackground();
-}
+	drawGame();
 
-void Partida::drawBackground()
-{
-	GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
-	GraphicManager::getInstance()->drawSprite(GRAFIC_TAULER, POS_X_TAULER, POS_Y_TAULER, false);
+	float waitTime = 0.5;
+	m_time += deltaTime;
+
+	if (m_time > waitTime)
+	{
+		if (!m_movementQueue.isEmpty())
+			handleNextMove(m_movementQueue.pop());
+
+		m_time = 0.0;
+	}
+
+	if (m_shapeReachedEnd)
+	{
+		if (!m_shapeQueue.isEmpty())
+		{
+			Figura nextShape = Figura(*m_shapeQueue.pop());
+			m_game.changeShape(nextShape);
+		}
+
+		m_shapeReachedEnd = false;
+	}
 }
 
 void Partida::handleGameInput()
@@ -175,7 +190,48 @@ void Partida::handleGameInput()
 		break;
 
 	case TECLA_ESPAI:
-		// TODO Add method inside Joc to drop shape to the end
+		if (m_game.hardDropShape() != -1)
+			m_shapeReachedEnd = true;
 		break;
 	}
+}
+
+void Partida::handleNextMove(TipusMoviment nextMove)
+{
+	switch (nextMove)
+	{
+	case MOVIMENT_ESQUERRA:
+		m_game.mouFigura(-1);
+		break;
+
+	case MOVIMENT_DRETA:
+		m_game.mouFigura(1);
+		break;
+
+	case MOVIMENT_GIR_HORARI:
+		m_game.giraFigura(GIR_HORARI);
+		break;
+
+	case MOVIMENT_GIR_ANTI_HORARI:
+		m_game.giraFigura(GIR_ANTI_HORARI);
+		break;
+
+	case MOVIMENT_BAIXA:
+		if (m_game.baixaFigura() != -1)
+			m_shapeReachedEnd = true;
+		break;
+
+	case MOVIMENT_BAIXA_FINAL:
+		if (m_game.hardDropShape() != -1)
+			m_shapeReachedEnd = true;
+		break;
+	}
+}
+
+void Partida::drawGame()
+{
+	GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
+	GraphicManager::getInstance()->drawSprite(GRAFIC_TAULER, POS_X_TAULER, POS_Y_TAULER, false);
+	m_game.showBoard();
+	m_game.showCoordinates();
 }
