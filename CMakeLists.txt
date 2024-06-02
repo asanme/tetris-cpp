@@ -5,17 +5,17 @@ set(CMAKE_CXX_STANDARD 14)
 
 add_executable(tetris_cpp
         src/main.cpp
-        src/code/logic/cpp/Tauler.cpp
-        src/code/logic/headers/Tauler.h
-        src/code/logic/cpp/Joc.cpp
-        src/code/logic/headers/Joc.h
-        src/code/logic/cpp/Figura.cpp
-        src/code/logic/headers/Figura.h
-        src/code/logic/cpp/GraphicManager.cpp
-        src/code/logic/headers/GraphicManager.h
-        src/code/logic/headers/InfoJoc.h
-        src/code/logic/cpp/Partida.cpp
-        src/code/logic/headers/Partida.h
+        src/code/logic/game-logic/Tauler.cpp
+        src/code/logic/game-logic/headers/Tauler.h
+        src/code/logic/game-logic/Joc.cpp
+        src/code/logic/game-logic/headers/Joc.h
+        src/code/logic/game-logic/Figura.cpp
+        src/code/logic/game-logic/headers/Figura.h
+        src/code/logic/game-logic/GraphicManager.cpp
+        src/code/logic/game-logic/headers/GraphicManager.h
+        src/code/logic/game-logic/headers/InfoJoc.h
+        src/code/logic/game-logic/Partida.cpp
+        src/code/logic/game-logic/headers/Partida.h
         src/code/graphic-lib/NFont/NFont.cpp
         src/code/graphic-lib/NFont/NFont.h
         src/code/graphic-lib/NFont/NFont_gpu.h
@@ -40,17 +40,14 @@ add_executable(tetris_cpp
         src/code/graphic-lib/stb_vorbis.h
         src/code/graphic-lib/video.cpp
         src/code/graphic-lib/video.h
-        src/code/logic/cpp/ShapeQueue.cpp
-        src/code/logic/cpp/ShapeNode.cpp
-        src/code/logic/cpp/MovementNode.cpp
-        src/code/logic/headers/MovementNode.h
-        src/code/logic/headers/MovementQueue.h
-        src/code/logic/headers/ShapeQueue.h
-        src/code/logic/cpp/MovementNode.cpp
-        src/code/logic/headers/MovementNode.h
-        src/code/logic/cpp/MovementQueue.cpp
-        src/code/logic/cpp/ShapeNode.cpp
-        src/code/logic/cpp/ShapeQueue.cpp)
+        src/code/logic/util/MovementNode.cpp
+        src/code/logic/util/MovementQueue.cpp
+        src/code/logic/util/ShapeNode.cpp
+        src/code/logic/util/ShapeQueue.cpp
+        src/code/logic/util/headers/MovementNode.h
+        src/code/logic/util/headers/MovementQueue.h
+        src/code/logic/util/headers/ShapeNode.h
+        src/code/logic/util/headers/ShapeQueue.h)
 
 # Windows build not working
 if (WIN32)
@@ -68,19 +65,15 @@ if (WIN32)
 
 elseif (UNIX)
     # Linux specific configuration
-    set(SDL_DIR ${CMAKE_SOURCE_DIR}/libs/SDL)
-    set(libpng_DIR ${CMAKE_SOURCE_DIR}/libs/libpng)
+    find_package(PNG REQUIRED)
+    find_package(SDL2 REQUIRED)
     find_package(SDL2_ttf REQUIRED)
     find_package(SDL2_image REQUIRED)
-    find_package(ZLIB REQUIRED)
 
-    # Include library folders
-    target_include_directories(${PROJECT_NAME} PRIVATE ${SDL_DIR}/include REQUIRED)
-    target_include_directories(${PROJECT_NAME} PRIVATE ${SDL_DIR} REQUIRED)
+    # Include libpng directories
+    include_directories(${PNG_INCLUDE_DIR})
 
     # Link libraries
-    target_link_libraries(${PROJECT_NAME} ${SDL_DIR}/build/libSDL2.a)
-    target_link_libraries(${PROJECT_NAME} ${libpng_DIR}/build/libpng.a)
-    target_link_libraries(${PROJECT_NAME} SDL2_ttf::SDL2_ttf SDL2_image::SDL2_image ZLIB::ZLIB)
+    target_link_libraries(${PROJECT_NAME} ${PNG_LIBRARY} SDL2::SDL2 SDL2_ttf::SDL2_ttf SDL2_image::SDL2_image ZLIB::ZLIB)
 endif ()
 

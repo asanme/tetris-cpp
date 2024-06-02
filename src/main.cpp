@@ -1,6 +1,6 @@
 #include "./code/graphic-lib/libreria.h"
 #include "./code/graphic-lib/NFont/NFont.h"
-#include "code/logic/headers/Partida.h"
+#include "code/logic/game-logic/headers/Partida.h"
 #include <SDL2/SDL.h>
 
 int main(int argc, const char* argv[])
@@ -17,7 +17,7 @@ int main(int argc, const char* argv[])
 	Uint64 LAST = 0;
 	double deltaTime = 0;
 
-	game.inicialitza(1, "../src/data/partida.txt", "../src/data/figures.txt", "../src/data/moviments.txt");
+	game.inicialitza(1, "../data/partida.txt", "../data/figures.txt", "../data/moviments.txt");
 
 	do
 	{

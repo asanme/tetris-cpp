@@ -1,1 +1,0 @@
-/usr/bin/cc CMakeFiles/glfont.dir/glfont.c.o -o glfont  -Wl,-rpath,/home/asanme/cpp-projects/tetris-cpp/libs/SDL2-ttf/build /usr/lib/libOpenGL.so libSDL2_ttf-2.0.so.0.2200.0 /usr/lib/libSDL2main.a /usr/lib/libSDL2-2.0.so.0.3000.3
