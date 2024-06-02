@@ -2,71 +2,7 @@
 #include "headers/InfoJoc.h"
 #include "headers/Figura.h"
 #include "headers/Partida.h"
-
-// TODO Add methods inside a header file inside util
-static Figura readShapeData(const int* shapeData)
-{
-	Figura currentShape;
-	TipusFigura tipusFigura = static_cast<TipusFigura>(shapeData[0]);
-	int yPos = shapeData[1] - 1;
-	int xPos = shapeData[2] - 1;
-	int rotationIndex = shapeData[3];
-
-	currentShape.setShape(tipusFigura);
-	currentShape.setYBoardPosition(yPos);
-	currentShape.setXBoardPosition(xPos);
-
-	for (int i = 0; i < rotationIndex; i++)
-		currentShape.rotateShape(GIR_HORARI);
-
-	return currentShape;
-}
-
-static ShapeQueue deserializeShapes(const string& fitxerFigures)
-{
-	ShapeQueue shapeQueue;
-	ifstream shapesFile;
-
-	shapesFile.open(fitxerFigures);
-	if (shapesFile.is_open())
-	{
-		string currentLine;
-
-		while (getline(shapesFile, currentLine))
-		{
-			int shapeData[4];
-			deserializeShapeData(shapeData, currentLine);
-			Figura currentShape = readShapeData(shapeData);
-			shapeQueue.push(currentShape);
-		}
-	}
-
-	shapesFile.close();
-	return shapeQueue;
-}
-
-static MovementQueue deserializeMoves(const string& fitxerMoviments)
-{
-	ifstream movesFile;
-	MovementQueue movementQueue;
-
-	movesFile.open(fitxerMoviments);
-	if (movesFile.is_open())
-	{
-		char movement;
-		while (movesFile >> movement)
-		{
-			if (isdigit(movement))
-			{
-				int movementValue = movement - '0';
-				movementQueue.push(static_cast<TipusMoviment>(movementValue ));
-			}
-		}
-	}
-
-	movesFile.close();
-	return movementQueue;
-}
+#include "../util/headers/Utilities.h"
 
 void Partida::inicialitza(
 	int mode,

@@ -34,12 +34,12 @@ int** Tauler::dumpBoard() const
 	return boardMatrix;
 }
 
-void Tauler::addShape(Figura& shape, int xPos, int yPos)
+void Tauler::addShape(Figura& shape)
 {
 	m_currentShape = &shape;
 	int** shapeMatrix = shape.getShapeMatrix();
-	shape.setXBoardPosition(xPos);
-	shape.setYBoardPosition(yPos);
+	int xPos = shape.getXBoardPosition();
+	int yPos = shape.getYBoardPosition();
 
 	for (int i = 0; i < shape.getRows(); ++i)
 	{

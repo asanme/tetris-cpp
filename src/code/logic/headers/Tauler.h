@@ -35,8 +35,7 @@ class Tauler
 		}
 	}
 
-	// TODO Remove position arguments, the shape will already have the positions
-	void addShape(Figura& shape, int xPos, int yPos);
+	void addShape(Figura& shape);
 	void changeShape(Figura& shape);
 
 	void moveShapeVertically();

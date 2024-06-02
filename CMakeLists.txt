@@ -47,7 +47,9 @@ add_executable(tetris_cpp
         src/code/util/headers/MovementNode.h
         src/code/util/headers/MovementQueue.h
         src/code/util/headers/ShapeNode.h
-        src/code/util/headers/ShapeQueue.h)
+        src/code/util/headers/ShapeQueue.h
+        src/code/util/headers/Utilities.h
+        src/code/util/Utilities.cpp)
 
 # Windows build not working
 if (WIN32)

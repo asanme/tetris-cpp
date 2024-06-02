@@ -1,70 +1,9 @@
 #include <iostream>
 #include "headers/Figura.h"
+#include "../util/headers/Utilities.h"
 
 using namespace std;
 
-static void invertRows(int** matrix, int rows, int columns)
-{
-	for (int j = 0; j < columns; ++j)
-	{
-		for (int i = 0; i < rows / 2; ++i)
-		{
-			int tmp = matrix[i][j];
-			int rowIndex = rows - 1 - i;
-			matrix[i][j] = matrix[rowIndex][j];
-			matrix[rowIndex][j] = tmp;
-		}
-	}
-}
-
-static void invertColumns(int** matrix, int rows, int columns)
-{
-	for (int i = 0; i < rows; ++i)
-	{
-		for (int j = 0; j < columns / 2; ++j)
-		{
-			int tmp = matrix[i][j];
-			int columnIndex = columns - 1 - j;
-			matrix[i][j] = matrix[i][columnIndex];
-			matrix[i][columnIndex] = tmp;
-		}
-	}
-}
-
-static void transposeMatrix(int** matrix, int rows, int columns)
-{
-	int matrixCopy[rows][columns];
-
-	for (int i = 0; i < rows; i++)
-	{
-		for (int j = 0; j < columns; j++)
-		{
-			matrixCopy[i][j] = matrix[i][j];
-		}
-	}
-
-	for (int i = 0; i < rows; i++)
-	{
-		for (int j = 0; j < columns; j++)
-		{
-			matrix[i][j] = matrixCopy[j][i];
-		}
-	}
-}
-
-static int** initNewMatrix(int columns, int rows)
-{
-	int** newMatrix = new int* [rows];
-
-	for (int i = 0; i < rows; i++)
-		newMatrix[i] = new int[columns];
-
-	for (int i = 0; i < rows; i++)
-		for (int j = 0; j < columns; j++)
-			newMatrix[i][j] = 0;
-
-	return newMatrix;
-}
 
 void Figura::rotateShape(DireccioGir rotationDirection)
 {

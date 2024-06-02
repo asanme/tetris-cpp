@@ -32,17 +32,3 @@ class Joc
 	Figura m_currentShape;
 };
 
-static void deserializeShapeData(int* shapeData, string& currentLine)
-{
-	int dataIndex = 0;
-
-	for (char c : currentLine)
-	{
-		if (isdigit(c))
-		{
-			int currentValue = c - '0';
-			shapeData[dataIndex] = currentValue;
-			++dataIndex;
-		}
-	}
-}

@@ -3,23 +3,7 @@
 #include "headers/Joc.h"
 #include "headers/GraphicManager.h"
 #include "headers/InfoJoc.h"
-
-static void deserializeMatrixData(int** tmpBoardMatrix, int& rowIndex, const string& currentLine)
-{
-	int matrixColumnIndex = 0;
-
-	for (char c : currentLine)
-	{
-		if (isdigit(c))
-		{
-			int currentMatrixValue = c - '0';
-			tmpBoardMatrix[rowIndex][matrixColumnIndex] = currentMatrixValue;
-			++matrixColumnIndex;
-		}
-	}
-
-	++rowIndex;
-}
+#include "../util/headers/Utilities.h"
 
 void Joc::setGameData(int** boardMatrixData, const int* shapeData)
 {
@@ -27,12 +11,14 @@ void Joc::setGameData(int** boardMatrixData, const int* shapeData)
 	int column = shapeData[2];
 	int rotationIndex = shapeData[3];
 	m_currentShape.setShape(static_cast<TipusFigura>(shapeData[0]));
+	m_currentShape.setXBoardPosition(column - 1);
+	m_currentShape.setYBoardPosition(row - 1);
 
 	for (int i = 0; i < rotationIndex; i++)
 		m_currentShape.rotateShape(GIR_HORARI);
 
 	m_board.loadBoard(boardMatrixData);
-	m_board.addShape(m_currentShape, column - 1, row - 1);
+	m_board.addShape(m_currentShape);
 }
 
 void Joc::inicialitza(const string& nomFitxer)

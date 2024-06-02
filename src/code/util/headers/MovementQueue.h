@@ -2,7 +2,6 @@
 
 #include "MovementNode.h"
 
-// TODO Finish class
 class MovementQueue
 {
  public:
