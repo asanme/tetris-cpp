@@ -16,7 +16,7 @@ int main(int argc, const char* argv[])
 	Uint64 NOW = SDL_GetPerformanceCounter();
 	Uint64 LAST = 0;
 	double deltaTime = 0;
-	GameMode gameMode = AUTOMATED;
+	GameMode gameMode = NORMAL;
 
 	switch (gameMode)
 	{

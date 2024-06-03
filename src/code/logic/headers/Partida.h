@@ -18,7 +18,7 @@ typedef enum
 class Partida
 {
  public:
-	Partida() : m_time(0), m_score(0), m_currentLevel(1), m_clearedRowsCurrentFrame(-1)
+	Partida() : m_time(0), m_score(0), m_currentLevel(1), m_timeMultiplier(1), m_clearedRowsCurrentFrame(-1)
 	{
 	}
 
@@ -39,6 +39,8 @@ class Partida
 	int m_score;
 	int m_currentLevel;
 	int m_clearedRowsCurrentFrame;
+	// Double for more accuracy
+	double m_timeMultiplier;
 
 	// Other information
 	ShapeQueue m_shapeQueue;

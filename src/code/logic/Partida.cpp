@@ -56,7 +56,6 @@ void Partida::normalGame(double deltaTime)
 	drawGame();
 	handleGameInput();
 
-	float waitTime = 0.5;
 	m_time += deltaTime;
 	if (m_clearedRowsCurrentFrame != -1)
 	{
@@ -65,7 +64,7 @@ void Partida::normalGame(double deltaTime)
 		m_game.changeShape(nextShape);
 	}
 
-	if (m_time > waitTime)
+	if (m_time > m_timeMultiplier)
 	{
 		m_clearedRowsCurrentFrame = m_game.baixaFigura();
 		m_time = 0.0;
@@ -76,7 +75,6 @@ void Partida::automatedGame(double deltaTime)
 {
 	drawGame();
 
-	float waitTime = 0.5;
 	m_time += deltaTime;
 	if (m_clearedRowsCurrentFrame != -1)
 	{
@@ -89,7 +87,7 @@ void Partida::automatedGame(double deltaTime)
 		}
 	}
 
-	if (m_time > waitTime)
+	if (m_time > m_timeMultiplier)
 	{
 		if (!m_movementQueue.isEmpty())
 			handleNextMove(m_movementQueue.pop());
@@ -117,6 +115,7 @@ void Partida::handleScore()
 	{
 		++m_currentLevel;
 		lastIncrement = m_score / 1000;
+		m_timeMultiplier = calculateTimeMultiplier(m_timeMultiplier);
 	}
 
 	m_clearedRowsCurrentFrame = -1;
@@ -192,13 +191,13 @@ void Partida::drawGame()
 	string scoreText = "SCORE: " + to_string(m_score);
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 20, 20, 1, scoreText);
 
-	// Score
+	// Level
 	string levelText = "LEVEL: " + to_string(m_currentLevel);
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 20, 60, 1, levelText);
 
 	// Game information
 	m_game.showBoard();
-//	m_game.showCoordinates();
+	//	m_game.showCoordinates();
 }
 
 TipusTecla Partida::getKeyPressed()

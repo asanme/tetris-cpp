@@ -1,6 +1,8 @@
 #include "headers/Utilities.h"
 #include <random>
 
+const double MAX_TIME_MULTIPLIER = 0.0000000000000000000000000000000000000000000000000000000000001;
+
 void invertRows(int** matrix, int rows, int columns)
 {
 	for (int j = 0; j < columns; ++j)
@@ -202,4 +204,13 @@ Figura generateRandomShape()
 	*/
 
 	return randomizedShape;
+}
+
+double calculateTimeMultiplier(double currentMultiplier)
+{
+	currentMultiplier = currentMultiplier - (currentMultiplier / 4);
+	if (currentMultiplier < MAX_TIME_MULTIPLIER)
+		currentMultiplier = MAX_TIME_MULTIPLIER;
+
+	return currentMultiplier;
 }
