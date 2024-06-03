@@ -4,7 +4,7 @@
 class MovementNode
 {
  public:
-	MovementNode(TipusMoviment movementType) : m_movementType(movementType)
+	MovementNode(TipusMoviment movementType) : m_movementType(movementType), m_nextNode(nullptr)
 	{
 	}
 

@@ -40,7 +40,7 @@ void Partida::normalGame(double deltaTime)
 {
 	renderGame();
 
-	if (!m_hasToppedOut)
+	if (!m_hasGameFinished)
 	{
 		handleGameInput();
 		m_time += deltaTime;
@@ -48,7 +48,7 @@ void Partida::normalGame(double deltaTime)
 		{
 			handleScore();
 			Figura nextShape = generateRandomShape();
-			m_hasToppedOut = hasToppedOut(nextShape);
+			m_hasGameFinished = hasToppedOut(nextShape);
 			m_game.changeShape(nextShape);
 		}
 
@@ -64,7 +64,7 @@ void Partida::automatedGame(double deltaTime)
 {
 	renderGame();
 
-	if (!m_hasToppedOut)
+	if (!m_hasGameFinished)
 	{
 		m_time += deltaTime;
 		if (m_clearedRowsCurrentFrame != -1)
@@ -74,15 +74,19 @@ void Partida::automatedGame(double deltaTime)
 			if (!m_shapeQueue.isEmpty())
 			{
 				Figura nextShape = Figura(*m_shapeQueue.pop());
-				m_hasToppedOut = hasToppedOut(nextShape);
+				m_hasGameFinished = hasToppedOut(nextShape);
 				m_game.changeShape(nextShape);
 			}
+			else
+				m_hasGameFinished = true;
 		}
 
 		if (m_time > m_timeMultiplier)
 		{
 			if (!m_movementQueue.isEmpty())
 				handleNextMove(m_movementQueue.pop());
+			else
+				m_hasGameFinished = true;
 
 			m_time = 0.0;
 		}
@@ -206,11 +210,11 @@ void Partida::renderGame()
 
 	// Game information
 	m_game.showBoard();
-	//	m_game.showCoordinates();
+	//m_game.showCoordinates();
 
 	//	Death Info
 
-	if (m_hasToppedOut)
+	if (m_hasGameFinished)
 	{
 		// Depth effect
 		GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 35 + 4, SCREEN_SIZE_Y / 4 - 4, 2, "GAME OVER");
@@ -241,4 +245,9 @@ TipusTecla Partida::getKeyPressed()
 bool Partida::hasToppedOut(const Figura& newShape)
 {
 	return m_game.hasToppedOut(newShape);
+}
+
+bool Partida::hasGameFinished() const
+{
+	return m_hasGameFinished;
 }

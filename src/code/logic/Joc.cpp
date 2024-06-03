@@ -141,13 +141,13 @@ void Joc::showBoard()
 void Joc::showCoordinates()
 {
 	string xPos = "X: " + to_string(m_currentShape.getXBoardPosition());
-	string yPos = "Y: " + to_string(m_currentShape.getYBoardPosition());
+	string yPos = "\nY: " + to_string(m_currentShape.getYBoardPosition());
 	string coords = xPos + " " + yPos;
 
 	GraphicManager::getInstance()->drawFont(
 		FONT_WHITE_30,
+		SCREEN_SIZE_X - 140,
 		20,
-		60,
 		1,
 		coords
 	);

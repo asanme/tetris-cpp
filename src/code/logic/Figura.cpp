@@ -4,7 +4,6 @@
 
 using namespace std;
 
-
 void Figura::rotateShape(DireccioGir rotationDirection)
 {
 	switch (rotationDirection)

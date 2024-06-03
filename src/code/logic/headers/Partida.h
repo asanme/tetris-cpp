@@ -25,7 +25,7 @@ class Partida
 		m_currentLevel = 1;
 		m_timeMultiplier = 1;
 		m_clearedRowsCurrentFrame = -1;
-		m_hasToppedOut = false;
+		m_hasGameFinished = false;
 	}
 
 	void actualitza(GameMode gameMode, double deltaTime);
@@ -36,6 +36,8 @@ class Partida
 		const string& fitxerFigures,
 		const string& fitxerMoviments
 	);
+
+	bool hasGameFinished() const;
 
  private:
 	Joc m_game;
@@ -50,7 +52,7 @@ class Partida
 	double m_timeMultiplier;
 
 	// Other information
-	bool m_hasToppedOut;
+	bool m_hasGameFinished;
 	ShapeQueue m_shapeQueue;
 	MovementQueue m_movementQueue;
 
