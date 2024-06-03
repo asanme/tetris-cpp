@@ -58,7 +58,9 @@ void Tauler::addShape(Figura& shape)
 
 void Tauler::changeShape(Figura& shape)
 {
+	clearShape();
 	m_currentShape = &shape;
+	redrawShape();
 }
 
 void Tauler::rotateShape(DireccioGir direction)

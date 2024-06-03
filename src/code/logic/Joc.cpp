@@ -137,12 +137,11 @@ void Joc::showBoard()
 	m_board.showBoard();
 }
 
-// TODO Remove this
 // Debug only
 void Joc::showCoordinates()
 {
-	string xPos = "X: " + to_string(m_currentShape.getXBoardPosition() + 2);
-	string yPos = "Y: " + to_string(m_currentShape.getYBoardPosition() + 2);
+	string xPos = "X: " + to_string(m_currentShape.getXBoardPosition());
+	string yPos = "Y: " + to_string(m_currentShape.getYBoardPosition());
 	string coords = xPos + " " + yPos;
 
 	GraphicManager::getInstance()->drawFont(

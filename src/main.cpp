@@ -16,10 +16,17 @@ int main(int argc, const char* argv[])
 	Uint64 NOW = SDL_GetPerformanceCounter();
 	Uint64 LAST = 0;
 	double deltaTime = 0;
-	GameMode gameMode = AUTOMATED;
+	GameMode gameMode = NORMAL;
 
-	game.inicialitza(gameMode, "../data/partida.txt", "../data/figures.txt", "../data/moviments.txt");
-//	game.inicialitza(gameMode, "../data/row-test.txt", "../data/figures.txt", "../data/moviments.txt");
+	switch (gameMode)
+	{
+	case NORMAL:
+		game.inicialitza(gameMode, "../data/row-test.txt", "../data/figures.txt", "../data/moviments.txt");
+		break;
+	case AUTOMATED:
+		game.inicialitza(gameMode, "../data/partida.txt", "../data/figures.txt", "../data/moviments.txt");
+		break;
+	}
 
 	do
 	{

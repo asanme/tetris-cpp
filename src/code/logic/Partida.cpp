@@ -14,6 +14,7 @@ void Partida::inicialitza(
 	switch (gameMode)
 	{
 	case NORMAL:
+		// TODO Testing, uncomment and remove init
 		m_game.inicialitza(fitxerInicial);
 //		Figura randomShape = generateRandomShape();
 //		m_game.changeShape(randomShape);
@@ -40,7 +41,6 @@ void Partida::actualitza(GameMode gameMode, double deltaTime)
 	}
 }
 
-// TODO Fix bug, the tile render doesn't match the state of the board nor current shape
 void Partida::normalGame(double deltaTime)
 {
 	drawGame();
@@ -62,14 +62,12 @@ void Partida::normalGame(double deltaTime)
 	}
 }
 
-// TODO Fix bug, the tile render doesn't match the state of the board nor current shape
 void Partida::automatedGame(double deltaTime)
 {
 	drawGame();
 
 	float waitTime = 0.5;
 	m_time += deltaTime;
-
 	if (m_clearedRowsCurrentFrame != -1)
 	{
 		handleScore();
@@ -92,24 +90,23 @@ void Partida::automatedGame(double deltaTime)
 
 void Partida::handleScore()
 {
+	static int lastIncrement = 0;
 	m_score += 10;
 
 	if (m_clearedRowsCurrentFrame >= 1)
-	{
 		m_score += 100;
-	}
 
 	if (m_clearedRowsCurrentFrame == 2)
-	{
 		m_score += 50;
-	}
 	else if (m_clearedRowsCurrentFrame == 3)
-	{
 		m_score += 75;
-	}
 	else if (m_clearedRowsCurrentFrame == 4)
-	{
 		m_score += 100;
+
+	if (m_score / 1000 > lastIncrement)
+	{
+		++m_currentLevel;
+		lastIncrement = m_score / 1000;
 	}
 
 	m_clearedRowsCurrentFrame = -1;
@@ -185,9 +182,13 @@ void Partida::drawGame()
 	string scoreText = "SCORE: " + to_string(m_score);
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 20, 20, 1, scoreText);
 
+	// Score
+	string levelText = "LEVEL: " + to_string(m_currentLevel);
+	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 20, 60, 1, levelText);
+
 	// Game information
 	m_game.showBoard();
-	m_game.showCoordinates();
+//	m_game.showCoordinates();
 }
 
 TipusTecla Partida::getKeyPressed()
