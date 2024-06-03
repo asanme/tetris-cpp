@@ -154,6 +154,9 @@ void Tauler::moveRowsDown(int rowIndex)
 
 void Tauler::redrawShape()
 {
+	if (m_currentShape == nullptr)
+		return;
+
 	for (int i = 0; i < m_currentShape->getRows(); i++)
 	{
 		for (int j = 0; j < m_currentShape->getColumns(); ++j)
@@ -169,6 +172,9 @@ void Tauler::redrawShape()
 
 void Tauler::clearShape()
 {
+	if (m_currentShape == nullptr)
+		return;
+
 	for (int i = 0; i < m_currentShape->getRows(); i++)
 	{
 		for (int j = 0; j < m_currentShape->getColumns(); ++j)

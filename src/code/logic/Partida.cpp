@@ -4,6 +4,21 @@
 #include "headers/Partida.h"
 #include "../util/headers/Utilities.h"
 
+void Partida::initAutomatedGame(const string& fitxerInicial,
+	const string& fitxerFigures,
+	const string& fitxerMoviments)
+{
+	m_game.inicialitza(fitxerInicial);
+	m_shapeQueue = deserializeShapes(fitxerFigures);
+	m_movementQueue = deserializeMoves(fitxerMoviments);
+}
+
+void Partida::initNormalGame()
+{
+	Figura randomShape = generateRandomShape();
+	m_game.changeShape(randomShape);
+}
+
 void Partida::inicialitza(
 	GameMode gameMode,
 	const string& fitxerInicial,
@@ -14,15 +29,10 @@ void Partida::inicialitza(
 	switch (gameMode)
 	{
 	case NORMAL:
-		// TODO Testing, uncomment and remove init
-		m_game.inicialitza(fitxerInicial);
-//		Figura randomShape = generateRandomShape();
-//		m_game.changeShape(randomShape);
+		initNormalGame();
 		break;
 	case AUTOMATED:
-		m_game.inicialitza(fitxerInicial);
-		m_shapeQueue = deserializeShapes(fitxerFigures);
-		m_movementQueue = deserializeMoves(fitxerMoviments);
+		initAutomatedGame(fitxerInicial, fitxerFigures, fitxerMoviments);
 		break;
 	}
 }

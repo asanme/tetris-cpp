@@ -58,4 +58,6 @@ class Partida
 	// Other game modes
 	void normalGame(double deltaTime);
 	void automatedGame(double deltaTime);
+	void initAutomatedGame(const string& fitxerInicial, const string& fitxerFigures, const string& fitxerMoviments);
+	void initNormalGame();
 };
