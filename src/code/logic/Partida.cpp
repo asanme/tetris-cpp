@@ -5,22 +5,24 @@
 #include "../util/headers/Utilities.h"
 
 void Partida::inicialitza(
-	int mode,
+	GameMode gameMode,
 	const string& fitxerInicial,
 	const string& fitxerFigures,
 	const string& fitxerMoviments
 )
 {
-	if (mode == AUTOMATED)
+	switch (gameMode)
 	{
+	case NORMAL:
+		m_game.inicialitza(fitxerInicial);
+//		Figura randomShape = generateRandomShape();
+//		m_game.changeShape(randomShape);
+		break;
+	case AUTOMATED:
 		m_game.inicialitza(fitxerInicial);
 		m_shapeQueue = deserializeShapes(fitxerFigures);
 		m_movementQueue = deserializeMoves(fitxerMoviments);
-	}
-	else
-	{
-		Figura randomShape = generateRandomShape();
-		m_game.changeShape(randomShape);
+		break;
 	}
 }
 
@@ -38,29 +40,25 @@ void Partida::actualitza(GameMode gameMode, double deltaTime)
 	}
 }
 
+// TODO Fix bug, the tile render doesn't match the state of the board nor current shape
 void Partida::normalGame(double deltaTime)
 {
 	drawGame();
 	handleGameInput();
 
-	int completedRows = -1;
 	float waitTime = 0.5;
 	m_time += deltaTime;
+	if (m_clearedRowsCurrentFrame != -1)
+	{
+		handleScore();
+		Figura nextShape = generateRandomShape();
+		m_game.changeShape(nextShape);
+	}
 
 	if (m_time > waitTime)
 	{
-		completedRows = m_game.baixaFigura();
+		m_clearedRowsCurrentFrame = m_game.baixaFigura();
 		m_time = 0.0;
-	}
-
-	if (completedRows != -1)
-		m_shapeReachedEnd = true;
-
-	if (m_shapeReachedEnd)
-	{
-		Figura nextShape = generateRandomShape();
-		m_game.changeShape(nextShape);
-		m_shapeReachedEnd = false;
 	}
 }
 
@@ -72,6 +70,17 @@ void Partida::automatedGame(double deltaTime)
 	float waitTime = 0.5;
 	m_time += deltaTime;
 
+	if (m_clearedRowsCurrentFrame != -1)
+	{
+		handleScore();
+
+		if (!m_shapeQueue.isEmpty())
+		{
+			Figura nextShape = Figura(*m_shapeQueue.pop());
+			m_game.changeShape(nextShape);
+		}
+	}
+
 	if (m_time > waitTime)
 	{
 		if (!m_movementQueue.isEmpty())
@@ -79,33 +88,37 @@ void Partida::automatedGame(double deltaTime)
 
 		m_time = 0.0;
 	}
+}
 
-	if (m_shapeReachedEnd)
+void Partida::handleScore()
+{
+	m_score += 10;
+
+	if (m_clearedRowsCurrentFrame >= 1)
 	{
-		if (!m_shapeQueue.isEmpty())
-		{
-			Figura nextShape = Figura(*m_shapeQueue.pop());
-			m_game.changeShape(nextShape);
-		}
-
-		m_shapeReachedEnd = false;
+		m_score += 100;
 	}
+
+	if (m_clearedRowsCurrentFrame == 2)
+	{
+		m_score += 50;
+	}
+	else if (m_clearedRowsCurrentFrame == 3)
+	{
+		m_score += 75;
+	}
+	else if (m_clearedRowsCurrentFrame == 4)
+	{
+		m_score += 100;
+	}
+
+	m_clearedRowsCurrentFrame = -1;
 }
 
 void Partida::handleGameInput()
 {
-	TipusTecla keyPressed = NO_TECLA;
-
-	if (Keyboard_GetKeyTrg(KEYBOARD_RIGHT))
-		keyPressed = TECLA_DRETA;
-	else if (Keyboard_GetKeyTrg(KEYBOARD_LEFT))
-		keyPressed = TECLA_ESQUERRA;
-	else if (Keyboard_GetKeyTrg(KEYBOARD_UP))
-		keyPressed = TECLA_AMUNT;
-	else if (Keyboard_GetKeyTrg(KEYBOARD_DOWN))
-		keyPressed = TECLA_ABAIX;
-	else if (Keyboard_GetKeyTrg(KEYBOARD_SPACE))
-		keyPressed = TECLA_ESPAI;
+	TipusTecla keyPressed = getKeyPressed();
+	int clearedRows = 0;
 
 	switch (keyPressed)
 	{
@@ -126,14 +139,14 @@ void Partida::handleGameInput()
 		break;
 
 	case TECLA_ESPAI:
-		if (m_game.hardDropShape() != -1)
-			m_shapeReachedEnd = true;
+		m_clearedRowsCurrentFrame = m_game.hardDropShape();
 		break;
 	}
 }
 
 void Partida::handleNextMove(TipusMoviment nextMove)
 {
+	int clearedRows = 0;
 	switch (nextMove)
 	{
 	case MOVIMENT_ESQUERRA:
@@ -153,21 +166,45 @@ void Partida::handleNextMove(TipusMoviment nextMove)
 		break;
 
 	case MOVIMENT_BAIXA:
-		if (m_game.baixaFigura() != -1)
-			m_shapeReachedEnd = true;
+		m_clearedRowsCurrentFrame = m_game.baixaFigura();
 		break;
 
 	case MOVIMENT_BAIXA_FINAL:
-		if (m_game.hardDropShape() != -1)
-			m_shapeReachedEnd = true;
+		m_clearedRowsCurrentFrame = m_game.hardDropShape();
 		break;
 	}
 }
 
 void Partida::drawGame()
 {
+	// Background
 	GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
 	GraphicManager::getInstance()->drawSprite(GRAFIC_TAULER, POS_X_TAULER, POS_Y_TAULER, false);
+
+	// Score
+	string scoreText = "SCORE: " + to_string(m_score);
+	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 20, 20, 1, scoreText);
+
+	// Game information
 	m_game.showBoard();
 	m_game.showCoordinates();
+}
+
+TipusTecla Partida::getKeyPressed()
+{
+	TipusTecla keyPressed;
+	if (Keyboard_GetKeyTrg(KEYBOARD_RIGHT))
+		keyPressed = TECLA_DRETA;
+	else if (Keyboard_GetKeyTrg(KEYBOARD_LEFT))
+		keyPressed = TECLA_ESQUERRA;
+	else if (Keyboard_GetKeyTrg(KEYBOARD_UP))
+		keyPressed = TECLA_AMUNT;
+	else if (Keyboard_GetKeyTrg(KEYBOARD_DOWN))
+		keyPressed = TECLA_ABAIX;
+	else if (Keyboard_GetKeyTrg(KEYBOARD_SPACE))
+		keyPressed = TECLA_ESPAI;
+	else
+		keyPressed = NO_TECLA;
+
+	return keyPressed;
 }

@@ -16,8 +16,10 @@ int main(int argc, const char* argv[])
 	Uint64 NOW = SDL_GetPerformanceCounter();
 	Uint64 LAST = 0;
 	double deltaTime = 0;
+	GameMode gameMode = AUTOMATED;
 
-	game.inicialitza(0, "../data/partida.txt", "../data/figures.txt", "../data/moviments.txt");
+	game.inicialitza(gameMode, "../data/partida.txt", "../data/figures.txt", "../data/moviments.txt");
+//	game.inicialitza(gameMode, "../data/row-test.txt", "../data/figures.txt", "../data/moviments.txt");
 
 	do
 	{
@@ -27,7 +29,7 @@ int main(int argc, const char* argv[])
 
 		pantalla.processEvents();
 
-		game.actualitza(NORMAL, deltaTime);
+		game.actualitza(gameMode, deltaTime);
 
 		pantalla.update();
 	} while (!Keyboard_GetKeyTrg(KEYBOARD_ESCAPE));

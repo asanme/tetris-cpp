@@ -113,7 +113,7 @@ string GraphicManager::getFontPath(FONT_NAME name)
 	case FONT_GREEN_30:
 	case FONT_RED_30:
 	case FONT_WHITE_30:
-		path = "../resources/fonts/FreeSans.ttf";
+		path = "../resources/fonts/prstartk.ttf";
 		break;
 
 	default:

@@ -160,21 +160,46 @@ void deserializeMatrixData(int** tmpBoardMatrix, int& rowIndex, const string& cu
 	++rowIndex;
 }
 
-// TODO Fix out of range bugs (probably depending on the size of the shape)
+static bool isValidPlacement(int nColumns, int xPosition)
+{
+	return ((nColumns + xPosition) - 1) < N_COL_TAULER;
+}
+
 Figura generateRandomShape()
 {
 	Figura randomizedShape;
-
 	std::random_device rd;
 	std::mt19937 gen(rd());
-	std::uniform_int_distribution<> tileDistribution(0, N_TIPUS_FIGURES - 1);
-	std::uniform_int_distribution<> columnDistribution(0, N_COL_TAULER);
 
-	int randomShape = tileDistribution(gen);
-	int randomColumn = columnDistribution(gen);
+	std::uniform_int_distribution<> rotationDistribution(0, 3);
+	std::uniform_int_distribution<> shapeDistribution(1, N_TIPUS_FIGURES);
+	std::uniform_int_distribution<> columnDistribution(0, N_COL_TAULER - 1);
+
+	int randomColumn;
+	int randomShape = shapeDistribution(gen);
+	int randomRotation = rotationDistribution(gen);
 
 	randomizedShape.setShape(static_cast<TipusFigura>(randomShape));
+	int nColumns = randomizedShape.getColumns();
+
+	for (int i = 0; i < randomRotation; i++)
+		randomizedShape.rotateShape(GIR_HORARI);
+
+	do
+	{
+		randomColumn = columnDistribution(gen);
+	} while (!isValidPlacement(nColumns, randomColumn));
+
 	randomizedShape.setXBoardPosition(randomColumn);
+
+	// Debug
+	/*
+	std::cout << "----  Generated Shape ----" << "\n";
+	std::cout << "columnIndex: " << randomColumn << "\n";
+	std::cout << "shapeIndex: " << randomShape << "\n";
+	std::cout << "nColumns: " << randomizedShape.getColumns() << "\n";
+	std::cout << "--------------------------" << "\n";
+	*/
 
 	return randomizedShape;
 }

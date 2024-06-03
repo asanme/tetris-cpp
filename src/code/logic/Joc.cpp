@@ -114,25 +114,6 @@ int Joc::baixaFigura()
 	return completedRows;
 }
 
-void Joc::showBoard()
-{
-	m_board.showBoard();
-}
-
-void Joc::showCoordinates()
-{
-	string xPos = "X: " + to_string(m_currentShape.getXBoardPosition());
-	string yPos = "Y: " + to_string(m_currentShape.getYBoardPosition());
-	string coords = xPos + " " + yPos;
-
-	GraphicManager::getInstance()->drawFont(
-		FONT_WHITE_30,
-		POS_X_TAULER,
-		POS_Y_TAULER - (2 * MIDA_QUADRAT),
-		1,
-		coords
-	);
-}
 int Joc::hardDropShape()
 {
 	int totalCompletedRows = 0;
@@ -149,4 +130,26 @@ int Joc::hardDropShape()
 	}
 
 	return totalCompletedRows;
+}
+
+void Joc::showBoard()
+{
+	m_board.showBoard();
+}
+
+// TODO Remove this
+// Debug only
+void Joc::showCoordinates()
+{
+	string xPos = "X: " + to_string(m_currentShape.getXBoardPosition() + 2);
+	string yPos = "Y: " + to_string(m_currentShape.getYBoardPosition() + 2);
+	string coords = xPos + " " + yPos;
+
+	GraphicManager::getInstance()->drawFont(
+		FONT_WHITE_30,
+		20,
+		60,
+		1,
+		coords
+	);
 }
