@@ -79,7 +79,7 @@ class Figura
 	int getColumns() const;
 
 	// Debug only
-	void showShape();
+	void showShape() const;
 
  private:
 	void freeShapeMatrix();

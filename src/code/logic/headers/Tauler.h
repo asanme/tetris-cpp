@@ -36,7 +36,7 @@ class Tauler
 	}
 
 	void addShape(Figura& shape);
-	void changeShape(Figura& shape);
+	void setShape(Figura& shape);
 
 	void moveShapeVertically();
 	void moveShapeHorizontally(int xDir);
@@ -52,6 +52,9 @@ class Tauler
 	void loadBoard(int** board);
 
 	void showBoard();
+
+	// TODO Check if is valid
+	bool isShapeOverlapping(const Figura& shape);
 
  private:
 	bool isShapeColliding(const Figura& shape) const;

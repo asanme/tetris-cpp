@@ -56,7 +56,7 @@ void Tauler::addShape(Figura& shape)
 	}
 }
 
-void Tauler::changeShape(Figura& shape)
+void Tauler::setShape(Figura& shape)
 {
 	clearShape();
 	m_currentShape = &shape;
@@ -242,4 +242,25 @@ void Tauler::showBoard()
 			}
 		}
 	}
+}
+
+bool Tauler::isShapeOverlapping(const Figura& shape)
+{
+	bool isOverlapping = false;
+	int** shapeMatrix = shape.getShapeMatrix();
+
+	for (int i = 0; i < shape.getRows(); ++i)
+	{
+		for (int j = 0; j < shape.getColumns(); ++j)
+		{
+			int rowIndex = i + shape.getYBoardPosition();
+			int columnIndex = j + shape.getXBoardPosition();
+
+			if (m_board[rowIndex][columnIndex] != COLOR_NEGRE &&
+				shapeMatrix[i][j] != COLOR_NEGRE)
+				isOverlapping = true;
+		}
+	}
+
+	return isOverlapping;
 }

@@ -21,6 +21,7 @@ class Joc
 	int hardDropShape();
 
 	void showBoard();
+	bool hasToppedOut(const Figura& newShape);
 
 	// Debug only
 	void showCoordinates();

@@ -78,7 +78,7 @@ void Joc::escriuTauler(const string& nomFitxer)
 void Joc::changeShape(const Figura& newShape)
 {
 	m_currentShape = *new Figura(newShape);
-	m_board.changeShape(m_currentShape);
+	m_board.setShape(m_currentShape);
 }
 
 bool Joc::giraFigura(DireccioGir direccio)
@@ -151,4 +151,9 @@ void Joc::showCoordinates()
 		1,
 		coords
 	);
+}
+
+bool Joc::hasToppedOut(const Figura& newShape)
+{
+	return m_board.isShapeOverlapping(newShape);
 }

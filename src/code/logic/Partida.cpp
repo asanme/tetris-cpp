@@ -4,21 +4,6 @@
 #include "headers/Partida.h"
 #include "../util/headers/Utilities.h"
 
-void Partida::initAutomatedGame(const string& fitxerInicial,
-	const string& fitxerFigures,
-	const string& fitxerMoviments)
-{
-	m_game.inicialitza(fitxerInicial);
-	m_shapeQueue = deserializeShapes(fitxerFigures);
-	m_movementQueue = deserializeMoves(fitxerMoviments);
-}
-
-void Partida::initNormalGame()
-{
-	Figura randomShape = generateRandomShape();
-	m_game.changeShape(randomShape);
-}
-
 void Partida::inicialitza(
 	GameMode gameMode,
 	const string& fitxerInicial,
@@ -53,56 +38,65 @@ void Partida::actualitza(GameMode gameMode, double deltaTime)
 
 void Partida::normalGame(double deltaTime)
 {
-	drawGame();
-	handleGameInput();
+	renderGame();
 
-	m_time += deltaTime;
-	if (m_clearedRowsCurrentFrame != -1)
+	if (!m_hasToppedOut)
 	{
-		handleScore();
-		Figura nextShape = generateRandomShape();
-		m_game.changeShape(nextShape);
-	}
+		handleGameInput();
+		m_time += deltaTime;
+		if (m_clearedRowsCurrentFrame != -1)
+		{
+			handleScore();
+			Figura nextShape = generateRandomShape();
+			m_hasToppedOut = hasToppedOut(nextShape);
+			m_game.changeShape(nextShape);
+		}
 
-	if (m_time > m_timeMultiplier)
-	{
-		m_clearedRowsCurrentFrame = m_game.baixaFigura();
-		m_time = 0.0;
+		if (m_time > m_timeMultiplier)
+		{
+			m_clearedRowsCurrentFrame = m_game.baixaFigura();
+			m_time = 0.0;
+		}
 	}
 }
 
 void Partida::automatedGame(double deltaTime)
 {
-	drawGame();
+	renderGame();
 
-	m_time += deltaTime;
-	if (m_clearedRowsCurrentFrame != -1)
+	if (!m_hasToppedOut)
 	{
-		handleScore();
-
-		if (!m_shapeQueue.isEmpty())
+		m_time += deltaTime;
+		if (m_clearedRowsCurrentFrame != -1)
 		{
-			Figura nextShape = Figura(*m_shapeQueue.pop());
-			m_game.changeShape(nextShape);
+			handleScore();
+
+			if (!m_shapeQueue.isEmpty())
+			{
+				Figura nextShape = Figura(*m_shapeQueue.pop());
+				m_hasToppedOut = hasToppedOut(nextShape);
+				m_game.changeShape(nextShape);
+			}
 		}
-	}
 
-	if (m_time > m_timeMultiplier)
-	{
-		if (!m_movementQueue.isEmpty())
-			handleNextMove(m_movementQueue.pop());
+		if (m_time > m_timeMultiplier)
+		{
+			if (!m_movementQueue.isEmpty())
+				handleNextMove(m_movementQueue.pop());
 
-		m_time = 0.0;
+			m_time = 0.0;
+		}
 	}
 }
 
 void Partida::handleScore()
 {
 	static int lastIncrement = 0;
-	m_score += 10;
 
 	if (m_clearedRowsCurrentFrame >= 1)
 		m_score += 100;
+	else
+		m_score += 10;
 
 	if (m_clearedRowsCurrentFrame == 2)
 		m_score += 50;
@@ -181,7 +175,22 @@ void Partida::handleNextMove(TipusMoviment nextMove)
 	}
 }
 
-void Partida::drawGame()
+void Partida::initAutomatedGame(const string& fitxerInicial,
+	const string& fitxerFigures,
+	const string& fitxerMoviments)
+{
+	m_game.inicialitza(fitxerInicial);
+	m_shapeQueue = deserializeShapes(fitxerFigures);
+	m_movementQueue = deserializeMoves(fitxerMoviments);
+}
+
+void Partida::initNormalGame()
+{
+	Figura randomShape = generateRandomShape();
+	m_game.changeShape(randomShape);
+}
+
+void Partida::renderGame()
 {
 	// Background
 	GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
@@ -198,6 +207,15 @@ void Partida::drawGame()
 	// Game information
 	m_game.showBoard();
 	//	m_game.showCoordinates();
+
+	//	Death Info
+
+	if (m_hasToppedOut)
+	{
+		// Depth effect
+		GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 35 + 4, SCREEN_SIZE_Y / 4 - 4, 2, "GAME OVER");
+		GraphicManager::getInstance()->drawFont(FONT_RED_30, 35, SCREEN_SIZE_Y / 4, 2, "GAME OVER");
+	}
 }
 
 TipusTecla Partida::getKeyPressed()
@@ -217,4 +235,10 @@ TipusTecla Partida::getKeyPressed()
 		keyPressed = NO_TECLA;
 
 	return keyPressed;
+}
+
+// TOP OUT CONDITION: the shape is overlapping with another one
+bool Partida::hasToppedOut(const Figura& newShape)
+{
+	return m_game.hasToppedOut(newShape);
 }

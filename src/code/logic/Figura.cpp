@@ -205,7 +205,7 @@ void Figura::freeShapeMatrix()
 	m_rows = 0;
 }
 
-void Figura::showShape()
+void Figura::showShape() const
 {
 	cout << "\nShowing current shape:\n";
 	cout << "---------------\n";
