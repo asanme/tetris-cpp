@@ -53,31 +53,15 @@ add_executable(tetris_cpp
         src/code/logic/Tetris.cpp
         src/code/logic/headers/Tetris.h)
 
-# Windows build not working
-if (WIN32)
-    # Windows specific configuration
-    set(SDL2_DIR ${CMAKE_SOURCE_DIR}/external/SDL-Windows)
+# Find packages in OS
+find_package(PNG REQUIRED)
+find_package(SDL2 REQUIRED)
+find_package(SDL2_ttf REQUIRED)
+find_package(SDL2_image REQUIRED)
 
-    # Add SDL2 directory to include directories
-    target_include_directories(${PROJECT_NAME} PRIVATE ${SDL2_DIR}/include)
+# Include libpng directories
+include_directories(${PNG_INCLUDE_DIR})
 
-    # Add SDL2.dll to the output directory
-    add_custom_command(TARGET ${PROJECT_NAME} POST_BUILD
-            COMMAND ${CMAKE_COMMAND} -E copy_if_different
-            "${SDL2_DIR}/SDL2.dll"
-            $<TARGET_FILE_DIR:${PROJECT_NAME}>)
-
-elseif (UNIX)
-    # Linux specific configuration
-    find_package(PNG REQUIRED)
-    find_package(SDL2 REQUIRED)
-    find_package(SDL2_ttf REQUIRED)
-    find_package(SDL2_image REQUIRED)
-
-    # Include libpng directories
-    include_directories(${PNG_INCLUDE_DIR})
-
-    # Link libraries
-    target_link_libraries(${PROJECT_NAME} ${PNG_LIBRARY} SDL2::SDL2 SDL2_ttf::SDL2_ttf SDL2_image::SDL2_image ZLIB::ZLIB)
-endif ()
+# Link libraries
+target_link_libraries(${PROJECT_NAME} ${PNG_LIBRARY} SDL2::SDL2 SDL2_ttf::SDL2_ttf SDL2_image::SDL2_image)
 

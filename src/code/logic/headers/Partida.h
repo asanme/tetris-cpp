@@ -59,6 +59,8 @@ class Partida
 
 	// Util methods
 	void renderGame();
+	void renderNextShapes();
+	static int renderShapePreview(const Figura& shape, int lastX, int lastY) ;
 	bool hasToppedOut(const Figura& newShape);
 	void initNormalGame();
 	void initAutomatedGame(const string& fitxerInicial, const string& fitxerFigures, const string& fitxerMoviments);
@@ -74,4 +76,5 @@ class Partida
 	// Other game modes
 	void normalGame(double deltaTime);
 	void automatedGame(double deltaTime);
+	void renderBackground() const;
 };

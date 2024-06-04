@@ -24,6 +24,8 @@ void Partida::inicialitza(
 
 void Partida::actualitza(GameMode gameMode, double deltaTime)
 {
+	renderBackground();
+	renderNextShapes();
 	renderGame();
 
 	if (!m_hasGameFinished)
@@ -40,6 +42,11 @@ void Partida::actualitza(GameMode gameMode, double deltaTime)
 		}
 	}
 }
+void Partida::renderBackground() const
+{
+	GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
+	GraphicManager::getInstance()->drawSprite(GRAFIC_TAULER, POS_X_TAULER, POS_Y_TAULER, false);
+}
 
 // End condition for normal games is topOut
 void Partida::normalGame(double deltaTime)
@@ -51,7 +58,9 @@ void Partida::normalGame(double deltaTime)
 	if (m_clearedRowsCurrentFrame != -1)
 	{
 		handleScore();
-		Figura nextShape = generateRandomShape();
+
+		m_shapeQueue.push(generateRandomShape());
+		Figura nextShape = Figura(*m_shapeQueue.pop());
 		m_hasGameFinished = hasToppedOut(nextShape);
 		m_game.changeShape(nextShape);
 	}
@@ -138,7 +147,9 @@ void Partida::handleGameInput()
 		break;
 
 	case TECLA_ABAIX:
-		m_game.giraFigura(GIR_ANTI_HORARI);
+		// I prefer to make the shape go down rather thar rotate ONLY NORMAL
+		// m_game.giraFigura(GIR_ANTI_HORARI);
+		m_game.baixaFigura();
 		break;
 
 	case TECLA_ESPAI:
@@ -192,14 +203,17 @@ void Partida::initNormalGame()
 {
 	Figura randomShape = generateRandomShape();
 	m_game.changeShape(randomShape);
+
+	// Always 3 shapes on queue
+	for (int i = 0; i < 4; i++)
+	{
+		Figura nextRandomShape = generateRandomShape();
+		m_shapeQueue.push(nextRandomShape);
+	}
 }
 
 void Partida::renderGame()
 {
-	// Background
-	GraphicManager::getInstance()->drawSprite(GRAFIC_FONS, 0, 0, false);
-	GraphicManager::getInstance()->drawSprite(GRAFIC_TAULER, POS_X_TAULER, POS_Y_TAULER, false);
-
 	// Score
 	string scoreText = "SCORE: " + to_string(m_score);
 	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 20, 20, 1, scoreText);
@@ -219,22 +233,65 @@ void Partida::renderGame()
 		GraphicManager::getInstance()->drawFont(FONT_RED_30, 35 + 4, SCREEN_SIZE_Y / 4 - 4, 2, "GAME OVER");
 		GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 35, SCREEN_SIZE_Y / 4, 2, "GAME OVER");
 
-		GraphicManager::getInstance()->drawFont(
-			FONT_RED_30,
-			75 + 2,
-			SCREEN_SIZE_Y - 102,
-			1,
-			"PRESS ESCAPE..."
-		);
+		GraphicManager::getInstance()->drawFont(FONT_RED_30, 75 + 2, SCREEN_SIZE_Y - 102, 1, "PRESS ESCAPE...");
 
-		GraphicManager::getInstance()->drawFont(
-			FONT_WHITE_30,
-			75,
-			SCREEN_SIZE_Y - 100,
-			1,
-			"PRESS ESCAPE..."
-		);
+		GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 75, SCREEN_SIZE_Y - 100, 1, "PRESS ESCAPE...");
 	}
+}
+
+void Partida::renderNextShapes()
+{
+	GraphicManager::getInstance()->drawFont(FONT_WHITE_30, SCREEN_SIZE_X - 130, SCREEN_SIZE_Y / 5, 1, "NEXT");
+
+	int lastX = SCREEN_SIZE_X - 130;
+	int lastY = (SCREEN_SIZE_Y / 5) + (3 * MIDA_QUADRAT);
+
+	const ShapeNode* currentNode = m_shapeQueue.getHead();
+	for (int i = 0; i < 3; i++)
+	{
+		if (currentNode != nullptr)
+		{
+			lastY = renderShapePreview(currentNode->getShape(), lastX, lastY);
+			lastY += MIDA_QUADRAT;
+			currentNode = currentNode->getNextNode();
+		}
+	}
+}
+
+int Partida::renderShapePreview(const Figura& shape, int lastX, int lastY)
+{
+	IMAGE_NAME sprite = static_cast<IMAGE_NAME>(shape.getColor() + 1);
+	int columns = shape.getColumns();
+	int rows = shape.getRows();
+
+	int currentX = lastX;
+
+	for (int i = 0; i < rows; i++)
+	{
+		bool isDataInRow = false;
+
+		for (int j = 0; j < columns; j++)
+		{
+			currentX = lastX + (j * MIDA_QUADRAT);
+
+			if (shape.getShapeMatrix()[i][j] != COLOR_NEGRE)
+			{
+				isDataInRow = true;
+				GraphicManager::getInstance()->drawSprite(
+					sprite,
+					currentX,
+					lastY,
+					false
+				);
+			}
+		}
+
+		// Grows vertically every row (that contains data)
+		if (isDataInRow)
+			lastY += MIDA_QUADRAT;
+	}
+
+	return lastY;
 }
 
 TipusTecla Partida::getKeyPressed()

@@ -65,7 +65,14 @@ void Tetris::startGame(Screen& pantalla, GameMode& gameMode)
 	}
 
 	pantalla.processEvents();
-	addNewScore(game.getGameScore());
+
+	// Only save score in NORMAL mode
+	if (gameMode == NORMAL)
+	{
+		int gameScore = game.getGameScore();
+		if (gameScore > 0)
+			addNewScore(gameScore);
+	}
 }
 
 void Tetris::showTerminalHighScores()
