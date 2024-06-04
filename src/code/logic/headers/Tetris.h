@@ -1,5 +1,14 @@
 #pragma once
 
+#include <string>
+#include <vector>
+
+typedef struct
+{
+	std::string name;
+	int score;
+} HighScore;
+
 class Tetris
 {
  public:
@@ -7,7 +16,15 @@ class Tetris
 	void play();
 
  private:
+	std::vector<HighScore> m_scores;
 
-	static int showTerminalMenu();
+	// Score
+	void showHighScores();
+	void loadHighScores();
+	void addNewScore(int score);
+
+	// UI
+	static int selectModeMenu();
+	static int showGUIMenu();
 };
 

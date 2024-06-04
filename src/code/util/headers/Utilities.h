@@ -1,6 +1,7 @@
 #pragma once
 
 #include "../../logic/headers/Figura.h"
+#include "../../logic/headers/Tetris.h"
 #include "ShapeQueue.h"
 #include "MovementQueue.h"
 #include <fstream>
@@ -12,8 +13,12 @@ void transposeMatrix(int** matrix, int rows, int columns);
 
 // Serialization-Deserialization
 Figura readShapeData(const int* shapeData);
-ShapeQueue deserializeShapes(const string& fitxerFigures);
-MovementQueue deserializeMoves(const string& fitxerMoviments);
+void serializeHighScore(const vector<HighScore>& scores);
+
+ShapeQueue deserializeShapes(const string& shapeFile);
+MovementQueue deserializeMoves(const string& movementFile);
+HighScore deserializeHighScore(const string& line);
+void deserializeHighScores(vector<HighScore>& scores);
 
 void deserializeShapeData(int* shapeData, string& currentLine);
 void deserializeMatrixData(int** tmpBoardMatrix, int& rowIndex, const string& currentLine);
@@ -22,3 +27,4 @@ void deserializeMatrixData(int** tmpBoardMatrix, int& rowIndex, const string& cu
 int** initNewMatrix(int columns, int rows);
 Figura generateRandomShape();
 double calculateTimeMultiplier(double currentMultiplier);
+void bubbleSort(vector<HighScore>& vectorToSort);

@@ -216,8 +216,24 @@ void Partida::renderGame()
 	if (m_hasGameFinished)
 	{
 		// Depth effect
-		GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 35 + 4, SCREEN_SIZE_Y / 4 - 4, 2, "GAME OVER");
-		GraphicManager::getInstance()->drawFont(FONT_RED_30, 35, SCREEN_SIZE_Y / 4, 2, "GAME OVER");
+		GraphicManager::getInstance()->drawFont(FONT_RED_30, 35 + 4, SCREEN_SIZE_Y / 4 - 4, 2, "GAME OVER");
+		GraphicManager::getInstance()->drawFont(FONT_WHITE_30, 35, SCREEN_SIZE_Y / 4, 2, "GAME OVER");
+
+		GraphicManager::getInstance()->drawFont(
+			FONT_RED_30,
+			75 + 2,
+			SCREEN_SIZE_Y - 102,
+			1,
+			"PRESS ESCAPE..."
+		);
+
+		GraphicManager::getInstance()->drawFont(
+			FONT_WHITE_30,
+			75,
+			SCREEN_SIZE_Y - 100,
+			1,
+			"PRESS ESCAPE..."
+		);
 	}
 }
 
@@ -249,4 +265,9 @@ bool Partida::hasToppedOut(const Figura& newShape)
 bool Partida::hasGameFinished() const
 {
 	return m_hasGameFinished;
+}
+
+int Partida::getGameScore() const
+{
+	return m_score;
 }

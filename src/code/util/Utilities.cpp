@@ -35,12 +35,12 @@ Figura readShapeData(const int* shapeData)
 	return currentShape;
 }
 
-ShapeQueue deserializeShapes(const string& fitxerFigures)
+ShapeQueue deserializeShapes(const string& shapeFile)
 {
 	ShapeQueue shapeQueue;
 	ifstream shapesFile;
 
-	shapesFile.open(fitxerFigures);
+	shapesFile.open(shapeFile);
 	if (shapesFile.is_open())
 	{
 		string currentLine;
@@ -58,12 +58,12 @@ ShapeQueue deserializeShapes(const string& fitxerFigures)
 	return shapeQueue;
 }
 
-MovementQueue deserializeMoves(const string& fitxerMoviments)
+MovementQueue deserializeMoves(const string& movementFile)
 {
 	ifstream movesFile;
 	MovementQueue movementQueue;
 
-	movesFile.open(fitxerMoviments);
+	movesFile.open(movementFile);
 	if (movesFile.is_open())
 	{
 		char movement;
@@ -213,4 +213,94 @@ double calculateTimeMultiplier(double currentMultiplier)
 		currentMultiplier = MAX_TIME_MULTIPLIER;
 
 	return currentMultiplier;
+}
+
+void serializeHighScore(const vector<HighScore>& scores)
+{
+	ofstream highScores;
+	highScores.open("../highscores/highscores.txt");
+
+	if (highScores.is_open())
+	{
+		for (int i = 0; i < scores.size(); i++)
+		{
+			HighScore currentScore = scores[i];
+			string output = currentScore.name + ";" + to_string(currentScore.score) + "\n";
+			highScores << output;
+		}
+	}
+
+	highScores.close();
+}
+
+HighScore deserializeHighScore(const string& line)
+{
+	HighScore currentHighScore;
+	bool hasReachedSeparator = false;
+	string scoreText;
+	string name;
+	int score;
+
+	for (char c : line)
+	{
+		if (c != ';')
+		{
+			if (!hasReachedSeparator)
+			{
+				name += c;
+			}
+			else
+			{
+				if (isdigit(c))
+					scoreText += c;
+			}
+		}
+		else
+			hasReachedSeparator = true;
+	}
+
+	score = stoi(scoreText);
+	currentHighScore.name = name;
+	currentHighScore.score = score;
+	return currentHighScore;
+}
+
+void deserializeHighScores(vector<HighScore>& scores)
+{
+	scores.clear();
+	ifstream highScores;
+	highScores.open("../highscores/highscores.txt");
+
+	if (highScores.is_open())
+	{
+		string currentLine;
+		while (getline(highScores, currentLine))
+		{
+			HighScore currentScore = deserializeHighScore(currentLine);
+			scores.push_back(currentScore);
+		}
+	}
+
+	highScores.close();
+}
+
+void bubbleSort(vector<HighScore>& vectorToSort)
+{
+	int positionsToSort = vectorToSort.size();
+
+	while (positionsToSort != 0)
+	{
+		for (int i = 1; i < positionsToSort; ++i)
+		{
+			int j = i - 1;
+			if (vectorToSort[j].score < vectorToSort[i].score)
+			{
+				// Swap elements
+				HighScore tmpScore = vectorToSort[i];
+				vectorToSort[i] = vectorToSort[j];
+				vectorToSort[j] = tmpScore;
+			}
+		}
+		--positionsToSort;
+	}
 }

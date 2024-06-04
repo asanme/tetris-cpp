@@ -38,6 +38,7 @@ class Partida
 	);
 
 	bool hasGameFinished() const;
+	int getGameScore() const;
 
  private:
 	Joc m_game;

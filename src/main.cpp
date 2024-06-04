@@ -6,4 +6,3 @@ int main(int argc, const char* argv[])
 	tetris.play();
 	return 0;
 }
-
