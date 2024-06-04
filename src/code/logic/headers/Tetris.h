@@ -3,6 +3,7 @@
 #include <string>
 #include <vector>
 #include "../../graphic-lib/libreria.h"
+#include "Partida.h"
 
 typedef struct
 {
@@ -13,26 +14,27 @@ typedef struct
 class Tetris
 {
  public:
-	Tetris() : m_tetrisMusic(nullptr)
-	{
-	}
+	Tetris() = default;
 	void play();
 
  private:
 	std::vector<HighScore> m_scores;
-	T_SOUND* m_tetrisMusic;
 
 	// Score
-	void showHighScores();
 	void loadHighScores();
 	void addNewScore(int score);
 
 	// Sound
 	void playMusic();
-	void stopMusic();
 
 	// UI
-	static int selectModeMenu();
-	static int showGUIMenu();
+	void showTerminalHighScores();
+	void showGuiHighScores(Screen& pantalla);
+
+	static int terminalSelectionMenu();
+	int guiSelectionMenu(Screen& pantalla);
+
+	// Others
+	void startGame(Screen& pantalla, GameMode& gameMode);
 };
 

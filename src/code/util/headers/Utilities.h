@@ -6,6 +6,14 @@
 #include "MovementQueue.h"
 #include <fstream>
 
+typedef struct
+{
+	int minX;
+	int minY;
+	int maxX;
+	int maxY;
+} BoxBounds;
+
 // Matrix transformations
 void invertRows(int** matrix, int rows, int columns);
 void invertColumns(int** matrix, int rows, int columns);
@@ -28,3 +36,6 @@ int** initNewMatrix(int columns, int rows);
 Figura generateRandomShape();
 double calculateTimeMultiplier(double currentMultiplier);
 void bubbleSort(vector<HighScore>& vectorToSort);
+
+void clearCinBuffer();
+bool wasBoxClicked(BoxBounds bounds, int clickedX, int clickedY);

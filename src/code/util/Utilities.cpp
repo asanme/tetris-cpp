@@ -304,3 +304,18 @@ void bubbleSort(vector<HighScore>& vectorToSort)
 		--positionsToSort;
 	}
 }
+
+void clearCinBuffer()
+{
+	std::cin.ignore(numeric_limits<streamsize>::max(), '\n');
+}
+
+bool wasBoxClicked(BoxBounds bounds, int clickedX, int clickedY)
+{
+	bool wasBoxClicked = false;
+
+	if (clickedX >= bounds.minX && clickedX <= bounds.maxX && clickedY >= bounds.minY && clickedY <= bounds.maxY)
+		wasBoxClicked = true;
+
+	return wasBoxClicked;
+}
