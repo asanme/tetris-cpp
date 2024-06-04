@@ -2,13 +2,33 @@
 #include "headers/InfoJoc.h"
 #include "headers/Partida.h"
 #include "../util/headers/Utilities.h"
-#include <iostream>
 #include <SDL2/SDL.h>
 #include <limits>
 
 const std::string GAME_DATA = "../data/partida.txt";
 const std::string SHAPE_DATA = "../data/figures.txt";
 const std::string MOVEMENT_DATA = "../data/moviments.txt";
+
+void Tetris::playMusic()
+{
+	Sound_Init();
+
+	m_tetrisMusic = Sound_LoadMusic("../resources/sounds/tetris-copyright-free.ogg", PLAY_FROM_DISK_STREAM);
+
+/*
+	Sound_Play(m_tetrisMusic, SOUND_PLAY_NORMAL);
+	Sound_Stop(m_tetrisMusic);
+	Sound_Delete(m_tetrisMusic);
+*/
+}
+
+void Tetris::stopMusic()
+{
+//	Sound_Restart(m_tetrisMusic);
+	Sound_Stop(m_tetrisMusic);
+	Sound_Delete(m_tetrisMusic);
+	Sound_Init();
+}
 
 void Tetris::play()
 {
@@ -28,6 +48,7 @@ void Tetris::play()
 
 		if (selection == 1 || selection == 2)
 		{
+			playMusic();
 			GameMode gameMode = static_cast<GameMode>(selection - 1);
 			Partida game;
 
@@ -53,6 +74,7 @@ void Tetris::play()
 
 			// Once the game has finished, add the score to the list of scores
 			addNewScore(game.getGameScore());
+			stopMusic();
 		}
 		else if (selection == 3)
 		{
@@ -151,3 +173,4 @@ void Tetris::addNewScore(int score)
 	bubbleSort(m_scores);
 	serializeHighScore(m_scores);
 }
+

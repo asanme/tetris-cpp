@@ -2,6 +2,7 @@
 
 #include <string>
 #include <vector>
+#include "../../graphic-lib/libreria.h"
 
 typedef struct
 {
@@ -12,16 +13,23 @@ typedef struct
 class Tetris
 {
  public:
-	Tetris() = default;
+	Tetris() : m_tetrisMusic(nullptr)
+	{
+	}
 	void play();
 
  private:
 	std::vector<HighScore> m_scores;
+	T_SOUND* m_tetrisMusic;
 
 	// Score
 	void showHighScores();
 	void loadHighScores();
 	void addNewScore(int score);
+
+	// Sound
+	void playMusic();
+	void stopMusic();
 
 	// UI
 	static int selectModeMenu();

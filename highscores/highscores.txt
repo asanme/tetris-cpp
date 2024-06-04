@@ -1,0 +1,6 @@
+top;2620
+alex;760
+nop;250
+alex;190
+alex;170
+automated;20
