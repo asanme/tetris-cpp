@@ -24,72 +24,71 @@ void Partida::inicialitza(
 
 void Partida::actualitza(GameMode gameMode, double deltaTime)
 {
-	switch (gameMode)
-	{
-	case NORMAL:
-		normalGame(deltaTime);
-		break;
-
-	case AUTOMATED:
-		automatedGame(deltaTime);
-		break;
-	}
-}
-
-void Partida::normalGame(double deltaTime)
-{
 	renderGame();
 
 	if (!m_hasGameFinished)
 	{
-		handleGameInput();
-		m_time += deltaTime;
-		if (m_clearedRowsCurrentFrame != -1)
+		switch (gameMode)
 		{
-			handleScore();
-			Figura nextShape = generateRandomShape();
+		case NORMAL:
+			normalGame(deltaTime);
+			break;
+
+		case AUTOMATED:
+			automatedGame(deltaTime);
+			break;
+		}
+	}
+}
+
+// End condition for normal games is topOut
+void Partida::normalGame(double deltaTime)
+{
+	if (!m_hasGameFinished)
+		handleGameInput();
+
+	m_time += deltaTime;
+	if (m_clearedRowsCurrentFrame != -1)
+	{
+		handleScore();
+		Figura nextShape = generateRandomShape();
+		m_hasGameFinished = hasToppedOut(nextShape);
+		m_game.changeShape(nextShape);
+	}
+
+	if (m_time > m_timeMultiplier)
+	{
+		m_clearedRowsCurrentFrame = m_game.baixaFigura();
+		m_time = 0.0;
+	}
+}
+
+// End condition for automated games is topOut, no more shapes or no more moves
+void Partida::automatedGame(double deltaTime)
+{
+	m_time += deltaTime;
+	if (m_clearedRowsCurrentFrame != -1)
+	{
+		handleScore();
+
+		if (!m_shapeQueue.isEmpty())
+		{
+			Figura nextShape = Figura(*m_shapeQueue.pop());
 			m_hasGameFinished = hasToppedOut(nextShape);
 			m_game.changeShape(nextShape);
 		}
-
-		if (m_time > m_timeMultiplier)
-		{
-			m_clearedRowsCurrentFrame = m_game.baixaFigura();
-			m_time = 0.0;
-		}
+		else
+			m_hasGameFinished = true;
 	}
-}
 
-void Partida::automatedGame(double deltaTime)
-{
-	renderGame();
-
-	if (!m_hasGameFinished)
+	if (m_time > m_timeMultiplier)
 	{
-		m_time += deltaTime;
-		if (m_clearedRowsCurrentFrame != -1)
-		{
-			handleScore();
+		if (!m_movementQueue.isEmpty())
+			handleNextMove(m_movementQueue.pop());
+		else
+			m_hasGameFinished = true;
 
-			if (!m_shapeQueue.isEmpty())
-			{
-				Figura nextShape = Figura(*m_shapeQueue.pop());
-				m_hasGameFinished = hasToppedOut(nextShape);
-				m_game.changeShape(nextShape);
-			}
-			else
-				m_hasGameFinished = true;
-		}
-
-		if (m_time > m_timeMultiplier)
-		{
-			if (!m_movementQueue.isEmpty())
-				handleNextMove(m_movementQueue.pop());
-			else
-				m_hasGameFinished = true;
-
-			m_time = 0.0;
-		}
+		m_time = 0.0;
 	}
 }
 
@@ -150,7 +149,6 @@ void Partida::handleGameInput()
 
 void Partida::handleNextMove(TipusMoviment nextMove)
 {
-	int clearedRows = 0;
 	switch (nextMove)
 	{
 	case MOVIMENT_ESQUERRA:
@@ -179,9 +177,11 @@ void Partida::handleNextMove(TipusMoviment nextMove)
 	}
 }
 
-void Partida::initAutomatedGame(const string& fitxerInicial,
+void Partida::initAutomatedGame(
+	const string& fitxerInicial,
 	const string& fitxerFigures,
-	const string& fitxerMoviments)
+	const string& fitxerMoviments
+)
 {
 	m_game.inicialitza(fitxerInicial);
 	m_shapeQueue = deserializeShapes(fitxerFigures);
@@ -212,8 +212,7 @@ void Partida::renderGame()
 	m_game.showBoard();
 	//m_game.showCoordinates();
 
-	//	Death Info
-
+	//	Death Notification
 	if (m_hasGameFinished)
 	{
 		// Depth effect

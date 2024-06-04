@@ -53,7 +53,6 @@ class Tauler
 
 	void showBoard();
 
-	// TODO Check if is valid
 	bool isShapeOverlapping(const Figura& shape);
 
  private:

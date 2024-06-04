@@ -8,5 +8,6 @@ class Tetris
 
  private:
 
+	static int showTerminalMenu();
 };
 

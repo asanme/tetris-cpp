@@ -3,7 +3,6 @@
 #include "headers/Partida.h"
 #include <iostream>
 #include <SDL2/SDL.h>
-#include "../graphic-lib/libreria.h"
 
 void Tetris::play()
 {
@@ -16,27 +15,27 @@ void Tetris::play()
 
 	Screen pantalla(SCREEN_SIZE_X, SCREEN_SIZE_Y);
 
-	// BUG if the player keeps pressing a key and the game ends -> the input gets saved, so the next game it will get immediately executed
+	// Game info
+	int gameIndex = 4;
+
 	do
 	{
+		gameIndex = showTerminalMenu();
+		GameMode gameMode = NORMAL;
+		Partida game;
+
+		if (gameIndex == 4)
+		{
+			SDL_Quit();
+			return;
+		}
+
+		// SDL Setup
 		pantalla.show();
 		Uint64 NOW = SDL_GetPerformanceCounter();
 		Uint64 LAST = 0;
 		double deltaTime = 0;
-		GameMode gameMode = NORMAL;
-		int gameIndex;
-		Partida game;
 
-		std::cout << "-------------------------------" << "\n";
-		std::cout << "---- Welcome to tetris-cpp ----" << "\n";
-		std::cout << "-------------------------------" << "\n";
-		std::cout << "Choose a mode " << "\n";
-		std::cout << "1. Normal Game " << "\n";
-		std::cout << "2. Automated Game " << "\n";
-		std::cout << "3. See Highscores " << "\n";
-		std::cout << "-------------------------------" << "\n";
-
-		std::cin >> gameIndex;
 		if (gameIndex == 2)
 		{
 			gameMode = AUTOMATED;
@@ -44,7 +43,7 @@ void Tetris::play()
 
 		game.inicialitza(gameMode, "../data/partida.txt", "../data/figures.txt", "../data/moviments.txt");
 
-		while (!game.hasGameFinished())
+		while (!Keyboard_GetKeyTrg(KEYBOARD_ESCAPE))
 		{
 			LAST = NOW;
 			NOW = SDL_GetPerformanceCounter();
@@ -54,7 +53,44 @@ void Tetris::play()
 			pantalla.update();
 		}
 
-	} while (!Keyboard_GetKeyTrg(KEYBOARD_ESCAPE));
+		pantalla.processEvents();
+		pantalla.update();
+	} while (true);
+}
 
-	SDL_Quit();
+int Tetris::showTerminalMenu()
+{
+	bool isInputValid = false;
+	char userInput;
+	int chosenMode;
+
+	cout << "-------------------------------" << "\n";
+	cout << "---- Welcome to tetris-cpp ----" << "\n";
+	cout << "-------------------------------" << "\n\n";
+
+	while (!isInputValid)
+	{
+		cout << "-------------------------------" << "\n";
+		cout << "Choose a mode " << "\n";
+		cout << "1. Normal Game " << "\n";
+		cout << "2. Automated Game " << "\n";
+		cout << "3. See Highscores " << "\n";
+		cout << "4. Quit " << "\n";
+		cout << "-------------------------------" << "\n";
+
+		std::cin >> userInput;
+
+		if (isdigit(userInput))
+		{
+			chosenMode = userInput - '0';
+
+			if (chosenMode > 0 && chosenMode < 5)
+				isInputValid = true;
+		}
+
+		if (!isInputValid)
+			cout << "Invalid input, select an actual mode." << "\n";
+	}
+
+	return chosenMode;
 }
