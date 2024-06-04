@@ -12,13 +12,24 @@ ___
 ___
 
 ## Altra Informació
+
 Aquest projecte fa servir **C++14** amb **CMake** 3.27
 
+Per poder compilar el projecte cal que el sistema operatiu tingui instalades les següents llibreries:
+
+* libpng
+* SDL2
+* SDL2_ttf
+* SDL2_image
+
 ___
+
 ## Com Executar
+
 El programa es compatible amb totes les plataformes
 
 ### Pasos
+
 Clonem el repositori.
 
 ``
