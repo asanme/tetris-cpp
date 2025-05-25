@@ -1,5 +1,19 @@
 # Tetris C++
 
+# Showcase Showcase
+### Main Menu
+<img width="298" alt="image" src="https://github.com/user-attachments/assets/b5d3b8b6-9c35-4e58-898b-752cdac2c544" />
+
+### Gameplay
+<img width="295" alt="image" src="https://github.com/user-attachments/assets/92705cfb-6e4f-4ac9-a5c6-48c149eaf769" />
+
+### Game Over
+<img width="294" alt="image" src="https://github.com/user-attachments/assets/3eb5e38f-ecd5-4168-8866-5074ed32fe04" />
+
+### Highscores
+<img width="300" alt="image" src="https://github.com/user-attachments/assets/7df11204-1ac2-4047-b210-b154b4c68531" />
+
+
 ## Additional Information
 
 This project uses **C++14** with **CMake** 3.27.
