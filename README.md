@@ -1,6 +1,6 @@
 # Tetris C++
 
-# Showcase Showcase
+# Showcase
 ### Main Menu
 <img width="298" alt="image" src="https://github.com/user-attachments/assets/b5d3b8b6-9c35-4e58-898b-752cdac2c544" />
 
