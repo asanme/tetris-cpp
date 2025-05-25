@@ -14,7 +14,7 @@
 <img width="300" alt="image" src="https://github.com/user-attachments/assets/7df11204-1ac2-4047-b210-b154b4c68531" />
 
 ## Learn More
-You can read more about this project in my [DeepWiki][https://deepwiki.com/asanme/tetris-cpp]
+You can read more about this project in my [DeepWiki](https://deepwiki.com/asanme/tetris-cpp)
 
 ## Additional Information
 
