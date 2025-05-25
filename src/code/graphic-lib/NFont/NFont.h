@@ -57,6 +57,7 @@ THE SOFTWARE.
 
 #endif 
 
+#include "SDL_FontCache.h"
 #include "stdarg.h"
 
 // Let's pretend this exists...
@@ -65,8 +66,6 @@ THE SOFTWARE.
 #endif
 
 struct FC_Font;
-
-typedef struct _TTF_Font TTF_Font;
 
 // Differences between SDL_Renderer and SDL_gpu
 #ifdef NFONT_USE_SDL_GPU

@@ -1,63 +1,50 @@
 # Tetris C++
 
-___
+## Additional Information
 
-### Integrants:
+This project uses **C++14** with **CMake** 3.27.
 
-* **Alex Sánchez Menage**. NIU: **1670860**
-* **Sedna del Carmen Valido Bravo de Laguna**. NIU: **1674419**
+To compile the project, the operating system must have the following libraries installed:
 
-### Grup: **452-5**
+* libpng  
+* SDL2  
+* SDL2_ttf  
+* SDL2_image  
 
-___
+## How to Run
 
-## Altra Informació
+The program is compatible with all platforms.
 
-Aquest projecte fa servir **C++14** amb **CMake** 3.27
+### Steps
 
-Per poder compilar el projecte cal que el sistema operatiu tingui instalades les següents llibreries:
+Clone the repository:
 
-* libpng
-* SDL2
-* SDL2_ttf
-* SDL2_image
-
-___
-
-## Com Executar
-
-El programa es compatible amb totes les plataformes
-
-### Pasos
-
-Clonem el repositori.
-
-``
+```
 git clone git@github.com:asanme/tetris-cpp.git
-``
+```
 
-Anem a la carpeta del repositori.
+Go to the repository folder:
 
-``
+```
 cd tetris-cpp
-``
+```
 
-Executem `cmake` i especifiquem el nom de la carpeta on es generaran els fitxers necessaris per compilar.
+Run `cmake` and specify the name of the folder where the necessary compilation files will be generated:
 
-``
-cmake -B carpeta-compilacio
-``
+```
+cmake -B build-folder
+```
 
-Anem a la carpeta generada.
+Go to the generated folder:
 
-``
-cd carpeta-compilacio
-``
+```
+cd build-folder
+```
 
-Per últim, compilem.
+Finally, compile:
 
-``
+```
 make
-``
+```
 
-Dins the la carpeta trobarem l'executable `tetris_cpp`.
+Inside the folder, you will find the executable `tetris_cpp`.
